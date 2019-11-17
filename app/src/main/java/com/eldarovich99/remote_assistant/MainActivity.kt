@@ -2,6 +2,7 @@ package com.eldarovich99.remote_assistant
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import toothpick.Toothpick
 
 class MainActivity : AppCompatActivity() {
 
