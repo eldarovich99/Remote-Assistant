@@ -77,4 +77,6 @@ dependencies {
     implementation 'com.github.stephanenicolas.toothpick:smoothie:2.1.0'
     annotationProcessor 'com.github.stephanenicolas.toothpick:toothpick-compiler:2.1.0'
 
+    // Routing
+    implementation 'ru.terrakok.cicerone:cicerone:5.0.0'
 }
