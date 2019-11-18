@@ -1,4 +1,4 @@
-package com.eldarovich99.remote_assistant.presentation
+package com.eldarovich99.remote_assistant.presentation.view
 
 import android.os.Bundle
 import android.view.LayoutInflater
