@@ -1,6 +1,7 @@
 package com.eldarovich99.remote_assistant.presentation.view
 
 import android.os.Bundle
+import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,6 +12,19 @@ import com.eldarovich99.remote_assistant.routing.ChatScreen
 import kotlinx.android.synthetic.main.fragment_login.*
 
 class LoginFragment : BaseFragment() {
+    override fun dispatchKeyEvent(event: KeyEvent?){
+        when (event?.keyCode){
+            KeyEvent.KEYCODE_DPAD_CENTER -> {}
+            KeyEvent.KEYCODE_F1 -> {}
+            KeyEvent.KEYCODE_F2 -> {}
+            KeyEvent.KEYCODE_F3 -> {}
+            KeyEvent.KEYCODE_F4 -> {}
+            KeyEvent.KEYCODE_DPAD_LEFT -> {}
+            KeyEvent.KEYCODE_DPAD_RIGHT -> {}
+            KeyEvent.KEYCODE_DPAD_DOWN -> {}
+            KeyEvent.KEYCODE_DPAD_UP -> {}
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,

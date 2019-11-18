@@ -1,6 +1,7 @@
 package com.eldarovich99.remote_assistant.presentation
 
 import android.os.Bundle
+import android.view.KeyEvent
 import androidx.appcompat.app.AppCompatActivity
 import com.eldarovich99.remote_assistant.R
 import com.eldarovich99.remote_assistant.di.Scopes
@@ -21,5 +22,11 @@ class SingleActivity : AppCompatActivity() {
             .beginTransaction()
             .replace(R.id.fragment_host, LoginFragment())
             .commit()
+    }
+
+    override fun dispatchKeyEvent(event: KeyEvent?): Boolean {
+        val fragment = supportFragmentManager.fragments[supportFragmentManager.fragments.size-1] as BaseFragment
+        fragment.dispatchKeyEvent(event)
+        return super.dispatchKeyEvent(event)
     }
 }
