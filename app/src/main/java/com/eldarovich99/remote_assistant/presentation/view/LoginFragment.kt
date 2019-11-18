@@ -4,16 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
-import com.eldarovich99.remote_assistant.di.Scopes
-import com.eldarovich99.remote_assistant.domain.UserRepository
-import toothpick.Toothpick
-import javax.inject.Inject
+import com.eldarovich99.remote_assistant.R
+import com.eldarovich99.remote_assistant.presentation.BaseFragment
 
-class LoginFragment : Fragment() {
-
-    @Inject
-    lateinit var userRepository: UserRepository
+class LoginFragment : BaseFragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -21,12 +15,6 @@ class LoginFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // TODO
-        return super.onCreateView(inflater, container, savedInstanceState)
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        Toothpick.inject(this, Toothpick.openScope(Scopes.APP_SCOPE))
+        return inflater.inflate(R.layout.fragment_login, container, false)
     }
 }

@@ -14,6 +14,5 @@ class RepositoryModule(private val context: Context) : Module() {
 
         bind(SharedPreferences::class.java).toInstance(sharedPreferences)
         bind(UserRepository::class.java).to(UserRepositoryImpl::class.java).singletonInScope()
-
     }
 }
