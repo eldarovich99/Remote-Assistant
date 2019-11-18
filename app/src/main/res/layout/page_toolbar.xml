@@ -2,20 +2,21 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal" android:layout_width="match_parent"
     android:layout_height="48dp"
-    android:padding="8dp"
     android:background="@color/colorPrimary">
 
-    <ImageView
+    <Button
         android:id="@+id/chatsButton"
         android:layout_width="0dp"
+        android:padding="8dp"
         android:layout_height="match_parent"
-        android:src="@drawable/ic_history"
+        android:background="@drawable/ic_history"
         android:layout_weight="1"/>
 
-    <ImageView
+    <Button
         android:id="@+id/contactsButton"
         android:layout_width="0dp"
+        android:padding="8dp"
         android:layout_height="match_parent"
-        android:src="@drawable/ic_contacts"
+        android:background="@drawable/ic_contacts"
         android:layout_weight="1"/>
 </LinearLayout>

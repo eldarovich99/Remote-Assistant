@@ -1,9 +1,15 @@
 package com.eldarovich99.remote_assistant.presentation
 
+import android.content.Context.SENSOR_SERVICE
+import android.hardware.Sensor
+import android.hardware.SensorEvent
+import android.hardware.SensorEventListener
+import android.hardware.SensorManager
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import com.eldarovich99.remote_assistant.di.Scopes
 import com.eldarovich99.remote_assistant.domain.UserRepository
+import jp.epson.moverio.H725.DisplayControl
 import ru.terrakok.cicerone.Cicerone
 import ru.terrakok.cicerone.Navigator
 import ru.terrakok.cicerone.Router
@@ -20,8 +26,21 @@ open class BaseFragment : Fragment(){
     @Inject
     lateinit var navigator: Navigator
 
+    lateinit var displayControl : DisplayControl // TODO inject
+    var sensorManager : SensorManager?=null
+
+    companion object{
+        val TYPE_HEADSET_ACCELEROMETER = 0
+        val TYPE_CONTROLLER_ACCELEROMETER = 1
+        val TYPE_CONTROLLER_MAGNETIC_FIELD = 2
+        val TYPE_CONTROLLER_GYROSCOPE = 3
+        val TYPE_CONTROLLER_ROTATION_VECTOR = 4
+        val TYPE_HEADSET_TAP = 5
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         Toothpick.inject(this, Toothpick.openScopes(Scopes.APP_SCOPE, Scopes.ACTIVITY_SCOPE))
+        displayControl = DisplayControl(context)
         super.onCreate(savedInstanceState)
     }
 
@@ -32,6 +51,24 @@ open class BaseFragment : Fragment(){
 
     override fun onResume() {
         cicerone.navigatorHolder.setNavigator(navigator)
+
+        sensorManager = context?.getSystemService(SENSOR_SERVICE) as SensorManager
+        if (sensorManager != null) {
+            val tap = sensorManager?.getDefaultSensor(TYPE_HEADSET_TAP)
+            sensorManager?.registerListener(object : SensorEventListener{
+                override fun onAccuracyChanged(p0: Sensor?, p1: Int) {
+
+                }
+
+                override fun onSensorChanged(event: SensorEvent?) {
+                    if (event?.sensor?.type == TYPE_HEADSET_TAP) {
+                        //Toast.makeText(context, "Something happen", Toast.LENGTH_SHORT).show()
+                    }
+                }
+
+            }, tap, SensorManager.SENSOR_DELAY_NORMAL)
+        }
+        
         super.onResume()
     }
 }

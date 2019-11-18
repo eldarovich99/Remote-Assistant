@@ -19,6 +19,7 @@ class ChatsFragment : BaseFragment(){
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         chatsRecycler.adapter = ChatsAdapter()
+        chatsRecycler.requestFocus()
         super.onViewCreated(view, savedInstanceState)
     }
 }

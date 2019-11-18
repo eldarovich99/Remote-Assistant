@@ -20,7 +20,18 @@ allprojects {
     repositories {
         google()
         jcenter()
-        
+    }
+    gradle.projectsEvaluated {
+        tasks.withType(JavaCompile) {
+            switch (ant.properties.os) {
+                case 'windows':
+                    options.compilerArgs.add('-Xbootclasspath/p:' + projectDir.toString().concat("\\libs\\H725Ctrl.jar;"))
+                    break
+                case 'unix':
+                    options.compilerArgs.add('-Xbootclasspath/p:' + projectDir.toString().concat("/libs/H725Ctrl.jar:"))
+                    break
+            }
+        }
     }
 }
 

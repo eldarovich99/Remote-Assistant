@@ -17,6 +17,7 @@ class BottomNavBar(context: Context, private val attrs: AttributeSet): LinearLay
     }
     init {
         View.inflate(context, R.layout.page_toolbar, this)
+       // chatsButton.requestFocus()
         chatsButton.setOnClickListener {
             Toast.makeText(context, "Chats", Toast.LENGTH_SHORT).show()
         }
