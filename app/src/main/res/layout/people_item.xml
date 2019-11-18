@@ -4,8 +4,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="@color/colorPrimaryLight"
+    android:background="@drawable/background_selector"
     android:padding="4dp"
+    android:clickable="true"
+    android:focusable="true"
+    android:id="@+id/chatItemParent"
     android:layout_height="wrap_content">
 
     <ImageView
@@ -25,6 +28,8 @@
         android:layout_margin="16dp"
         android:textColor="@color/textColor"
         android:textSize="20sp"
+        android:text="Elon Musk"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/item_person_image_view"
         app:layout_constraintTop_toTopOf="parent" />
 
