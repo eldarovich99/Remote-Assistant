@@ -6,3 +6,4 @@ import ru.terrakok.cicerone.android.support.SupportAppScreen
 
 class ChatScreen : SupportAppScreen()
 class LoginScreen : SupportAppScreen()
+class ContactsScreen : SupportAppScreen()

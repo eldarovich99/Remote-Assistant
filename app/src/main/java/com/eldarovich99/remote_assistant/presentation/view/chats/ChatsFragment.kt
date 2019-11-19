@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import com.eldarovich99.remote_assistant.R
 import com.eldarovich99.remote_assistant.presentation.BaseFragment
+import com.eldarovich99.remote_assistant.routing.ContactsScreen
 import kotlinx.android.synthetic.main.fragment_chats.*
 
 class ChatsFragment : BaseFragment(){
@@ -18,14 +19,19 @@ class ChatsFragment : BaseFragment(){
             KeyEvent.KEYCODE_DPAD_CENTER -> {
                 Toast.makeText(context, "Confirm button clicked", Toast.LENGTH_SHORT).show()
             }
-            KeyEvent.KEYCODE_F1 -> {}
-            KeyEvent.KEYCODE_F2 -> {}
-            KeyEvent.KEYCODE_F3 -> {}
-            KeyEvent.KEYCODE_F4 -> {}
+            KeyEvent.KEYCODE_F1 -> {
+                Toast.makeText(context, "KEYCODE_F1", Toast.LENGTH_SHORT).show()}
+            KeyEvent.KEYCODE_F2 -> {
+                Toast.makeText(context, "KEYCODE_F2", Toast.LENGTH_SHORT).show()}
+            KeyEvent.KEYCODE_F3 -> {
+                Toast.makeText(context, "KEYCODE_F3", Toast.LENGTH_SHORT).show()}
+            KeyEvent.KEYCODE_F4 -> {
+                Toast.makeText(context, "KEYCODE_F4", Toast.LENGTH_SHORT).show()}
             KeyEvent.KEYCODE_DPAD_LEFT -> {
                 Toast.makeText(context, "ViewPager changes fragment (left)", Toast.LENGTH_SHORT).show()
             }
             KeyEvent.KEYCODE_DPAD_RIGHT -> {
+                cicerone.router.navigateTo(ContactsScreen())
                 Toast.makeText(context, "ViewPager changes fragment (right)", Toast.LENGTH_SHORT).show()
             }
             KeyEvent.KEYCODE_DPAD_DOWN -> {
