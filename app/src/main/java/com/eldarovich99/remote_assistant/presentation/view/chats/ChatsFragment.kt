@@ -12,6 +12,7 @@ import kotlinx.android.synthetic.main.fragment_chats.*
 
 class ChatsFragment : BaseFragment(){
     var adapterPosition = 0
+    var shouldMove = true
     override fun dispatchKeyEvent(event: KeyEvent?){
         when (event?.keyCode){
             KeyEvent.KEYCODE_DPAD_CENTER -> {
@@ -28,12 +29,22 @@ class ChatsFragment : BaseFragment(){
                 Toast.makeText(context, "ViewPager changes fragment (right)", Toast.LENGTH_SHORT).show()
             }
             KeyEvent.KEYCODE_DPAD_DOWN -> {
-                if (adapterPosition < chatsRecycler.adapter?.itemCount ?: 0)
-                    chatsRecycler.scrollToPosition(++adapterPosition)
+                if (adapterPosition < chatsRecycler.adapter?.itemCount ?: 0) {
+                    chatsRecycler.findViewHolderForAdapterPosition(adapterPosition)?.itemView?.isSelected = false
+                    shouldMove = shouldMove == false
+                    if (shouldMove){ adapterPosition+=1
+                    chatsRecycler.scrollToPosition(adapterPosition)}
+                    chatsRecycler.findViewHolderForAdapterPosition(adapterPosition)?.itemView?.isSelected = true
+                }
             }
             KeyEvent.KEYCODE_DPAD_UP -> {
-                if (adapterPosition > 0)
-                    chatsRecycler.scrollToPosition(--adapterPosition)
+                if (adapterPosition > 0) {
+                    chatsRecycler.findViewHolderForAdapterPosition(adapterPosition)?.itemView?.isSelected = false
+                    shouldMove = shouldMove == false
+                    if (shouldMove){ adapterPosition-=1
+                    chatsRecycler.scrollToPosition(adapterPosition)}
+                    chatsRecycler.findViewHolderForAdapterPosition(adapterPosition)?.itemView?.isSelected = true
+                }
             }
         }
     }
