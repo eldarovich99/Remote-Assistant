@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import com.eldarovich99.remote_assistant.R
 import com.eldarovich99.remote_assistant.presentation.BaseFragment
+import com.eldarovich99.remote_assistant.presentation.ui.BottomNavBar
 import com.eldarovich99.remote_assistant.routing.ContactsScreen
 import kotlinx.android.synthetic.main.fragment_chats.*
 
@@ -66,6 +67,7 @@ class ChatsFragment : BaseFragment(){
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         chatsRecycler.adapter = ChatsAdapter()
         chatsRecycler.requestFocus()
+        bottomNavBar.selectButton(BottomNavBar.CHATS)
         super.onViewCreated(view, savedInstanceState)
     }
 }

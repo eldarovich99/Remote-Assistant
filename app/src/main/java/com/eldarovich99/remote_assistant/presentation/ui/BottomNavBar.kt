@@ -9,6 +9,12 @@ import com.eldarovich99.remote_assistant.R
 import kotlinx.android.synthetic.main.bottom_nav_bar.view.*
 
 class BottomNavBar(context: Context, private val attrs: AttributeSet): LinearLayout(context, attrs){
+    companion object{
+        const val CHATS = "chats"
+        const val CONTACTS = "contacts"
+    }
+    private var selectedView : View?=null
+
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
         val parentWidth = MeasureSpec.getSize(widthMeasureSpec)
         val parentHeight = MeasureSpec.getSize(heightMeasureSpec)
@@ -33,5 +39,20 @@ class BottomNavBar(context: Context, private val attrs: AttributeSet): LinearLay
         }
         headerText.textSize = typedArray.getFloat(R.styleable.PageToolbar_pageHeaderSize, 36f)
         typedArray.recycle()*/
+    }
+
+    fun selectButton(key : String){
+        when (key){
+            CHATS -> {
+                selectedView?.isSelected = false
+                chatsButton.isSelected = true
+                selectedView = chatsButton
+            }
+            CONTACTS -> {
+                selectedView?.isSelected = false
+                contactsButton.isSelected = true
+                selectedView = contactsButton
+            }
+        }
     }
 }
