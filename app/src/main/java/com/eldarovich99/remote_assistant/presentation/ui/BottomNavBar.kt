@@ -6,7 +6,7 @@ import android.view.View
 import android.widget.LinearLayout
 import android.widget.Toast
 import com.eldarovich99.remote_assistant.R
-import kotlinx.android.synthetic.main.page_toolbar.view.*
+import kotlinx.android.synthetic.main.bottom_nav_bar.view.*
 
 class BottomNavBar(context: Context, private val attrs: AttributeSet): LinearLayout(context, attrs){
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
@@ -16,7 +16,7 @@ class BottomNavBar(context: Context, private val attrs: AttributeSet): LinearLay
         super.onMeasure(widthMeasureSpec, heightMeasureSpec)
     }
     init {
-        View.inflate(context, R.layout.page_toolbar, this)
+        View.inflate(context, R.layout.bottom_nav_bar, this)
        // chatsButton.requestFocus()
         chatsButton.setOnClickListener {
             Toast.makeText(context, "Chats", Toast.LENGTH_SHORT).show()
