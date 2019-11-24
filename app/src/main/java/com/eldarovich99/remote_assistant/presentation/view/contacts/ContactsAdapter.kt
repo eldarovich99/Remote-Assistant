@@ -8,13 +8,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.eldarovich99.remote_assistant.R
 import com.eldarovich99.remote_assistant.domain.models.User
 
-class ContactsAdapter() : RecyclerView.Adapter<ContactsAdapter.ContactsViewHolder>() {
+class ContactsAdapter : RecyclerView.Adapter<ContactsAdapter.ContactsViewHolder>() {
     val items = generateSequence { User() }.take(50).toList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ContactsViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.people_item_contacts, parent, false)
-        val holder = ContactsViewHolder(view)
-        return holder
+        return ContactsViewHolder(view)
     }
 
     override fun getItemCount(): Int {

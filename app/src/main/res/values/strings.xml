@@ -17,4 +17,6 @@
     <string name="interesting">Интересное</string>
     <string name="item_sale">Товар по акции</string>
     <string name="get_sale">Получить скидку</string>
+    <string name="chats">Диалоги</string>
+    <string name="contacts">Контакты</string>
 </resources>

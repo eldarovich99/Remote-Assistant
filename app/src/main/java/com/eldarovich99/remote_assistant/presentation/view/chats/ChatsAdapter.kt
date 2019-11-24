@@ -16,15 +16,14 @@ class ChatsAdapter() : RecyclerView.Adapter<ChatsAdapter.ChatsViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChatsViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.people_item_chats, parent, false)
-        val holder = ChatsViewHolder(view)
-      // holder.itemView.setOnClickListener {
+        // holder.itemView.setOnClickListener {
       //     selectedView?.isSelected = false
       //     it.isSelected = true
       //     selectedView = it
       //     selectedItemPosition = holder.adapterPosition
       // }
            // View.inflate(parent.context, R.layout.people_item_chats, null)
-        return holder
+        return ChatsViewHolder(view)
     }
 
     override fun getItemCount(): Int {

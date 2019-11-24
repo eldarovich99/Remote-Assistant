@@ -36,6 +36,7 @@ class ContactsFragment : BaseFragment(){
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         if (!wasFragmentCreated){
+            toolbar.title = getString(R.string.contacts)
             peopleRecycler.adapter = ContactsAdapter()
             peopleRecycler.requestFocus()
             peopleRecycler.addItemDecoration(

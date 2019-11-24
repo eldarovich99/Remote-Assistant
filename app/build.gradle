@@ -79,4 +79,7 @@ dependencies {
 
     // Routing
     implementation 'ru.terrakok.cicerone:cicerone:5.0.0'
+
+    // Circular ImageView
+    implementation 'com.mikhaellopez:circularimageview:4.1.0'
 }
