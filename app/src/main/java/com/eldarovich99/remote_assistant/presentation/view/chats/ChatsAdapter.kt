@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.eldarovich99.remote_assistant.R
 import com.eldarovich99.remote_assistant.domain.models.User
 
-class SingleChatsAdapter() : RecyclerView.Adapter<SingleChatsAdapter.ChatsViewHolder>() {
+class ChatsAdapter() : RecyclerView.Adapter<ChatsAdapter.ChatsViewHolder>() {
     val items = generateSequence { User() }.take(50).toList()
    // var selectedView : View?=null
    // var selectedItemPosition = -1

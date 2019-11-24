@@ -79,7 +79,7 @@ class ChatsFragment : BaseFragment(){
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         if (!wasFragmentCreated) {
             toolbar.title = getString(R.string.chats)
-            peopleRecycler.adapter = SingleChatsAdapter()
+            peopleRecycler.adapter = ChatsAdapter()
             peopleRecycler.requestFocus()
             bottomNavBar.selectButton(CHATS)
 

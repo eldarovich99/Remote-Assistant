@@ -15,8 +15,7 @@ class SingleChatAdapter : RecyclerView.Adapter<SingleChatAdapter.SingleViewHolde
         .plus(generateSequence { Message(2) }.take(1).toList())
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SingleViewHolder {
-        val view : View
-        view = when (viewType){
+        val view : View = when (viewType){
             Message.OWNER -> LayoutInflater.from(parent.context).inflate(R.layout.your_message, parent, false)
             Message.COMPANION -> LayoutInflater.from(parent.context).inflate(R.layout.companion_message, parent, false)
             else -> throw Exception("Unknown message type")

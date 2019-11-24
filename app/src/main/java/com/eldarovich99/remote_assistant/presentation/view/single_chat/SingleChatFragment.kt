@@ -24,6 +24,6 @@ class SingleChatFragment : BaseFragment(){
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        chatRecycler.adapter =
+        chatRecycler.adapter = SingleChatAdapter()
     }
 }
