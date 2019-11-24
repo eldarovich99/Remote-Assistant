@@ -6,6 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.RecyclerView
 import com.eldarovich99.remote_assistant.R
 import com.eldarovich99.remote_assistant.presentation.BaseFragment
 import com.eldarovich99.remote_assistant.routing.ContactsScreen
@@ -18,6 +20,7 @@ import kotlinx.coroutines.Job
 class ChatsFragment : BaseFragment(){
     var adapterPosition = 0
     var shouldMove = true
+    var wasFragmentCreated = false
    // val bottomNavBarObservable : Flow<Screen> by lazy { bottomNavBar.listenButtonClicked() }
     lateinit var buttonJob : Job
 
@@ -42,21 +45,21 @@ class ChatsFragment : BaseFragment(){
                 Toast.makeText(context, "ViewPager changes fragment (right)", Toast.LENGTH_SHORT).show()
             }
             KeyEvent.KEYCODE_DPAD_DOWN -> {
-                if (adapterPosition < chatsRecycler.adapter?.itemCount ?: 0) {
-                    chatsRecycler.findViewHolderForAdapterPosition(adapterPosition)?.itemView?.isSelected = false
+                if (adapterPosition < peopleRecycler.adapter?.itemCount ?: 0) {
+                    peopleRecycler.findViewHolderForAdapterPosition(adapterPosition)?.itemView?.isSelected = false
                     shouldMove = shouldMove == false
                     if (shouldMove){ adapterPosition+=1
-                    chatsRecycler.scrollToPosition(adapterPosition)}
-                    chatsRecycler.findViewHolderForAdapterPosition(adapterPosition)?.itemView?.isSelected = true
+                    peopleRecycler.scrollToPosition(adapterPosition)}
+                    peopleRecycler.findViewHolderForAdapterPosition(adapterPosition)?.itemView?.isSelected = true
                 }
             }
             KeyEvent.KEYCODE_DPAD_UP -> {
                 if (adapterPosition > 0) {
-                    chatsRecycler.findViewHolderForAdapterPosition(adapterPosition)?.itemView?.isSelected = false
+                    peopleRecycler.findViewHolderForAdapterPosition(adapterPosition)?.itemView?.isSelected = false
                     shouldMove = shouldMove == false
                     if (shouldMove){ adapterPosition-=1
-                    chatsRecycler.scrollToPosition(adapterPosition)}
-                    chatsRecycler.findViewHolderForAdapterPosition(adapterPosition)?.itemView?.isSelected = true
+                    peopleRecycler.scrollToPosition(adapterPosition)}
+                    peopleRecycler.findViewHolderForAdapterPosition(adapterPosition)?.itemView?.isSelected = true
                 }
             }
         }
@@ -70,20 +73,25 @@ class ChatsFragment : BaseFragment(){
         return inflater.inflate(R.layout.fragment_chats, container, false)
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        retainInstance = true
+        super.onCreate(savedInstanceState)
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        chatsRecycler.adapter = ChatsAdapter()
-        chatsRecycler.requestFocus()
-        bottomNavBar.selectButton(CHATS)
+        if (!wasFragmentCreated) {
+            peopleRecycler.adapter = ChatsAdapter()
+            peopleRecycler.requestFocus()
+            bottomNavBar.selectButton(CHATS)
 
+            peopleRecycler.addItemDecoration(
+                DividerItemDecoration(
+                    peopleRecycler.context,
+                    RecyclerView.VERTICAL
+                )
+            )
+            wasFragmentCreated = true
+        }
         super.onViewCreated(view, savedInstanceState)
-    }
-
-    override fun onResume() {
-        super.onResume()
-    }
-
-    override fun onPause() {
-       // buttonJob.cancel()
-        super.onPause()
     }
 }

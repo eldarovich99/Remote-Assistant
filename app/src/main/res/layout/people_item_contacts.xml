@@ -12,35 +12,36 @@
     android:layout_height="wrap_content">
 
     <ImageView
-        android:id="@+id/item_person_image_view"
-        android:layout_width="128dp"
-        android:layout_height="128dp"
+        android:id="@+id/personImageView"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:layout_marginTop="8dp"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:src="@tools:sample/avatars"
-        android:src="@drawable/ic_contacts"
-        app:layout_constraintTop_toTopOf="parent"/>
-
-    <TextView
-        android:id="@+id/item_name_text_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:textColor="@color/textColor"
-        android:textSize="20sp"
-        android:text="Elon Musk"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/item_person_image_view"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/item_directions_text_vew"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:textColor="@color/textColor"
-        android:textSize="20sp"
+        android:layout_marginBottom="8dp"
+        android:src="@drawable/brad_pitt"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/item_person_image_view" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@tools:sample/avatars" />
 
+    <TextView
+        android:id="@+id/nameTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:text="Brad Pitt"
+        android:textColor="@color/textColor"
+        android:textSize="20sp"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/personImageView"
+        app:layout_constraintTop_toTopOf="@+id/personImageView" />
+
+    <TextView
+        android:id="@+id/lastMessageTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Заместитель старшего инженера"
+        android:textColor="@color/textColor"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@+id/personImageView"
+        app:layout_constraintStart_toStartOf="@+id/nameTextView"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

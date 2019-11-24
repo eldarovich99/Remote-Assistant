@@ -37,11 +37,11 @@ class BottomNavBar(context: Context, private val attrs: AttributeSet): LinearLay
         Toothpick.inject(this, Toothpick.openScopes(Scopes.APP_SCOPE, Scopes.ACTIVITY_SCOPE))
         // chatsButton.requestFocus()
         chatsButton.setOnClickListener {
-            cicerone.router.navigateTo(ScreenKeys.getScreen(CHATS))
+            cicerone.router.replaceScreen(ScreenKeys.getScreen(CHATS))
             Toast.makeText(context, "Chats", Toast.LENGTH_SHORT).show()
         }
         contactsButton.setOnClickListener {
-            cicerone.router.navigateTo(ScreenKeys.getScreen(CONTACTS))
+            cicerone.router.replaceScreen(ScreenKeys.getScreen(CONTACTS))
             Toast.makeText(context, "Contacts", Toast.LENGTH_SHORT).show()
         }
         /*val typedArray = context.obtainStyledAttributes(attrs, R.styleable.PageToolbar)
@@ -66,14 +66,13 @@ class BottomNavBar(context: Context, private val attrs: AttributeSet): LinearLay
     }
 
     fun selectButton(key: String) {
+        selectedView?.isSelected = false
         when (key) {
             CHATS -> {
-                selectedView?.isSelected = false
                 chatsButton.isSelected = true
                 selectedView = chatsButton
             }
             CONTACTS -> {
-                selectedView?.isSelected = false
                 contactsButton.isSelected = true
                 selectedView = contactsButton
             }

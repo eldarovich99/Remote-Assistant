@@ -38,7 +38,7 @@ class LoginFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         loginButton.setOnClickListener {
             Toast.makeText(context, "Login button clicked", Toast.LENGTH_SHORT).show()
-            cicerone.router.navigateTo(ChatScreen())
+            cicerone.router.newRootScreen(ChatScreen())
         }
         super.onViewCreated(view, savedInstanceState)
     }

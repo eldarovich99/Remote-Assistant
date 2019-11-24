@@ -15,7 +15,7 @@ class ChatsAdapter() : RecyclerView.Adapter<ChatsAdapter.ChatsViewHolder>() {
     var bindCounter = 0
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChatsViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.people_item, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.people_item_chats, parent, false)
         val holder = ChatsViewHolder(view)
       // holder.itemView.setOnClickListener {
       //     selectedView?.isSelected = false
@@ -23,7 +23,7 @@ class ChatsAdapter() : RecyclerView.Adapter<ChatsAdapter.ChatsViewHolder>() {
       //     selectedView = it
       //     selectedItemPosition = holder.adapterPosition
       // }
-           // View.inflate(parent.context, R.layout.people_item, null)
+           // View.inflate(parent.context, R.layout.people_item_chats, null)
         return holder
     }
 
@@ -41,7 +41,7 @@ class ChatsAdapter() : RecyclerView.Adapter<ChatsAdapter.ChatsViewHolder>() {
     }
 
     class ChatsViewHolder(view: View) : RecyclerView.ViewHolder(view){
-        val itemNameTextView = view.findViewById<TextView>(R.id.item_name_text_view)
+        val itemNameTextView = view.findViewById<TextView>(R.id.nameTextView)
     }
 
     fun disable(adapterPosition: Int){
