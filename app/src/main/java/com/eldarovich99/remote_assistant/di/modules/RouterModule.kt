@@ -10,7 +10,7 @@ import ru.terrakok.cicerone.Router
 import toothpick.config.Module
 
 class RouterModule(activity : AppCompatActivity) : Module(){
-    val cicerone : Cicerone<Router> = Cicerone.create()
+    val cicerone : Cicerone<Router> by lazy{ Cicerone.create() }
     init {
         bind(Cicerone::class.java).toInstance(cicerone)
 

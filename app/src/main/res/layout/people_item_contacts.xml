@@ -42,7 +42,7 @@
         android:layout_height="wrap_content"
         android:text="Заместитель старшего инженера"
         android:textColor="@color/textColor"
-        android:textSize="12sp"
+        android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="@+id/personImageView"
         app:layout_constraintStart_toStartOf="@+id/nameTextView"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

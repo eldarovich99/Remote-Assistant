@@ -40,12 +40,17 @@
 
     <TextView
         android:id="@+id/lastMessageTextView"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Это мое последнее сообщение"
+        android:ellipsize="end"
+        android:gravity="start"
+        android:maxLines="2"
+        android:text="Товарищи! сложившаяся структура организации требуют определения и уточнения соответствующий условий активизации."
+        android:textAlignment="textStart"
         android:textColor="@color/textColor"
-        android:textSize="12sp"
+        android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/chatDateTextView"
         app:layout_constraintStart_toStartOf="@+id/nameTextView"
         app:layout_constraintTop_toBottomOf="@+id/nameTextView" />
 

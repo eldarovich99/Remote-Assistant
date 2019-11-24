@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:background="@color/colorPrimary"
+    android:layout_height="?attr/actionBarSize">
+
+    <ImageButton
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:layout_marginLeft="8dp"
+        android:layout_weight="0"
+        android:layout_gravity="center"
+        android:background="@android:color/transparent"
+        app:srcCompat="@drawable/ic_keyboard_arrow_left_black" />
+    <com.mikhaellopez.circularimageview.CircularImageView
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:layout_marginLeft="8dp"
+        android:layout_weight="0"
+        android:layout_gravity="center"
+        android:background="@android:color/transparent"
+        app:srcCompat="@drawable/brad_pitt"
+        app:civ_border_width="0dp"/>
+    <TextView
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_gravity="center"
+        android:text="Брэд Питт"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:textSize="16sp"
+        android:textColor="@android:color/white"
+        android:layout_height="wrap_content"/>
+</LinearLayout>

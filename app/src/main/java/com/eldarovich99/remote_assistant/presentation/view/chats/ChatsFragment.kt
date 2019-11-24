@@ -13,10 +13,8 @@ import com.eldarovich99.remote_assistant.presentation.BaseFragment
 import com.eldarovich99.remote_assistant.routing.ContactsScreen
 import com.eldarovich99.remote_assistant.routing.ScreenKeys.CHATS
 import kotlinx.android.synthetic.main.fragment_chats.*
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.Job
 
-@ExperimentalCoroutinesApi
 class ChatsFragment : BaseFragment(){
     var adapterPosition = 0
     var shouldMove = true
