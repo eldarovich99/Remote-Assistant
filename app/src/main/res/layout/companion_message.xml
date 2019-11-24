@@ -18,8 +18,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="С другой стороны рамки и место обучения кадров требуют от нас анализа
-            системы обучения кадров, соответствует насущным потребностям."
+            android:text="Товарищи! постоянное информационно-пропагандистское обеспечение нашей деятельности влечет за собой процесс внедрения и модернизации форм развития. "
             android:textSize="12sp"
             android:textColor="@color/textColor"
             android:layout_margin="8dp"/>
