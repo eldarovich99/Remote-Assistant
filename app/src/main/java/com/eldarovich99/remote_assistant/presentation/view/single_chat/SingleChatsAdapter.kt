@@ -16,7 +16,7 @@ class SingleChatAdapter : RecyclerView.Adapter<SingleChatAdapter.SingleViewHolde
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SingleViewHolder {
         val view : View = when (viewType){
-            Message.OWNER -> LayoutInflater.from(parent.context).inflate(R.layout.your_message, parent, false)
+            Message.OWNER -> LayoutInflater.from(parent.context).inflate(R.layout.owner_message, parent, false)
             Message.COMPANION -> LayoutInflater.from(parent.context).inflate(R.layout.companion_message, parent, false)
             else -> throw Exception("Unknown message type")
         }
@@ -24,7 +24,7 @@ class SingleChatAdapter : RecyclerView.Adapter<SingleChatAdapter.SingleViewHolde
     }
 
     override fun getItemViewType(position: Int): Int {
-        return super.getItemViewType(position)
+        return items[position].type
     }
 
     override fun getItemCount(): Int {

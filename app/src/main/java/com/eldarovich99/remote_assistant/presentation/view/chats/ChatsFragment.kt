@@ -79,8 +79,12 @@ class ChatsFragment : BaseFragment(){
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         if (!wasFragmentCreated) {
             toolbar.title = getString(R.string.chats)
-            peopleRecycler.adapter = ChatsAdapter()
             peopleRecycler.requestFocus()
+            peopleRecycler.adapter = ChatsAdapter(object : ChatsAdapter.Companion.OnItemClicked{
+                override fun onClick(position: Int) {
+                  //  cicerone.router.navigateTo(SingleChatScreen())
+                }
+            })
             bottomNavBar.selectButton(CHATS)
 
             peopleRecycler.addItemDecoration(

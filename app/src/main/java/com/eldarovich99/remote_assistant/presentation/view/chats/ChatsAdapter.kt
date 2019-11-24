@@ -8,7 +8,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.eldarovich99.remote_assistant.R
 import com.eldarovich99.remote_assistant.domain.models.User
 
-class ChatsAdapter() : RecyclerView.Adapter<ChatsAdapter.ChatsViewHolder>() {
+class ChatsAdapter(val callback : OnItemClicked) : RecyclerView.Adapter<ChatsAdapter.ChatsViewHolder>() {
+    companion object{
+        interface OnItemClicked{
+            fun onClick(position: Int)
+        }
+    }
     val items = generateSequence { User() }.take(50).toList()
    // var selectedView : View?=null
    // var selectedItemPosition = -1
@@ -16,6 +21,8 @@ class ChatsAdapter() : RecyclerView.Adapter<ChatsAdapter.ChatsViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChatsViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.people_item_chats, parent, false)
+        val holder = ChatsViewHolder(view)
+        callback.onClick(holder.adapterPosition)
         // holder.itemView.setOnClickListener {
       //     selectedView?.isSelected = false
       //     it.isSelected = true
@@ -23,7 +30,7 @@ class ChatsAdapter() : RecyclerView.Adapter<ChatsAdapter.ChatsViewHolder>() {
       //     selectedItemPosition = holder.adapterPosition
       // }
            // View.inflate(parent.context, R.layout.people_item_chats, null)
-        return ChatsViewHolder(view)
+        return holder
     }
 
     override fun getItemCount(): Int {

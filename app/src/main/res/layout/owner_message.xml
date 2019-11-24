@@ -5,12 +5,13 @@
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_marginRight="64dp"
-    android:layout_height="match_parent">
+    android:layout_marginBottom="8dp"
+    android:layout_height="wrap_content">
 
     <com.mikhaellopez.circularimageview.CircularImageView
         android:id="@+id/personImageView"
-        android:layout_width="32dp"
-        android:layout_height="32dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
@@ -29,7 +30,7 @@
             android:layout_height="wrap_content"
             android:text="С другой стороны рамки и место обучения кадров требуют от нас анализа
             системы обучения кадров, соответствует насущным потребностям."
-            android:textSize="12sp"
+            android:textSize="14sp"
             android:textColor="@color/textColor"
             android:layout_margin="8dp"/>
     </androidx.cardview.widget.CardView>
