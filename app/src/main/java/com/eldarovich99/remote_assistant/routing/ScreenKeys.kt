@@ -1,5 +1,6 @@
 package com.eldarovich99.remote_assistant.routing
 
+import ru.terrakok.cicerone.Screen
 import ru.terrakok.cicerone.android.support.SupportAppScreen
 
 //sealed class ScreenKeys : Screen()
@@ -7,3 +8,17 @@ import ru.terrakok.cicerone.android.support.SupportAppScreen
 class ChatScreen : SupportAppScreen()
 class LoginScreen : SupportAppScreen()
 class ContactsScreen : SupportAppScreen()
+
+object ScreenKeys {
+    const val CHATS = "chats"
+    const val LOGIN = "login"
+    const val CONTACTS = "contacts"
+    fun getScreen(key: String) : Screen {
+        return when (key){
+            CHATS -> ChatScreen()
+            LOGIN -> LoginScreen()
+            CONTACTS -> ContactsScreen()
+            else -> throw Exception("Unknown screen key")
+        }
+    }
+}

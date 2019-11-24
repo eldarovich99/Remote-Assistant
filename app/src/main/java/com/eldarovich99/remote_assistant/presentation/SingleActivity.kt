@@ -13,7 +13,7 @@ class SingleActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_single)
 
         val appScope = Toothpick.openScopes(Scopes.APP_SCOPE, Scopes.ACTIVITY_SCOPE)
         appScope.installModules(RouterModule(this))
@@ -28,5 +28,10 @@ class SingleActivity : AppCompatActivity() {
         val fragment = supportFragmentManager.fragments[supportFragmentManager.fragments.size-1] as BaseFragment
         fragment.dispatchKeyEvent(event)
         return super.dispatchKeyEvent(event)
+    }
+
+    override fun onDestroy() {
+        Toothpick.closeScope(Scopes.ACTIVITY_SCOPE)
+        super.onDestroy()
     }
 }

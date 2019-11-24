@@ -8,13 +8,19 @@ import android.view.ViewGroup
 import android.widget.Toast
 import com.eldarovich99.remote_assistant.R
 import com.eldarovich99.remote_assistant.presentation.BaseFragment
-import com.eldarovich99.remote_assistant.presentation.ui.BottomNavBar
 import com.eldarovich99.remote_assistant.routing.ContactsScreen
+import com.eldarovich99.remote_assistant.routing.ScreenKeys.CHATS
 import kotlinx.android.synthetic.main.fragment_chats.*
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.Job
 
+@ExperimentalCoroutinesApi
 class ChatsFragment : BaseFragment(){
     var adapterPosition = 0
     var shouldMove = true
+   // val bottomNavBarObservable : Flow<Screen> by lazy { bottomNavBar.listenButtonClicked() }
+    lateinit var buttonJob : Job
+
     override fun dispatchKeyEvent(event: KeyEvent?){
         when (event?.keyCode){
             KeyEvent.KEYCODE_DPAD_CENTER -> {
@@ -67,7 +73,17 @@ class ChatsFragment : BaseFragment(){
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         chatsRecycler.adapter = ChatsAdapter()
         chatsRecycler.requestFocus()
-        bottomNavBar.selectButton(BottomNavBar.CHATS)
+        bottomNavBar.selectButton(CHATS)
+
         super.onViewCreated(view, savedInstanceState)
+    }
+
+    override fun onResume() {
+        super.onResume()
+    }
+
+    override fun onPause() {
+       // buttonJob.cancel()
+        super.onPause()
     }
 }

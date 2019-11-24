@@ -8,11 +8,13 @@ import android.view.ViewGroup
 import android.widget.Toast
 import com.eldarovich99.remote_assistant.R
 import com.eldarovich99.remote_assistant.presentation.BaseFragment
-import com.eldarovich99.remote_assistant.presentation.ui.BottomNavBar
 import com.eldarovich99.remote_assistant.presentation.view.chats.ChatsAdapter
 import com.eldarovich99.remote_assistant.routing.ContactsScreen
+import com.eldarovich99.remote_assistant.routing.ScreenKeys.CONTACTS
 import kotlinx.android.synthetic.main.fragment_chats.*
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 
+@ExperimentalCoroutinesApi
 class ContactsFragment : BaseFragment(){
     var adapterPosition = 0
     var shouldMove = true
@@ -28,7 +30,7 @@ class ContactsFragment : BaseFragment(){
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         chatsRecycler.adapter = ChatsAdapter()
         chatsRecycler.requestFocus()
-        bottomNavBar.selectButton(BottomNavBar.CONTACTS)
+        bottomNavBar.selectButton(CONTACTS)
         super.onViewCreated(view, savedInstanceState)
     }
     override fun dispatchKeyEvent(event: KeyEvent?){
