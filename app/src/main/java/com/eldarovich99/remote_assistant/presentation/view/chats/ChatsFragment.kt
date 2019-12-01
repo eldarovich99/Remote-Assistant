@@ -69,7 +69,8 @@ class ChatsFragment : BaseFragment(){
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        Toothpick.openScope(Scopes.CHATS_SCOPE)
+        Toothpick.openScope(Scopes.CHATS_SCOPE) // It doesn't work because Inject happen before.
+        // It is necessary to google it and find out how to deal with it
         return inflater.inflate(R.layout.fragment_chats, container, false)
     }
 
