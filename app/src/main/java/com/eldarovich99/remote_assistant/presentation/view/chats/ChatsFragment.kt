@@ -12,13 +12,13 @@ import com.eldarovich99.remote_assistant.R
 import com.eldarovich99.remote_assistant.presentation.BaseFragment
 import com.eldarovich99.remote_assistant.routing.ContactsScreen
 import com.eldarovich99.remote_assistant.routing.ScreenKeys.CHATS
+import com.eldarovich99.remote_assistant.routing.SingleChatScreen
 import kotlinx.android.synthetic.main.fragment_chats.*
 import kotlinx.coroutines.Job
 
 class ChatsFragment : BaseFragment(){
     var adapterPosition = 0
     var shouldMove = true
-    var wasFragmentCreated = false
    // val bottomNavBarObservable : Flow<Screen> by lazy { bottomNavBar.listenButtonClicked() }
     lateinit var buttonJob : Job
 
@@ -39,7 +39,7 @@ class ChatsFragment : BaseFragment(){
                 Toast.makeText(context, "ViewPager changes fragment (left)", Toast.LENGTH_SHORT).show()
             }
             KeyEvent.KEYCODE_DPAD_RIGHT -> {
-                cicerone.router.navigateTo(ContactsScreen())
+                router.navigateTo(ContactsScreen())
                 Toast.makeText(context, "ViewPager changes fragment (right)", Toast.LENGTH_SHORT).show()
             }
             KeyEvent.KEYCODE_DPAD_DOWN -> {
@@ -70,19 +70,13 @@ class ChatsFragment : BaseFragment(){
     ): View? {
         return inflater.inflate(R.layout.fragment_chats, container, false)
     }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        retainInstance = true
-        super.onCreate(savedInstanceState)
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        if (!wasFragmentCreated) {
             toolbar.title = getString(R.string.chats)
             peopleRecycler.requestFocus()
             peopleRecycler.adapter = ChatsAdapter(object : ChatsAdapter.Companion.OnItemClicked{
                 override fun onClick(position: Int) {
-                  //  cicerone.router.navigateTo(SingleChatScreen())
+                    //Toast.makeText(context, "Clicked!", Toast.LENGTH_SHORT).show()
+                    router.navigateTo(SingleChatScreen())
                 }
             })
             bottomNavBar.selectButton(CHATS)
@@ -93,8 +87,6 @@ class ChatsFragment : BaseFragment(){
                     RecyclerView.VERTICAL
                 )
             )
-            wasFragmentCreated = true
-        }
         super.onViewCreated(view, savedInstanceState)
     }
 }

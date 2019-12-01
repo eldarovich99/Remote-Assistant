@@ -23,6 +23,9 @@ class BottomNavBar(context: Context, private val attrs: AttributeSet): LinearLay
 
     @Inject
     lateinit var navigator: Navigator
+
+    @Inject
+    lateinit var router: Router
     private var selectedView: View? = null
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
@@ -37,11 +40,11 @@ class BottomNavBar(context: Context, private val attrs: AttributeSet): LinearLay
         Toothpick.inject(this, Toothpick.openScopes(Scopes.APP_SCOPE, Scopes.ACTIVITY_SCOPE))
         // chatsButton.requestFocus()
         chatsButton.setOnClickListener {
-            cicerone.router.replaceScreen(ScreenKeys.getScreen(CHATS))
+            router.replaceScreen(ScreenKeys.getScreen(CHATS))
             Toast.makeText(context, "Chats", Toast.LENGTH_SHORT).show()
         }
         contactsButton.setOnClickListener {
-            cicerone.router.replaceScreen(ScreenKeys.getScreen(CONTACTS))
+            router.replaceScreen(ScreenKeys.getScreen(CONTACTS))
             Toast.makeText(context, "Contacts", Toast.LENGTH_SHORT).show()
         }
         /*val typedArray = context.obtainStyledAttributes(attrs, R.styleable.PageToolbar)

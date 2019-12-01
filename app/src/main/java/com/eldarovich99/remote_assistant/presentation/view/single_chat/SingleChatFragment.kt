@@ -6,12 +6,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import com.eldarovich99.remote_assistant.IOnBackPressed
 import com.eldarovich99.remote_assistant.R
 import com.eldarovich99.remote_assistant.presentation.BaseFragment
 import com.eldarovich99.remote_assistant.routing.ContactsScreen
 import kotlinx.android.synthetic.main.fragment_single_chat.*
 
-class SingleChatFragment : BaseFragment(){
+class SingleChatFragment : BaseFragment(), IOnBackPressed{
     override fun dispatchKeyEvent(event: KeyEvent?) {
         when (event?.keyCode){
             KeyEvent.KEYCODE_DPAD_CENTER -> {
@@ -29,7 +30,7 @@ class SingleChatFragment : BaseFragment(){
                 Toast.makeText(context, "ViewPager changes fragment (left)", Toast.LENGTH_SHORT).show()
             }
             KeyEvent.KEYCODE_DPAD_RIGHT -> {
-                cicerone.router.navigateTo(ContactsScreen())
+                router.navigateTo(ContactsScreen())
                 Toast.makeText(context, "ViewPager changes fragment (right)", Toast.LENGTH_SHORT).show()
             }
             KeyEvent.KEYCODE_DPAD_DOWN -> {
@@ -64,5 +65,9 @@ class SingleChatFragment : BaseFragment(){
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         chatRecycler.adapter = SingleChatAdapter()
+    }
+
+    override fun onBackPressed() {
+        router.exit()
     }
 }

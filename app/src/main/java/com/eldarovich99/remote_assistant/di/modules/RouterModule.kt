@@ -10,15 +10,15 @@ import ru.terrakok.cicerone.Router
 import toothpick.config.Module
 
 class RouterModule(activity : AppCompatActivity) : Module(){
-    val cicerone : Cicerone<Router> by lazy{ Cicerone.create() }
+    val cicerone : Cicerone<Router> by lazy{ Cicerone.create(router) }
+    val router : Router by lazy {Router()}
     init {
         bind(Cicerone::class.java).toInstance(cicerone)
 
         val navigator = SingleNavigator(activity, R.id.fragment_host)
         bind(Navigator::class.java).toInstance(navigator)
+        bind(Router::class.java).toInstance(router)
     }
-
-    fun getRouter() : Router = cicerone.router
     fun getNavigatorHolder() : NavigatorHolder = cicerone.navigatorHolder
 
 }

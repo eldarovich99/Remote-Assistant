@@ -22,7 +22,9 @@ class ChatsAdapter(val callback : OnItemClicked) : RecyclerView.Adapter<ChatsAda
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChatsViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.people_item_chats, parent, false)
         val holder = ChatsViewHolder(view)
-        callback.onClick(holder.adapterPosition)
+        holder.itemView.setOnClickListener {
+            callback.onClick(holder.adapterPosition)
+        }
         // holder.itemView.setOnClickListener {
       //     selectedView?.isSelected = false
       //     it.isSelected = true
@@ -38,12 +40,8 @@ class ChatsAdapter(val callback : OnItemClicked) : RecyclerView.Adapter<ChatsAda
     }
 
     override fun onBindViewHolder(holder: ChatsViewHolder, position: Int) {
-       // holder.itemView.isSelected = holder.adapterPosition == selectedItemPosition
         holder.itemNameTextView.text = "${holder.itemNameTextView.text.toString().substringBefore(' ')} ${holder.adapterPosition}"
         holder.itemView.isSelected = items[holder.adapterPosition].isEnabled
-        //holder.offerTitle.text = itemMocks[holder.adapterPosition].offerTitle
-       // holder.organizationName.text = itemMocks[holder.adapterPosition].organizationName
-       // holder.offerImageView.setImageResource(R.drawable.mock_offer) // replace when backend will be ready
     }
 
     class ChatsViewHolder(view: View) : RecyclerView.ViewHolder(view){

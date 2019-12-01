@@ -22,6 +22,9 @@ abstract class BaseFragment : Fragment(){
     @Inject
     lateinit var navigator: Navigator
 
+    @Inject
+    lateinit var router: Router
+
     lateinit var displayControl : DisplayControl // TODO inject
    // var sensorManager : SensorManager?=null
 

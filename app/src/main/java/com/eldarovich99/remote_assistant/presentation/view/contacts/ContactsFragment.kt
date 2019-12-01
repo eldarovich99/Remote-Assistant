@@ -17,7 +17,6 @@ import kotlinx.android.synthetic.main.fragment_chats.*
 class ContactsFragment : BaseFragment(){
     var adapterPosition = 0
     var shouldMove = true
-    var wasFragmentCreated = false
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -28,12 +27,10 @@ class ContactsFragment : BaseFragment(){
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        retainInstance = true
         super.onCreate(savedInstanceState)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        if (!wasFragmentCreated){
             toolbar.title = getString(R.string.contacts)
             peopleRecycler.adapter = ContactsAdapter()
             peopleRecycler.requestFocus()
@@ -44,8 +41,6 @@ class ContactsFragment : BaseFragment(){
                 )
             )
             bottomNavBar.selectButton(CONTACTS)
-            wasFragmentCreated = true
-        }
         super.onViewCreated(view, savedInstanceState)
     }
     override fun dispatchKeyEvent(event: KeyEvent?){
@@ -57,7 +52,7 @@ class ContactsFragment : BaseFragment(){
                 Toast.makeText(context, "ViewPager changes fragment (left)", Toast.LENGTH_SHORT).show()
             }
             KeyEvent.KEYCODE_DPAD_RIGHT -> {
-                cicerone.router.navigateTo(ContactsScreen())
+                router.navigateTo(ContactsScreen())
                 Toast.makeText(context, "ViewPager changes fragment (right)", Toast.LENGTH_SHORT).show()
             }
             KeyEvent.KEYCODE_DPAD_DOWN -> {
