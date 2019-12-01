@@ -9,30 +9,37 @@ import android.widget.Toast
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
 import com.eldarovich99.remote_assistant.R
+import com.eldarovich99.remote_assistant.di.Scopes
 import com.eldarovich99.remote_assistant.presentation.BaseFragment
 import com.eldarovich99.remote_assistant.routing.ContactsScreen
 import com.eldarovich99.remote_assistant.routing.ScreenKeys.CONTACTS
 import kotlinx.android.synthetic.main.fragment_chats.*
+import toothpick.Toothpick
+import javax.inject.Inject
 
 class ContactsFragment : BaseFragment(){
     var adapterPosition = 0
     var shouldMove = true
+    @Inject
+    lateinit var adapter: ContactsAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        Toothpick.openScope(Scopes.CONTACTS_SCOPE)
         return inflater.inflate(R.layout.fragment_chats, container, false)
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override fun onDestroyView() {
+        Toothpick.closeScope(Scopes.CONTACTS_SCOPE)
+        super.onDestroyView()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
             toolbar.title = getString(R.string.contacts)
-            peopleRecycler.adapter = ContactsAdapter()
+            peopleRecycler.adapter = adapter // ContactsAdapter()
             peopleRecycler.requestFocus()
             peopleRecycler.addItemDecoration(
                 DividerItemDecoration(

@@ -7,13 +7,11 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.eldarovich99.remote_assistant.R
 import com.eldarovich99.remote_assistant.domain.models.User
+import com.eldarovich99.remote_assistant.routing.SingleChatScreen
+import ru.terrakok.cicerone.Router
+import javax.inject.Inject
 
-class ChatsAdapter(val callback : OnItemClicked) : RecyclerView.Adapter<ChatsAdapter.ChatsViewHolder>() {
-    companion object{
-        interface OnItemClicked{
-            fun onClick(position: Int)
-        }
-    }
+class ChatsAdapter @Inject constructor(var router: Router) : RecyclerView.Adapter<ChatsAdapter.ChatsViewHolder>() {
     val items = generateSequence { User() }.take(50).toList()
    // var selectedView : View?=null
    // var selectedItemPosition = -1
@@ -23,7 +21,7 @@ class ChatsAdapter(val callback : OnItemClicked) : RecyclerView.Adapter<ChatsAda
         val view = LayoutInflater.from(parent.context).inflate(R.layout.people_item_chats, parent, false)
         val holder = ChatsViewHolder(view)
         holder.itemView.setOnClickListener {
-            callback.onClick(holder.adapterPosition)
+            router.navigateTo(SingleChatScreen())
         }
         // holder.itemView.setOnClickListener {
       //     selectedView?.isSelected = false

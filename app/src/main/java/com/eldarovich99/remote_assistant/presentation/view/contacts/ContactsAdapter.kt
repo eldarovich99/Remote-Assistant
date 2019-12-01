@@ -7,12 +7,17 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.eldarovich99.remote_assistant.R
 import com.eldarovich99.remote_assistant.domain.models.User
+import ru.terrakok.cicerone.Router
+import javax.inject.Inject
 
-class ContactsAdapter : RecyclerView.Adapter<ContactsAdapter.ContactsViewHolder>() {
+class ContactsAdapter @Inject constructor(var router: Router) : RecyclerView.Adapter<ContactsAdapter.ContactsViewHolder>() {
     val items = generateSequence { User() }.take(50).toList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ContactsViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.people_item_contacts, parent, false)
+        view.setOnClickListener {
+            //router.navigateTo(SingleChatScreen())
+        }
         return ContactsViewHolder(view)
     }
 

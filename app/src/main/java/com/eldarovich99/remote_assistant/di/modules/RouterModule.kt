@@ -5,7 +5,6 @@ import com.eldarovich99.remote_assistant.R
 import com.eldarovich99.remote_assistant.routing.SingleNavigator
 import ru.terrakok.cicerone.Cicerone
 import ru.terrakok.cicerone.Navigator
-import ru.terrakok.cicerone.NavigatorHolder
 import ru.terrakok.cicerone.Router
 import toothpick.config.Module
 
@@ -19,6 +18,4 @@ class RouterModule(activity : AppCompatActivity) : Module(){
         bind(Navigator::class.java).toInstance(navigator)
         bind(Router::class.java).toInstance(router)
     }
-    fun getNavigatorHolder() : NavigatorHolder = cicerone.navigatorHolder
-
 }

@@ -9,18 +9,19 @@ import android.widget.Toast
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
 import com.eldarovich99.remote_assistant.R
+import com.eldarovich99.remote_assistant.di.Scopes
 import com.eldarovich99.remote_assistant.presentation.BaseFragment
 import com.eldarovich99.remote_assistant.routing.ContactsScreen
 import com.eldarovich99.remote_assistant.routing.ScreenKeys.CHATS
-import com.eldarovich99.remote_assistant.routing.SingleChatScreen
 import kotlinx.android.synthetic.main.fragment_chats.*
-import kotlinx.coroutines.Job
+import toothpick.Toothpick
+import javax.inject.Inject
 
 class ChatsFragment : BaseFragment(){
     var adapterPosition = 0
     var shouldMove = true
-   // val bottomNavBarObservable : Flow<Screen> by lazy { bottomNavBar.listenButtonClicked() }
-    lateinit var buttonJob : Job
+    @Inject
+    lateinit var adapter : ChatsAdapter
 
     override fun dispatchKeyEvent(event: KeyEvent?){
         when (event?.keyCode){
@@ -68,17 +69,19 @@ class ChatsFragment : BaseFragment(){
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        Toothpick.openScope(Scopes.CHATS_SCOPE)
         return inflater.inflate(R.layout.fragment_chats, container, false)
     }
+
+    override fun onDestroyView() {
+        Toothpick.closeScope(Scopes.CHATS_SCOPE)
+        super.onDestroyView()
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
             toolbar.title = getString(R.string.chats)
             peopleRecycler.requestFocus()
-            peopleRecycler.adapter = ChatsAdapter(object : ChatsAdapter.Companion.OnItemClicked{
-                override fun onClick(position: Int) {
-                    //Toast.makeText(context, "Clicked!", Toast.LENGTH_SHORT).show()
-                    router.navigateTo(SingleChatScreen())
-                }
-            })
+            peopleRecycler.adapter = adapter
             bottomNavBar.selectButton(CHATS)
 
             peopleRecycler.addItemDecoration(
