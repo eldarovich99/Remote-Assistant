@@ -19,4 +19,6 @@
     <string name="get_sale">Получить скидку</string>
     <string name="chats">Диалоги</string>
     <string name="contacts">Контакты</string>
+    <string name="find_by_name">Найти по имени</string>
+    <string name="none_calls">Входящих звонков нет</string>
 </resources>

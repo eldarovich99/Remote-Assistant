@@ -12,7 +12,6 @@ import com.eldarovich99.remote_assistant.R
 import com.eldarovich99.remote_assistant.di.Scopes
 import com.eldarovich99.remote_assistant.presentation.BaseFragment
 import com.eldarovich99.remote_assistant.routing.ContactsScreen
-import com.eldarovich99.remote_assistant.routing.ScreenKeys.CHATS
 import kotlinx.android.synthetic.main.fragment_chats.*
 import toothpick.Toothpick
 import javax.inject.Inject
@@ -83,7 +82,7 @@ class ChatsFragment : BaseFragment(){
             toolbar.title = getString(R.string.chats)
             peopleRecycler.requestFocus()
             peopleRecycler.adapter = adapter
-            bottomNavBar.selectButton(CHATS)
+            //bottomNavBar.selectButton(CHATS)
 
             peopleRecycler.addItemDecoration(
                 DividerItemDecoration(
