@@ -7,11 +7,12 @@
     <color name="colorAccentLight">#FF8A80</color>
 
     <color name="textColor">@android:color/black</color>
-    <color name="uiTextColor">#D5D0D2</color>
+    <color name="uiTextColor">#F0EEF0</color>
 
     <color name="color_light_grey">#D5D0D2</color>
     <color name="color_light_blue">#97CADB</color>
 
+    <color name="dismiss_red">#F44336</color>
     <!--<color name="colorPrimary">#5E35B1</color>
     <color name="colorPrimaryDark">#4527A0</color>
     <color name="colorPrimaryLight">#B39DDB</color>
