@@ -5,10 +5,10 @@ import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import com.eldarovich99.remote_assistant.R
 import com.eldarovich99.remote_assistant.presentation.BaseFragment
 import com.eldarovich99.remote_assistant.routing.ChatScreen
+import com.eldarovich99.remote_assistant.routing.RestorePasswordScreen
 import kotlinx.android.synthetic.main.fragment_login.*
 
 class LoginFragment : BaseFragment() {
@@ -37,8 +37,10 @@ class LoginFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         loginButton.setOnClickListener {
-            Toast.makeText(context, "Login button clicked", Toast.LENGTH_SHORT).show()
             router.newRootScreen(ChatScreen())
+        }
+        forgetPasswordButton.setOnClickListener {
+            router.navigateTo(RestorePasswordScreen())
         }
         super.onViewCreated(view, savedInstanceState)
     }

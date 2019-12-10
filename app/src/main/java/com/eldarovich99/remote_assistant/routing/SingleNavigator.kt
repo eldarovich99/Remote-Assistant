@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.eldarovich99.remote_assistant.presentation.view.CallFragment
 import com.eldarovich99.remote_assistant.presentation.view.LoginFragment
+import com.eldarovich99.remote_assistant.presentation.view.RestorePasswordFragment
 import com.eldarovich99.remote_assistant.presentation.view.chats.ChatsFragment
 import com.eldarovich99.remote_assistant.presentation.view.contacts.ContactsFragment
 import com.eldarovich99.remote_assistant.presentation.view.single_chat.SingleChatFragment
@@ -18,6 +19,7 @@ class SingleNavigator(activity: AppCompatActivity, fragmentHost: Int) : SupportA
             is ContactsScreen -> return ContactsFragment()
             is SingleChatScreen -> return SingleChatFragment()
             is CallScreen -> return CallFragment()
+            is RestorePasswordScreen -> return RestorePasswordFragment()
         }
         throw (Exception("Unknown Fragment"))
     }

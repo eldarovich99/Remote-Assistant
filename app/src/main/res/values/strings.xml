@@ -9,10 +9,12 @@
     <string name="name_surname">Имя фамилия</string>
     <string name="login">Авторизоваться</string>
     <string name="or">или</string>
+    <string name="enter_login">Введите логин:</string>
+    <string name="restore_password">Восстановить пароль</string>
     <string name="already_have_account_login">Уже есть аккаунт? Войти</string>
     <string name="next">Далее</string>
     <string name="confirmation_code">Код подтверждения:</string>
-    <string name="forget_account">Забыли аккаунт? Восстановить</string>
+    <string name="forget_password">Забыли пароль?</string>
     <string name="search">Поиск studentcare</string>
     <string name="interesting">Интересное</string>
     <string name="item_sale">Товар по акции</string>
