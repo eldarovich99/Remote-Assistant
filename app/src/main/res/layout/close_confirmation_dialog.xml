@@ -17,7 +17,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/endDialogButton"
         android:layout_width="125dp"
         android:layout_height="wrap_content"
         android:text="Завершить"
@@ -28,14 +28,14 @@
         app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/cancelDialogButton"
         android:layout_width="125dp"
         android:layout_height="wrap_content"
         android:text="Отмена"
         android:textColor="@color/uiTextColor"
         android:background="@color/colorPrimary"
         android:layout_marginTop="32dp"
-        app:layout_constraintEnd_toStartOf="@+id/button"
+        app:layout_constraintEnd_toStartOf="@+id/endDialogButton"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView3" />
 </androidx.constraintlayout.widget.ConstraintLayout>
