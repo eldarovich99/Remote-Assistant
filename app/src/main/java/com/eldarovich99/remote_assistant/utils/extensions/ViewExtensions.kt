@@ -9,3 +9,10 @@ fun View.hide(){
 fun View.show(){
     this.visibility = View.VISIBLE
 }
+
+fun View.revertVisibility(){
+    if (this.visibility == View.VISIBLE)
+        this.visibility = View.GONE
+    else
+        this.visibility = View.VISIBLE
+}

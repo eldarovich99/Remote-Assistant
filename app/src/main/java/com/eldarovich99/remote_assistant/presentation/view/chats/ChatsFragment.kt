@@ -6,12 +6,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
 import com.eldarovich99.remote_assistant.R
 import com.eldarovich99.remote_assistant.di.Scopes
 import com.eldarovich99.remote_assistant.presentation.BaseFragment
 import com.eldarovich99.remote_assistant.routing.ContactsScreen
+import com.eldarovich99.remote_assistant.utils.extensions.revertVisibility
 import kotlinx.android.synthetic.main.fragment_chats.*
 import toothpick.Toothpick
 import javax.inject.Inject
@@ -19,6 +21,7 @@ import javax.inject.Inject
 class ChatsFragment : BaseFragment(){
     var adapterPosition = 0
     var shouldMove = true
+    var isChatVisible = true
     @Inject
     lateinit var adapter : ChatsAdapter
 
@@ -90,6 +93,16 @@ class ChatsFragment : BaseFragment(){
                     RecyclerView.VERTICAL
                 )
             )
+        showChatImageView.setOnClickListener {
+            isChatVisible = !isChatVisible
+            searchIcon.revertVisibility()
+            searchEditText.revertVisibility()
+            peopleRecycler.revertVisibility()
+            if (isChatVisible)
+                showChatImageView.setImageDrawable(AppCompatResources.getDrawable(context!!, R.drawable.ic_keyboard_arrow_left_black))
+            else
+                showChatImageView.setImageDrawable(AppCompatResources.getDrawable(context!!, R.drawable.ic_keyboard_arrow_right))
+        }
         super.onViewCreated(view, savedInstanceState)
     }
 }
