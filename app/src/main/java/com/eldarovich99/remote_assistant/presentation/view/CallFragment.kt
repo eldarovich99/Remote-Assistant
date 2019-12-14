@@ -11,7 +11,7 @@ import kotlinx.android.synthetic.main.fragment_call.*
 
 class CallFragment : BaseFragment(){
     override fun dispatchKeyEvent(event: KeyEvent?) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        //TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     override fun onCreateView(

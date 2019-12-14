@@ -45,12 +45,12 @@ abstract class BaseFragment : Fragment(){
         super.onCreate(savedInstanceState)
     }
 
-    override fun onPause() {
+    override fun onStop() {
         cicerone.navigatorHolder.removeNavigator()
-        super.onPause()
+        super.onStop()
     }
 
-    override fun onResume() {
+    override fun onStart() {
         cicerone.navigatorHolder.setNavigator(navigator)
 
         /*sensorManager = context?.getSystemService(SENSOR_SERVICE) as SensorManager
@@ -72,7 +72,7 @@ abstract class BaseFragment : Fragment(){
             }, tap, SensorManager.SENSOR_DELAY_NORMAL)
         }*/
         
-        super.onResume()
+        super.onStart()
     }
 
     abstract fun dispatchKeyEvent(event: KeyEvent?)

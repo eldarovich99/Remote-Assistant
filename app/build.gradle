@@ -83,4 +83,7 @@ dependencies {
 
     // Circular ImageView
     implementation 'com.mikhaellopez:circularimageview:4.1.0'
+
+    // QR
+    implementation 'com.dlazaro66.qrcodereaderview:qrcodereaderview:2.0.3'
 }

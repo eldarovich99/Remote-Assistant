@@ -2,6 +2,7 @@ package com.eldarovich99.remote_assistant.routing
 
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import com.eldarovich99.remote_assistant.presentation.QrReaderFragment
 import com.eldarovich99.remote_assistant.presentation.view.CallFragment
 import com.eldarovich99.remote_assistant.presentation.view.LoginFragment
 import com.eldarovich99.remote_assistant.presentation.view.RestorePasswordFragment
@@ -11,7 +12,7 @@ import com.eldarovich99.remote_assistant.presentation.view.single_chat.SingleCha
 import ru.terrakok.cicerone.android.support.SupportAppNavigator
 import ru.terrakok.cicerone.android.support.SupportAppScreen
 
-class SingleNavigator(activity: AppCompatActivity, fragmentHost: Int) : SupportAppNavigator(activity, fragmentHost) {
+class SingleNavigator(val activity: AppCompatActivity, fragmentHost: Int) : SupportAppNavigator(activity, fragmentHost) {
     override fun createFragment(screen: SupportAppScreen?): Fragment {
         when (screen){
             is ChatScreen -> return ChatsFragment()
@@ -20,6 +21,7 @@ class SingleNavigator(activity: AppCompatActivity, fragmentHost: Int) : SupportA
             is SingleChatScreen -> return SingleChatFragment()
             is CallScreen -> return CallFragment()
             is RestorePasswordScreen -> return RestorePasswordFragment()
+            is QRScreen -> return QrReaderFragment()
         }
         throw (Exception("Unknown Fragment"))
     }

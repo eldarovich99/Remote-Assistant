@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.eldarovich99.remote_assistant.R
 import com.eldarovich99.remote_assistant.presentation.BaseFragment
+import com.eldarovich99.remote_assistant.presentation.QrReaderFragment
 import com.eldarovich99.remote_assistant.routing.ChatScreen
 import com.eldarovich99.remote_assistant.routing.RestorePasswordScreen
 import kotlinx.android.synthetic.main.fragment_login.*
@@ -40,8 +41,24 @@ class LoginFragment : BaseFragment() {
             router.newRootScreen(ChatScreen())
         }
         forgetPasswordButton.setOnClickListener {
-            router.navigateTo(RestorePasswordScreen())
+            router.navigateTo(RestorePasswordScreen(
+
+            ))
+        }
+        qrImageView.setOnClickListener {
+            QrReaderFragment.start(this, router)
         }
         super.onViewCreated(view, savedInstanceState)
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        when (requestCode) {
+            1 -> { QrReaderFragment.onRequestPermissionsResult(requestCode, grantResults, router)
+            }
+        }
     }
 }

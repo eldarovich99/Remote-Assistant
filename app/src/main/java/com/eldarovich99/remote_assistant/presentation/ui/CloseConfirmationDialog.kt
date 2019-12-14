@@ -24,7 +24,7 @@ class CloseConfirmationDialog(val fragment : Fragment){
             builder.setView(view)
             val dialog = builder.create()
             Toothpick.inject(this, Toothpick.openScopes(Scopes.APP_SCOPE, Scopes.ACTIVITY_SCOPE, Scopes.CHATS_SCOPE))
-            view.endDialogButton.setOnClickListener {
+            view.cancelDialogButton.setOnClickListener {
                 dialog.dismiss()
             }
             view.endDialogButton.setOnClickListener {
