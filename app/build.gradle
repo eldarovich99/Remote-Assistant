@@ -71,7 +71,7 @@ dependencies {
     implementation 'com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:0.9.2'
 
     // Material Design
-    implementation "com.google.android.material:material:1.2.0-alpha01"
+    implementation "com.google.android.material:material:1.2.0-alpha04"
 
     // DI
     implementation 'com.github.stephanenicolas.toothpick:toothpick-runtime:2.1.0'

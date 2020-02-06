@@ -45,9 +45,9 @@ class LoginFragment : BaseFragment() {
 
             ))
         }
-        qrImageView.setOnClickListener {
+        /*qrImageView.setOnClickListener {
             QrReaderFragment.start(this, router)
-        }
+        }*/
         super.onViewCreated(view, savedInstanceState)
     }
 
