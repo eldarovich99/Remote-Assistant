@@ -12,7 +12,7 @@ import com.eldarovich99.remote_assistant.presentation.ui.CloseConfirmationDialog
 import kotlinx.android.synthetic.main.fragment_call.*
 
 class CallFragment : BaseFragment(){
-    override fun dispatchKeyEvent(event: KeyEvent?) {
+    override suspend fun dispatchKeyEvent(event: KeyEvent?){
         when (event?.keyCode){
             KeyEvent.KEYCODE_DPAD_CENTER -> {
             }
@@ -25,7 +25,7 @@ class CallFragment : BaseFragment(){
             KeyEvent.KEYCODE_F4 -> {
                 Toast.makeText(context, "KEYCODE_F4", Toast.LENGTH_SHORT).show()}
             KeyEvent.KEYCODE_DPAD_LEFT -> {
-                CloseConfirmationDialog(this).get().show()
+                CloseConfirmationDialog(this@CallFragment).get().show()
             }
             KeyEvent.KEYCODE_DPAD_RIGHT -> {
             }

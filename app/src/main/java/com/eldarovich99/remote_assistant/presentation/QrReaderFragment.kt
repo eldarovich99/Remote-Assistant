@@ -17,7 +17,7 @@ import kotlinx.android.synthetic.main.qr_fragment.*
 import ru.terrakok.cicerone.Router
 
 class QrReaderFragment : BaseFragment(), QRCodeReaderView.OnQRCodeReadListener {
-    override fun dispatchKeyEvent(event: KeyEvent?) {
+    override suspend fun dispatchKeyEvent(event: KeyEvent?) {
         //TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 

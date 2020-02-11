@@ -75,5 +75,5 @@ abstract class BaseFragment : Fragment(){
         super.onStart()
     }
 
-    abstract fun dispatchKeyEvent(event: KeyEvent?)
+    abstract suspend fun dispatchKeyEvent(event: KeyEvent?)
 }

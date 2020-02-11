@@ -13,7 +13,7 @@ import com.eldarovich99.remote_assistant.routing.ContactsScreen
 import kotlinx.android.synthetic.main.fragment_single_chat.*
 
 class SingleChatFragment : BaseFragment(), IOnBackPressed{
-    override fun dispatchKeyEvent(event: KeyEvent?) {
+    override suspend fun dispatchKeyEvent(event: KeyEvent?) {
         when (event?.keyCode){
             KeyEvent.KEYCODE_DPAD_CENTER -> {
                 Toast.makeText(context, "Confirm button clicked", Toast.LENGTH_SHORT).show()

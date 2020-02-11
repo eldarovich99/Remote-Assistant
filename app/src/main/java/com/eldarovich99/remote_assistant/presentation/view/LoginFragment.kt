@@ -13,7 +13,7 @@ import com.eldarovich99.remote_assistant.routing.RestorePasswordScreen
 import kotlinx.android.synthetic.main.fragment_login.*
 
 class LoginFragment : BaseFragment() {
-    override fun dispatchKeyEvent(event: KeyEvent?){
+    override suspend fun dispatchKeyEvent(event: KeyEvent?){
         when (event?.keyCode){
             KeyEvent.KEYCODE_DPAD_CENTER -> {}
             KeyEvent.KEYCODE_F1 -> {}

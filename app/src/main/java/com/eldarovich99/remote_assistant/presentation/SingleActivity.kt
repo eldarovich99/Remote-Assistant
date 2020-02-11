@@ -9,10 +9,11 @@ import com.eldarovich99.remote_assistant.R
 import com.eldarovich99.remote_assistant.di.Scopes
 import com.eldarovich99.remote_assistant.di.modules.RouterModule
 import com.eldarovich99.remote_assistant.presentation.view.LoginFragment
+import kotlinx.coroutines.*
 import toothpick.Toothpick
 
 class SingleActivity : AppCompatActivity(), IOnBackPressed{
-
+    var keyDispatcherEventJob : Job?=null
     override fun onCreate(savedInstanceState: Bundle?) {
         enableFullScreenMode()
         super.onCreate(savedInstanceState)
@@ -38,7 +39,15 @@ class SingleActivity : AppCompatActivity(), IOnBackPressed{
     @Deprecated("It is necessary to make this function suspend to deal with multi-click effect")
     override fun dispatchKeyEvent(event: KeyEvent?): Boolean {
         val fragment = supportFragmentManager.fragments[supportFragmentManager.fragments.size-1] as BaseFragment
-        fragment.dispatchKeyEvent(event)
+
+        if (keyDispatcherEventJob == null || !keyDispatcherEventJob!!.isActive) {
+            keyDispatcherEventJob = CoroutineScope(Dispatchers.Main).launch {
+                fragment.dispatchKeyEvent(event)
+                withContext(Dispatchers.IO){
+                    Thread.sleep(300)
+                }
+            }
+        }
         return super.dispatchKeyEvent(event)
     }
 

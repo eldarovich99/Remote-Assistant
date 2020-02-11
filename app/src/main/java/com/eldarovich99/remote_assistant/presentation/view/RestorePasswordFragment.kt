@@ -11,7 +11,7 @@ import com.eldarovich99.remote_assistant.presentation.BaseFragment
 import toothpick.Toothpick
 
 class RestorePasswordFragment : BaseFragment() {
-    override fun dispatchKeyEvent(event: KeyEvent?) {
+    override suspend fun dispatchKeyEvent(event: KeyEvent?) {
         //TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 

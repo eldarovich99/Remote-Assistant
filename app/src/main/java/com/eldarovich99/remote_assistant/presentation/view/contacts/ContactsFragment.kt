@@ -50,7 +50,7 @@ class ContactsFragment : BaseFragment(){
             //bottomNavBar.selectButton(CONTACTS)
         super.onViewCreated(view, savedInstanceState)
     }
-    override fun dispatchKeyEvent(event: KeyEvent?){
+    override suspend fun dispatchKeyEvent(event: KeyEvent?){
         when (event?.keyCode){
             KeyEvent.KEYCODE_DPAD_CENTER -> {
                 Toast.makeText(context, "Confirm button clicked", Toast.LENGTH_SHORT).show()

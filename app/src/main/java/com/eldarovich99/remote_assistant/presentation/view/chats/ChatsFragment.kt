@@ -24,7 +24,7 @@ class ChatsFragment : BaseFragment(){
     @Inject
     lateinit var adapter : ChatsAdapter
 
-    override fun dispatchKeyEvent(event: KeyEvent?){
+    override suspend fun dispatchKeyEvent(event: KeyEvent?){
         when (event?.keyCode){
             KeyEvent.KEYCODE_DPAD_CENTER -> {
                 Toast.makeText(context, "Confirm button clicked", Toast.LENGTH_SHORT).show()
