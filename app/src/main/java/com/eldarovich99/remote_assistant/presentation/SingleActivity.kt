@@ -28,12 +28,9 @@ class SingleActivity : AppCompatActivity(), IOnBackPressed{
             .commit()
     }
 
-    fun enableFullScreenMode(){
-        val winParams = window?.attributes
-        winParams?.flags = WindowManager.LayoutParams.FLAG_FULLSCREEN
-        //requestWindowFeature(Window.FEATURE_NO_TITLE)
-        //window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN)
-        window.attributes = winParams
+    private fun enableFullScreenMode(){
+        window.addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        window.addFlags(0x80000000.toInt())
     }
 
     @Deprecated("It is necessary to make this function suspend to deal with multi-click effect")
