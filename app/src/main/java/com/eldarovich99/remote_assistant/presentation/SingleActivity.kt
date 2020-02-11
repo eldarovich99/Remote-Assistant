@@ -35,6 +35,7 @@ class SingleActivity : AppCompatActivity(), IOnBackPressed{
         window.attributes = winParams
     }
 
+    @Deprecated("It is necessary to make this function suspend to deal with multi-click effect")
     override fun dispatchKeyEvent(event: KeyEvent?): Boolean {
         val fragment = supportFragmentManager.fragments[supportFragmentManager.fragments.size-1] as BaseFragment
         fragment.dispatchKeyEvent(event)

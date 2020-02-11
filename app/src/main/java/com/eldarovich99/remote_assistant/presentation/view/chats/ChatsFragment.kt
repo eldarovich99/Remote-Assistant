@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.eldarovich99.remote_assistant.R
 import com.eldarovich99.remote_assistant.di.Scopes
 import com.eldarovich99.remote_assistant.presentation.BaseFragment
-import com.eldarovich99.remote_assistant.routing.ContactsScreen
 import com.eldarovich99.remote_assistant.utils.extensions.revertVisibility
 import kotlinx.android.synthetic.main.fragment_chats.*
 import toothpick.Toothpick
@@ -39,11 +38,10 @@ class ChatsFragment : BaseFragment(){
             KeyEvent.KEYCODE_F4 -> {
                 Toast.makeText(context, "KEYCODE_F4", Toast.LENGTH_SHORT).show()}
             KeyEvent.KEYCODE_DPAD_LEFT -> {
-                Toast.makeText(context, "ViewPager changes fragment (left)", Toast.LENGTH_SHORT).show()
+                revertChatsVisibility()
             }
             KeyEvent.KEYCODE_DPAD_RIGHT -> {
-                router.navigateTo(ContactsScreen())
-                Toast.makeText(context, "ViewPager changes fragment (right)", Toast.LENGTH_SHORT).show()
+                revertChatsVisibility()
             }
             KeyEvent.KEYCODE_DPAD_DOWN -> {
                 if (adapterPosition < peopleRecycler.adapter?.itemCount ?: 0) {
@@ -94,15 +92,19 @@ class ChatsFragment : BaseFragment(){
                 )
             )
         showChatImageView.setOnClickListener {
-            isChatVisible = !isChatVisible
-            searchIcon.revertVisibility()
-            searchEditText.revertVisibility()
-            peopleRecycler.revertVisibility()
-            if (isChatVisible)
-                showChatImageView.setImageDrawable(AppCompatResources.getDrawable(context!!, R.drawable.ic_keyboard_arrow_left_black))
-            else
-                showChatImageView.setImageDrawable(AppCompatResources.getDrawable(context!!, R.drawable.ic_keyboard_arrow_right))
+            revertChatsVisibility()
         }
         super.onViewCreated(view, savedInstanceState)
+    }
+
+    fun revertChatsVisibility(){
+        isChatVisible = !isChatVisible
+        searchIcon.revertVisibility()
+        searchEditText.revertVisibility()
+        peopleRecycler.revertVisibility()
+        if (isChatVisible)
+            showChatImageView.setImageDrawable(AppCompatResources.getDrawable(context!!, R.drawable.ic_keyboard_arrow_left_black))
+        else
+            showChatImageView.setImageDrawable(AppCompatResources.getDrawable(context!!, R.drawable.ic_keyboard_arrow_right))
     }
 }

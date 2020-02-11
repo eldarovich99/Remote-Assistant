@@ -3,6 +3,7 @@ package com.eldarovich99.remote_assistant.presentation.view.chats
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.eldarovich99.remote_assistant.R
@@ -20,7 +21,10 @@ class ChatsAdapter @Inject constructor(var router: Router) : RecyclerView.Adapte
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChatsViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.people_item_chats, parent, false)
         val holder = ChatsViewHolder(view)
-        holder.itemView.setOnClickListener {
+        /*holder.itemView.setOnClickListener {
+            router.navigateTo(CallScreen())
+        }*/
+        holder.invisibleButton.setOnClickListener {
             router.navigateTo(CallScreen())
         }
         // holder.itemView.setOnClickListener {
@@ -43,7 +47,8 @@ class ChatsAdapter @Inject constructor(var router: Router) : RecyclerView.Adapte
     }
 
     class ChatsViewHolder(view: View) : RecyclerView.ViewHolder(view){
-        val itemNameTextView = view.findViewById<TextView>(R.id.nameTextView)
+        val itemNameTextView : TextView = view.findViewById(R.id.nameTextView)
+        val invisibleButton : Button = view.findViewById(R.id.invisibleButton)
     }
 
     fun disable(adapterPosition: Int){
