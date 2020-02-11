@@ -2,6 +2,7 @@ package com.eldarovich99.remote_assistant.presentation
 
 import android.os.Bundle
 import android.view.KeyEvent
+import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import com.eldarovich99.remote_assistant.IOnBackPressed
 import com.eldarovich99.remote_assistant.R
@@ -13,6 +14,7 @@ import toothpick.Toothpick
 class SingleActivity : AppCompatActivity(), IOnBackPressed{
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        enableFullScreenMode()
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_single)
 
@@ -23,6 +25,14 @@ class SingleActivity : AppCompatActivity(), IOnBackPressed{
             .beginTransaction()
             .replace(R.id.fragment_host, LoginFragment())
             .commit()
+    }
+
+    fun enableFullScreenMode(){
+        val winParams = window?.attributes
+        winParams?.flags = WindowManager.LayoutParams.FLAG_FULLSCREEN
+        //requestWindowFeature(Window.FEATURE_NO_TITLE)
+        //window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN)
+        window.attributes = winParams
     }
 
     override fun dispatchKeyEvent(event: KeyEvent?): Boolean {
