@@ -6,9 +6,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.eldarovich99.remote_assistant.R
 import com.eldarovich99.remote_assistant.domain.models.Message
+import javax.inject.Inject
 
 
-class SingleChatAdapter : RecyclerView.Adapter<SingleChatAdapter.SingleViewHolder>() {
+class SingleChatAdapter @Inject constructor(): RecyclerView.Adapter<SingleChatAdapter.SingleViewHolder>() {
     val items = generateSequence { Message(1) }.take(2).toList()
         .plus(generateSequence { Message(2) }.take(2).toList())
         .plus(generateSequence { Message(1) }.take(1).toList())

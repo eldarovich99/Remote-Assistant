@@ -5,5 +5,6 @@ object Scopes {
     const val ACTIVITY_SCOPE = "ACTIVITY_SCOPE"
     // fragment scopes
     const val CHATS_SCOPE = "CHATS_SCOPE"
+    const val CALL_SCOPE = "CALL_SCOPE"
     const val CONTACTS_SCOPE = "CONTACTS_SCOPE"
 }

@@ -8,13 +8,18 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.content.res.AppCompatResources
 import com.eldarovich99.remote_assistant.R
+import com.eldarovich99.remote_assistant.di.Scopes
 import com.eldarovich99.remote_assistant.presentation.BaseFragment
 import com.eldarovich99.remote_assistant.presentation.ui.CloseConfirmationDialog
 import com.eldarovich99.remote_assistant.utils.extensions.revertVisibility
 import kotlinx.android.synthetic.main.fragment_call.*
+import toothpick.Toothpick
+import javax.inject.Inject
 
 class CallFragment : BaseFragment(){
     var isChatVisible = true
+    @Inject
+    lateinit var adapter : SingleChatAdapter
     override suspend fun dispatchKeyEvent(event: KeyEvent?){
         when (event?.keyCode){
             KeyEvent.KEYCODE_DPAD_CENTER -> {
@@ -46,14 +51,19 @@ class CallFragment : BaseFragment(){
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        Toothpick.openScope(Scopes.CALL_SCOPE) // It doesn't work because Inject happen before.
         return inflater.inflate(R.layout.fragment_call, container, false)
+    }
+
+    override fun onDestroyView() {
+        Toothpick.closeScope(Scopes.CALL_SCOPE)
+        super.onDestroyView()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         callUpperBar.setOnBackButtonListener(this)
-        chatRecycler.adapter =
-            SingleChatAdapter()
+        chatRecycler.adapter = adapter
         showChatImageView.setOnClickListener { revertChatsVisibility() }
     }
 
