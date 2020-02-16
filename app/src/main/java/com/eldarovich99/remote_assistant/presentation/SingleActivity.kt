@@ -8,7 +8,7 @@ import com.eldarovich99.remote_assistant.IOnBackPressed
 import com.eldarovich99.remote_assistant.R
 import com.eldarovich99.remote_assistant.di.Scopes
 import com.eldarovich99.remote_assistant.di.modules.RouterModule
-import com.eldarovich99.remote_assistant.presentation.view.LoginFragment
+import com.eldarovich99.remote_assistant.presentation.view.login.LoginFragment
 import kotlinx.coroutines.*
 import toothpick.Toothpick
 
@@ -24,7 +24,9 @@ class SingleActivity : AppCompatActivity(), IOnBackPressed{
 
         supportFragmentManager
             .beginTransaction()
-            .replace(R.id.fragment_host, LoginFragment())
+            .replace(R.id.fragment_host,
+                LoginFragment()
+            )
             .commit()
     }
 

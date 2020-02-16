@@ -1,4 +1,4 @@
-package com.eldarovich99.remote_assistant.presentation.view.single_chat
+package com.eldarovich99.remote_assistant.presentation.view.call
 
 import android.view.LayoutInflater
 import android.view.View
@@ -20,7 +20,9 @@ class SingleChatAdapter : RecyclerView.Adapter<SingleChatAdapter.SingleViewHolde
             Message.COMPANION -> LayoutInflater.from(parent.context).inflate(R.layout.companion_message, parent, false)
             else -> throw Exception("Unknown message type")
         }
-        return SingleViewHolder(view)
+        return SingleViewHolder(
+            view
+        )
     }
 
     override fun getItemViewType(position: Int): Int {

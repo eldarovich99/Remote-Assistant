@@ -1,4 +1,4 @@
-package com.eldarovich99.remote_assistant.presentation.view
+package com.eldarovich99.remote_assistant.presentation.view.login
 
 import android.os.Bundle
 import android.view.KeyEvent
