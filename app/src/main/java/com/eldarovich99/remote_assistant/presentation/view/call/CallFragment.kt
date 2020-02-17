@@ -24,6 +24,9 @@ class CallFragment : BaseFragment(){
         when (event?.keyCode){
             KeyEvent.KEYCODE_DPAD_CENTER -> {
             }
+            KeyEvent.KEYCODE_BACK ->{
+                CloseConfirmationDialog(this@CallFragment).get().show()
+            }
             KeyEvent.KEYCODE_F1 -> {
                 Toast.makeText(context, "KEYCODE_F1", Toast.LENGTH_SHORT).show()}
             KeyEvent.KEYCODE_F2 -> {
@@ -37,11 +40,6 @@ class CallFragment : BaseFragment(){
             }
             KeyEvent.KEYCODE_DPAD_RIGHT -> {
                 revertChatsVisibility()
-            }
-            KeyEvent.KEYCODE_DPAD_DOWN -> {
-                CloseConfirmationDialog(this@CallFragment).get().show()
-            }
-            KeyEvent.KEYCODE_DPAD_UP -> {
             }
         }
     }
