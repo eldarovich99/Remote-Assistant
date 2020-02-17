@@ -15,7 +15,7 @@ class CloseConfirmationDialog(val fragment : Fragment){
     @Inject
     lateinit var router : Router
     //var dialog : AlertDialog?=null
-    fun get() : AlertDialog {
+    fun get(result: DialogResult) : AlertDialog {
         fragment.context?.let{
             val parent = fragment.view?.findViewById(android.R.id.content) as? ViewGroup
             val view = LayoutInflater.from(fragment.context).inflate(R.layout.close_confirmation_dialog,
@@ -25,14 +25,24 @@ class CloseConfirmationDialog(val fragment : Fragment){
             val dialog = builder.create()
             Toothpick.inject(this, Toothpick.openScopes(Scopes.APP_SCOPE, Scopes.ACTIVITY_SCOPE, Scopes.CHATS_SCOPE))
             view.cancelDialogButton.setOnClickListener {
+                result.onDialogClosed(true)
                 dialog.dismiss()
             }
             view.endDialogButton.setOnClickListener {
                 dialog.dismiss()
+                result.onDialogClosed(false)
                 router.exit()
             }
             return dialog
         }
         throw Exception("Fragment context is null")
     }
+}
+
+/**
+ * Set true if result is OK
+ * Set false if result is Cancel
+ */
+interface DialogResult{
+    fun onDialogClosed(result: Boolean)
 }

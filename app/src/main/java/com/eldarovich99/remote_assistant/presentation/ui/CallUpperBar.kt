@@ -14,7 +14,9 @@ class CallUpperBar(context: Context, attrs: AttributeSet) : ConstraintLayout(con
     }
     fun setOnBackButtonListener(fragment: Fragment){
         backButton.setOnClickListener {
-            CloseConfirmationDialog(fragment).get().show()
+            CloseConfirmationDialog(fragment).get(object : DialogResult{
+                override fun onDialogClosed(result: Boolean) {}
+            }).show()
         }
     }
     fun setName(text : String){
