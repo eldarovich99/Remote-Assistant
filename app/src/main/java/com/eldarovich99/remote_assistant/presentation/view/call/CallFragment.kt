@@ -3,10 +3,7 @@ package com.eldarovich99.remote_assistant.presentation.view.call
 import android.hardware.Camera
 import android.os.Bundle
 import android.util.Log
-import android.view.KeyEvent
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.Toast
 import androidx.appcompat.content.res.AppCompatResources
 import com.eldarovich99.remote_assistant.R
@@ -17,15 +14,18 @@ import com.eldarovich99.remote_assistant.presentation.ui.DialogResult
 import com.eldarovich99.remote_assistant.utils.extensions.revertVisibility
 import kotlinx.android.synthetic.main.fragment_call.*
 import toothpick.Toothpick
+import java.io.IOException
 import javax.inject.Inject
-
-
 
 
 class CallFragment : BaseFragment(){
     var isChatVisible = true
     var camera: Camera? = null
     var lockObject = Object()
+    var surfaceView: SurfaceView?=null
+    var previewData = ByteArray(1280 * 720 * 3/2)
+    var previewBuf = ByteArray(1280 * 720 * 3/2)
+
     @Inject
     lateinit var adapter : SingleChatAdapter
     override suspend fun dispatchKeyEvent(event: KeyEvent?){
@@ -88,7 +88,64 @@ class CallFragment : BaseFragment(){
             showChatImageView.setImageDrawable(AppCompatResources.getDrawable(context!!, R.drawable.ic_keyboard_arrow_right))
     }
 
+
+
     fun launchCamera(){
+        surfaceView = SurfaceView(context)
+        val holder = surfaceView!!.holder
+
+        var previewCallback = object : Camera.PreviewCallback{
+            override fun onPreviewFrame(p0: ByteArray?, p1: Camera?) {
+                synchronized(lockObject){
+                    previewData = p0!!
+                }
+                camera?.addCallbackBuffer(previewBuf)
+            }
+        }
+
+        holder.addCallback(object: SurfaceHolder.Callback{
+            override fun surfaceChanged(p0: SurfaceHolder?, p1: Int, p2: Int, p3: Int) {
+                camera!!.stopPreview()
+                val params = camera!!.parameters
+                /* Set preview resolution to 1080p */
+                /* Set preview resolution to 1080p */
+                params.setPreviewSize(1920, 1080)
+                /* Set frame rate to 7.5fps */
+                /* Set frame rate to 7.5fps */
+                params.setPreviewFpsRange(7500, 7500)
+                /* Reflect parameter change to camera device */
+                /* Reflect parameter change to camera device */
+                camera!!.parameters = params
+                camera!!.addCallbackBuffer(previewData)
+                camera!!.setPreviewCallbackWithBuffer(previewCallback)
+                try {
+                    camera!!.startPreview()
+                } catch (e: RuntimeException) {
+                    e.printStackTrace()
+                }
+            }
+
+            override fun surfaceDestroyed(p0: SurfaceHolder?) {
+                Log.d("SurfaceView", "surfaceDestroyed")
+                camera?.stopPreview()
+                camera?.release()
+                camera = null
+            }
+
+            override fun surfaceCreated(p0: SurfaceHolder?) {
+                Log.d("SurfaceView", "surfaceDestroyed")
+                try {
+                    camera = Camera.open()
+                    camera?.setPreviewDisplay(holder)
+                } catch (e: java.lang.RuntimeException) {
+                    e.printStackTrace()
+                } catch (e: IOException) {
+                    e.printStackTrace()
+                }
+                camera!!.addCallbackBuffer(previewBuf)
+                camera!!.setPreviewCallbackWithBuffer(previewCallback)
+            }
+        })
         val camera = Camera.open()
         val params = camera.parameters
         params.setEpsonCameraMode((Camera.Parameters.EPSON_CAMERA_MODE_SINGLE_THROUGH_720P))
