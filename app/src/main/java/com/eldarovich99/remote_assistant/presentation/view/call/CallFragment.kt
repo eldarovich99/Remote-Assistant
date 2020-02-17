@@ -1,5 +1,6 @@
 package com.eldarovich99.remote_assistant.presentation.view.call
 
+import android.hardware.Camera
 import android.os.Bundle
 import android.view.KeyEvent
 import android.view.LayoutInflater
@@ -73,4 +74,25 @@ class CallFragment : BaseFragment(){
         else
             showChatImageView.setImageDrawable(AppCompatResources.getDrawable(context!!, R.drawable.ic_keyboard_arrow_right))
     }
+
+    fun launchCamera(){
+        val camera = Camera.open()
+        val params = camera.parameters
+        params.setEpsonCameraMode((Camera.Parameters.EPSON_CAMERA_MODE_SINGLE_THROUGH_1080P))
+        params.setPreviewFpsRange(7500, 7500)
+        camera.parameters = params
+    }
+
+/*    private fun getResolution(): IntArray? {
+        if (com.epson.moverio.bt2000.sample.samplecamerapreview.MainActivity.RESOLUTIONS.size <= mResolutionIndex) {
+            mResolutionIndex = 0
+        } else if (mResolutionIndex < 0) {
+            mResolutionIndex =
+                com.epson.moverio.bt2000.sample.samplecamerapreview.MainActivity.RESOLUTIONS.size - 1
+        }
+        return com.epson.moverio.bt2000.sample.samplecamerapreview.MainActivity.RESOLUTIONS.get(
+            mResolutionIndex
+        )
+    }*/
+
 }

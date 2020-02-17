@@ -46,19 +46,22 @@ class ChatsFragment : BaseFragment(){
             KeyEvent.KEYCODE_DPAD_DOWN -> {
                 if (adapterPosition < peopleRecycler.adapter?.itemCount ?: 0) {
                     peopleRecycler.findViewHolderForAdapterPosition(adapterPosition)?.itemView?.isSelected = false
-                    shouldMove = shouldMove == false
-                    if (shouldMove){ adapterPosition+=1
-                    peopleRecycler.scrollToPosition(adapterPosition)}
+                     adapterPosition+=1
                     peopleRecycler.findViewHolderForAdapterPosition(adapterPosition)?.itemView?.isSelected = true
+                    peopleRecycler.scrollToPosition(adapterPosition)
                 }
             }
             KeyEvent.KEYCODE_DPAD_UP -> {
                 if (adapterPosition > 0) {
                     peopleRecycler.findViewHolderForAdapterPosition(adapterPosition)?.itemView?.isSelected = false
-                    shouldMove = shouldMove == false
-                    if (shouldMove){ adapterPosition-=1
-                    peopleRecycler.scrollToPosition(adapterPosition)}
+                    //shouldMove = shouldMove == false
+                     adapterPosition-=1
                     peopleRecycler.findViewHolderForAdapterPosition(adapterPosition)?.itemView?.isSelected = true
+                    peopleRecycler.scrollToPosition(adapterPosition)
+                }
+                else{
+                    peopleRecycler.findViewHolderForAdapterPosition(adapterPosition)?.itemView?.isSelected = false
+                    adapterPosition = -1
                 }
             }
         }
