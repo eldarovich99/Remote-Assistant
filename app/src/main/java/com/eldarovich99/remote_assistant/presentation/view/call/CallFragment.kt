@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.*
 import android.widget.Toast
 import androidx.appcompat.content.res.AppCompatResources
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.eldarovich99.remote_assistant.R
 import com.eldarovich99.remote_assistant.di.Scopes
 import com.eldarovich99.remote_assistant.presentation.BaseFragment
@@ -74,9 +75,12 @@ class CallFragment : BaseFragment(){
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         callUpperBar.setOnBackButtonListener(this)
+        val layoutManager = LinearLayoutManager(context)
+        layoutManager.stackFromEnd = true
+        chatRecycler.layoutManager = layoutManager
         chatRecycler.adapter = adapter
         showChatImageView.setOnClickListener { revertChatsVisibility() }
-        launchCamera()
+        //launchCamera()
     }
 
     private fun revertChatsVisibility(){
@@ -90,7 +94,7 @@ class CallFragment : BaseFragment(){
 
 
 
-    fun launchCamera(){
+    private fun launchCamera(){
         surfaceView = SurfaceView(context)
         val holder = surfaceView!!.holder
 
