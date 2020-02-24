@@ -17,6 +17,7 @@
         android:background="@color/color_light_blue"
         android:layout_weight="1">
         <TextView
+            android:id="@+id/messageTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Товарищи! постоянное информационно-пропагандистское обеспечение нашей деятельности влечет за собой процесс внедрения и модернизации форм развития. "
