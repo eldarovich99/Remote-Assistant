@@ -29,8 +29,28 @@ class SingleChatAdapter @Inject constructor(): RecyclerView.Adapter<RecyclerView
                     .inflate(R.layout.companion_message, parent, false)
                 SingleViewHolder(view)
             }
-            Message.OWNER_FILE -> FileViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.owner_message_pdf, parent, false))
-            Message.COMPANION_FILE -> FileViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.companion_message_pdf, parent, false))
+            Message.OWNER_FILE -> {
+                val view = LayoutInflater.from(parent.context).inflate(
+                        R.layout.owner_message_pdf,
+                        parent,
+                        false
+                    )
+                view.setOnClickListener {
+                    //presenter.downloadFile("https://www.innerfidelity.com/images/AudioTechnicaATHIM02.pdf")
+                }
+                FileViewHolder(view)
+            }
+            Message.COMPANION_FILE -> {
+                val view = LayoutInflater.from(parent.context).inflate(
+                        R.layout.companion_message_pdf,
+                        parent,
+                        false
+                    )
+                view.setOnClickListener {
+                    //presenter.downloadFile("https://www.innerfidelity.com/images/LogitechUE900.pdf")
+                }
+                FileViewHolder(view)
+            }
             else -> throw Exception("Unknown message type")
         }
     }

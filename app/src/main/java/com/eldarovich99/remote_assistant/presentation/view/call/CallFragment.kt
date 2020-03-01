@@ -19,7 +19,7 @@ import java.io.IOException
 import javax.inject.Inject
 
 
-class CallFragment : BaseFragment(){
+class CallFragment: BaseFragment(){
     var isChatVisible = true
     var camera: Camera? = null
     var lockObject = Object()
@@ -29,6 +29,9 @@ class CallFragment : BaseFragment(){
 
     @Inject
     lateinit var adapter : SingleChatAdapter
+    //@Inject
+    //lateinit var presenter: CallPresenter
+
     override suspend fun dispatchKeyEvent(event: KeyEvent?){
         when (event?.keyCode){
             KeyEvent.KEYCODE_DPAD_CENTER -> {
@@ -63,7 +66,9 @@ class CallFragment : BaseFragment(){
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        Toothpick.openScope(Scopes.CALL_SCOPE) // It doesn't work because Inject happen before.
+      // KTP.openScope(Scopes.CALL_SCOPE)
+      //     .installModules(CallModule(this))
+      //     .inject(this)
         return inflater.inflate(R.layout.fragment_call, container, false)
     }
 

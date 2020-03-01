@@ -13,6 +13,6 @@ class RepositoryModule(private val context: Context) : Module() {
         val sharedPreferences = context.getSharedPreferences("app.prefs", MODE_PRIVATE)
 
         bind(SharedPreferences::class.java).toInstance(sharedPreferences)
-        bind(UserRepository::class.java).to(UserRepositoryImpl::class.java).singletonInScope()
+        bind(UserRepository::class.java).to(UserRepositoryImpl::class.java).singleton()
     }
 }
