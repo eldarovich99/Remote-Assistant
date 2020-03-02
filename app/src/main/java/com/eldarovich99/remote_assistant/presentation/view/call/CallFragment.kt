@@ -9,12 +9,14 @@ import androidx.appcompat.content.res.AppCompatResources
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.eldarovich99.remote_assistant.R
 import com.eldarovich99.remote_assistant.di.Scopes
+import com.eldarovich99.remote_assistant.di.modules.CallModule
 import com.eldarovich99.remote_assistant.presentation.BaseFragment
 import com.eldarovich99.remote_assistant.presentation.ui.CloseConfirmationDialog
 import com.eldarovich99.remote_assistant.presentation.ui.DialogResult
 import com.eldarovich99.remote_assistant.utils.extensions.revertVisibility
 import kotlinx.android.synthetic.main.fragment_call.*
 import toothpick.Toothpick
+import toothpick.ktp.KTP
 import java.io.IOException
 import javax.inject.Inject
 
@@ -29,8 +31,8 @@ class CallFragment: BaseFragment(){
 
     @Inject
     lateinit var adapter : SingleChatAdapter
-    //@Inject
-    //lateinit var presenter: CallPresenter
+    @Inject
+    lateinit var presenter: CallPresenter
 
     override suspend fun dispatchKeyEvent(event: KeyEvent?){
         when (event?.keyCode){
@@ -66,9 +68,9 @@ class CallFragment: BaseFragment(){
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-      // KTP.openScope(Scopes.CALL_SCOPE)
-      //     .installModules(CallModule(this))
-      //     .inject(this)
+       KTP.openScopes(Scopes.APP_SCOPE, Scopes.ACTIVITY_SCOPE, Scopes.CALL_SCOPE)
+           .installModules(CallModule(this))
+           .inject(this)
         return inflater.inflate(R.layout.fragment_call, container, false)
     }
 

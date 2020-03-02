@@ -15,6 +15,7 @@ import com.eldarovich99.remote_assistant.presentation.BaseFragment
 import com.eldarovich99.remote_assistant.utils.extensions.revertVisibility
 import kotlinx.android.synthetic.main.fragment_chats.*
 import toothpick.Toothpick
+import toothpick.ktp.KTP
 import javax.inject.Inject
 
 class ChatsFragment : BaseFragment(){
@@ -67,19 +68,24 @@ class ChatsFragment : BaseFragment(){
         }
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        KTP.openScopes(Scopes.APP_SCOPE, Scopes.ACTIVITY_SCOPE, Scopes.CHATS_SCOPE)
+            .inject(this)
+        super.onCreate(savedInstanceState)
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        Toothpick.openScope(Scopes.CHATS_SCOPE) // It doesn't work because Inject happen before.
         // It is necessary to google it and find out how to deal with it
         return inflater.inflate(R.layout.fragment_chats, container, false)
     }
 
-    override fun onDestroyView() {
+    override fun onDestroy() {
         Toothpick.closeScope(Scopes.CHATS_SCOPE)
-        super.onDestroyView()
+        super.onDestroy()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

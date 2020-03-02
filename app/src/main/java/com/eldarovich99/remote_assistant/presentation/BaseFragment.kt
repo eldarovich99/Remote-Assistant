@@ -3,18 +3,15 @@ package com.eldarovich99.remote_assistant.presentation
 import android.os.Bundle
 import android.view.KeyEvent
 import androidx.fragment.app.Fragment
-import com.eldarovich99.remote_assistant.di.Scopes
-import com.eldarovich99.remote_assistant.domain.UserRepository
 import jp.epson.moverio.H725.DisplayControl
 import ru.terrakok.cicerone.Cicerone
 import ru.terrakok.cicerone.Navigator
 import ru.terrakok.cicerone.Router
-import toothpick.Toothpick
 import javax.inject.Inject
 
 abstract class BaseFragment : Fragment(){
-    @Inject
-    lateinit var userRepository: UserRepository
+//    @Inject
+//    lateinit var userRepository: UserRepository
 
     @Inject
     lateinit var cicerone: Cicerone<Router>
@@ -40,7 +37,8 @@ abstract class BaseFragment : Fragment(){
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        Toothpick.inject(this, Toothpick.openScopes(Scopes.APP_SCOPE, Scopes.ACTIVITY_SCOPE))
+        //Toothpick.inject(this, Toothpick.openScopes(Scopes.APP_SCOPE, Scopes.ACTIVITY_SCOPE))
+
         displayControl = DisplayControl(context)
         super.onCreate(savedInstanceState)
     }

@@ -6,11 +6,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.eldarovich99.remote_assistant.R
+import com.eldarovich99.remote_assistant.di.Scopes
 import com.eldarovich99.remote_assistant.presentation.BaseFragment
 import com.eldarovich99.remote_assistant.presentation.QrReaderFragment
 import com.eldarovich99.remote_assistant.routing.ChatScreen
 import com.eldarovich99.remote_assistant.routing.RestorePasswordScreen
 import kotlinx.android.synthetic.main.fragment_login.*
+import toothpick.ktp.KTP
 
 class LoginFragment : BaseFragment() {
     override suspend fun dispatchKeyEvent(event: KeyEvent?){
@@ -27,6 +29,11 @@ class LoginFragment : BaseFragment() {
         }
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        KTP.openScopes(Scopes.APP_SCOPE, Scopes.ACTIVITY_SCOPE, Scopes.LOGIN_SCOPE).inject(this)
+        super.onCreate(savedInstanceState)
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -34,6 +41,11 @@ class LoginFragment : BaseFragment() {
     ): View? {
         // TODO
         return inflater.inflate(R.layout.fragment_login, container, false)
+    }
+
+    override fun onDestroy() {
+        KTP.closeScope(Scopes.LOGIN_SCOPE)
+        super.onDestroy()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
