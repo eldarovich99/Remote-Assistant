@@ -10,7 +10,7 @@ import com.eldarovich99.remote_assistant.domain.models.Message
 import javax.inject.Inject
 
 
-class SingleChatAdapter @Inject constructor(): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class SingleChatAdapter @Inject constructor(private val presenter: CallPresenter): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     val items = generateSequence { Message(1) }.take(2).toList()
         .plus(generateSequence { Message(3) }.take(2).toList())
         .plus(generateSequence { Message(4) }.take(2).toList())
@@ -36,7 +36,7 @@ class SingleChatAdapter @Inject constructor(): RecyclerView.Adapter<RecyclerView
                         false
                     )
                 view.setOnClickListener {
-                    //presenter.downloadFile("https://www.innerfidelity.com/images/AudioTechnicaATHIM02.pdf")
+                    presenter.downloadFile("https://www.innerfidelity.com/images/AudioTechnicaATHIM02.pdf")
                 }
                 FileViewHolder(view)
             }
@@ -47,7 +47,7 @@ class SingleChatAdapter @Inject constructor(): RecyclerView.Adapter<RecyclerView
                         false
                     )
                 view.setOnClickListener {
-                    //presenter.downloadFile("https://www.innerfidelity.com/images/LogitechUE900.pdf")
+                    presenter.downloadFile("https://www.innerfidelity.com/images/LogitechUE900.pdf")
                 }
                 FileViewHolder(view)
             }
