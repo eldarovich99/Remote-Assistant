@@ -1,9 +1,11 @@
 package com.eldarovich99.remote_assistant.data
 
+import android.app.Application
 import com.eldarovich99.remote_assistant.domain.FileRepository
+import javax.inject.Inject
 
-class FileRepositoryImpl : FileRepository {
+class FileRepositoryImpl @Inject constructor(val appContext: Application) : FileRepository {
     override fun downloadFile(url: String) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+
     }
 }
