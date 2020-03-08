@@ -1,5 +1,8 @@
 package com.eldarovich99.remote_assistant.domain
 
+import com.eldarovich99.remote_assistant.data.error_handling.Result
+import okhttp3.ResponseBody
+
 interface FileRepository {
-    fun downloadFile(url: String)
+    suspend fun downloadFile(url: String) : Result<ResponseBody>
 }

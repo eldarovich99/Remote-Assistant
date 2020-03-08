@@ -19,6 +19,7 @@
         app:civ_border_width="0dp"
         tools:src="@tools:sample/avatars" />
     <androidx.cardview.widget.CardView
+        android:id="@+id/fileMessageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:cardCornerRadius="10dp"
@@ -28,6 +29,7 @@
 
         <RelativeLayout
             android:layout_width="wrap_content"
+            android:clickable="false"
             android:layout_height="60dp">
 
             <TextView
@@ -39,6 +41,7 @@
                 android:layout_alignParentLeft="true"
                 android:textColor="@color/textColor"
                 android:layout_alignParentTop="true"
+                android:clickable="false"
                 android:textSize="14sp" />
 
             <TextView
@@ -50,6 +53,7 @@
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentLeft="true"
                 android:textColor="@color/textColor"
+                android:clickable="false"
                 android:textSize="12sp" />
 
             <ImageView
@@ -57,6 +61,7 @@
                 android:layout_height="35dp"
                 android:src="@drawable/pdf"
                 android:layout_alignParentRight="true"
+                android:clickable="false"
                 android:layout_centerVertical="true"/>
         </RelativeLayout>
     </androidx.cardview.widget.CardView>

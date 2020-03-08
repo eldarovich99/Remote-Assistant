@@ -7,6 +7,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.eldarovich99.remote_assistant.R
 import com.eldarovich99.remote_assistant.domain.models.Message
+import kotlinx.android.synthetic.main.owner_message_pdf.view.*
 import javax.inject.Inject
 
 
@@ -35,8 +36,8 @@ class SingleChatAdapter @Inject constructor(private val presenter: CallPresenter
                         parent,
                         false
                     )
-                view.setOnClickListener {
-                    presenter.downloadFile("https://www.innerfidelity.com/images/AudioTechnicaATHIM02.pdf")
+                view.fileMessageView.setOnClickListener {
+                    presenter.downloadFile("AudioTechnicaATHIM02.pdf")
                 }
                 FileViewHolder(view)
             }
@@ -46,8 +47,8 @@ class SingleChatAdapter @Inject constructor(private val presenter: CallPresenter
                         parent,
                         false
                     )
-                view.setOnClickListener {
-                    presenter.downloadFile("https://www.innerfidelity.com/images/LogitechUE900.pdf")
+                view.fileMessageView.setOnClickListener {
+                    presenter.downloadFile("LogitechUE900.pdf")
                 }
                 FileViewHolder(view)
             }

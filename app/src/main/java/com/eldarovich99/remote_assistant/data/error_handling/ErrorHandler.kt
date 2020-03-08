@@ -4,8 +4,9 @@ import retrofit2.HttpException
 import retrofit2.Response
 import java.io.IOException
 import java.net.HttpURLConnection
+import javax.inject.Inject
 
-class ErrorHandler {
+class ErrorHandler @Inject constructor(){
     inline fun <T> executeSafeCall(getData: () -> Response<T>): Result<T> {
         return try {
             val response = getData.invoke()
