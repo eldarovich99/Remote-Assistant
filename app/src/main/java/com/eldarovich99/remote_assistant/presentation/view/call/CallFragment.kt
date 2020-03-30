@@ -4,6 +4,9 @@ import android.hardware.Camera
 import android.os.Bundle
 import android.util.Log
 import android.view.*
+import android.view.animation.Animation
+import android.view.animation.LinearInterpolator
+import android.view.animation.RotateAnimation
 import android.widget.Toast
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -90,9 +93,17 @@ class CallFragment: BaseFragment(){
         chatRecycler.adapter = adapter
         showChatImageView.setOnClickListener { revertChatsVisibility() }
         CoroutineScope(uiScope+Dispatchers.IO).launch {
+            val duration = 2288
+            val rotate = RotateAnimation(0f, 270f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f)
+            rotate.duration = duration.toLong()
+            rotate.interpolator = LinearInterpolator()
+            statusImageView.animation = rotate
             // TODO remove mock
-            delay(2500)
+            delay(2288)
             callUpperBar.launchTimer()
+            withContext(Dispatchers.Main){
+                statusImageView.setImageResource(0)
+            }
         }
         //launchCamera()
     }

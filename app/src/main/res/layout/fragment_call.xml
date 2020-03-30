@@ -11,14 +11,14 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/statusImageView"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/showChatImageView"
         app:layout_constraintTop_toBottomOf="@+id/callUpperBar"
-        app:srcCompat="@drawable/brad_pitt" />
+        app:srcCompat="@drawable/clock" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/chatRecycler"
