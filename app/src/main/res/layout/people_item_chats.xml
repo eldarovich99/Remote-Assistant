@@ -11,9 +11,12 @@
 
     <Button
         android:id="@+id/invisibleButton"
-        android:background="@null"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="0dp"
+        android:background="@null"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="4dp" />
 
     <com.mikhaellopez.circularimageview.CircularImageView
         android:id="@+id/personImageView"
@@ -23,6 +26,7 @@
         android:layout_marginBottom="8dp"
         android:src="@drawable/brad_pitt"
         app:civ_border_width="0dp"
+        android:clickable="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -34,6 +38,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
         android:text="Brad Pitt"
+        android:clickable="false"
         app:layout_constraintHorizontal_bias="0.0"
         android:textColor="@color/textColor"
         android:textSize="20sp"
@@ -48,6 +53,7 @@
         android:ellipsize="end"
         android:gravity="start"
         android:maxLines="2"
+        android:clickable="false"
         android:text="Товарищи! сложившаяся структура организации требуют определения и уточнения соответствующий условий активизации."
         android:textAlignment="textStart"
         android:textColor="@color/textColor"
@@ -63,6 +69,7 @@
         android:layout_height="wrap_content"
         android:layout_marginRight="16dp"
         android:text="20.11"
+        android:clickable="false"
         android:textColor="@color/textColor"
         android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
