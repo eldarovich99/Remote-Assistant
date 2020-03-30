@@ -13,10 +13,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.eldarovich99.remote_assistant.R
 import com.eldarovich99.remote_assistant.di.Scopes
 import com.eldarovich99.remote_assistant.di.modules.CallModule
+import com.eldarovich99.remote_assistant.domain.models.Message
 import com.eldarovich99.remote_assistant.presentation.BaseFragment
 import com.eldarovich99.remote_assistant.presentation.ui.CloseConfirmationDialog
 import com.eldarovich99.remote_assistant.presentation.ui.DialogResult
+import com.eldarovich99.remote_assistant.utils.extensions.hide
 import com.eldarovich99.remote_assistant.utils.extensions.revertVisibility
+import com.eldarovich99.remote_assistant.utils.extensions.show
 import kotlinx.android.synthetic.main.fragment_call.*
 import kotlinx.coroutines.*
 import toothpick.Toothpick
@@ -32,7 +35,7 @@ class CallFragment: BaseFragment(){
     var surfaceView: SurfaceView?=null
     var previewData = ByteArray(1280 * 720 * 3/2)
     var previewBuf = ByteArray(1280 * 720 * 3/2)
-
+    val items = listOf<Message>()
     @Inject
     lateinit var adapter : SingleChatAdapter
     @Inject
@@ -91,6 +94,9 @@ class CallFragment: BaseFragment(){
         layoutManager.stackFromEnd = true
         chatRecycler.layoutManager = layoutManager
         chatRecycler.adapter = adapter
+        adapter.items = items
+        if (adapter.items.isEmpty())
+            emptyChatTextView.show() // TODO remove mock
         showChatImageView.setOnClickListener { revertChatsVisibility() }
         CoroutineScope(uiScope+Dispatchers.IO).launch {
             val duration = 2288
@@ -99,6 +105,7 @@ class CallFragment: BaseFragment(){
             rotate.interpolator = LinearInterpolator()
             statusImageView.animation = rotate
             // TODO remove mock
+            callUpperBar.setName("Никита Хлебко")
             delay(2288)
             callUpperBar.launchTimer()
             withContext(Dispatchers.Main){
@@ -111,10 +118,26 @@ class CallFragment: BaseFragment(){
     private fun revertChatsVisibility(){
         isChatVisible = !isChatVisible
         chatRecycler.revertVisibility()
-        if (isChatVisible)
-            showChatImageView.setImageDrawable(AppCompatResources.getDrawable(context!!, R.drawable.ic_keyboard_arrow_left_black))
-        else
-            showChatImageView.setImageDrawable(AppCompatResources.getDrawable(context!!, R.drawable.ic_keyboard_arrow_right))
+        if (isChatVisible) {
+            if(adapter.items.isEmpty())
+                emptyChatTextView.show()
+            showChatImageView.setImageDrawable(
+                AppCompatResources.getDrawable(
+                    context!!,
+                    R.drawable.ic_keyboard_arrow_left_black
+                )
+            )
+        }
+        else {
+            if(adapter.items.isEmpty())
+                emptyChatTextView.hide()
+            showChatImageView.setImageDrawable(
+                AppCompatResources.getDrawable(
+                    context!!,
+                    R.drawable.ic_keyboard_arrow_right
+                )
+            )
+        }
     }
 
 

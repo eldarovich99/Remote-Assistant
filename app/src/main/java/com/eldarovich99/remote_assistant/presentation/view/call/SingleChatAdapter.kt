@@ -12,12 +12,12 @@ import javax.inject.Inject
 
 
 class SingleChatAdapter @Inject constructor(private val presenter: CallPresenter): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-    val items = generateSequence { Message(1) }.take(2).toList()
+    var items = emptyList<Message>()/*generateSequence { Message(1) }.take(2).toList()
         .plus(generateSequence { Message(3) }.take(2).toList())
         .plus(generateSequence { Message(4) }.take(2).toList())
         .plus(generateSequence { Message(2) }.take(2).toList())
         .plus(generateSequence { Message(1) }.take(1).toList())
-        .plus(generateSequence { Message(2) }.take(1).toList())
+        .plus(generateSequence { Message(2) }.take(1).toList())*/
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when (viewType){

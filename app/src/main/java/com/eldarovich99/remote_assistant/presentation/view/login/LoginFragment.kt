@@ -10,7 +10,6 @@ import com.eldarovich99.remote_assistant.di.Scopes
 import com.eldarovich99.remote_assistant.presentation.BaseFragment
 import com.eldarovich99.remote_assistant.presentation.QrReaderFragment
 import com.eldarovich99.remote_assistant.routing.ChatScreen
-import com.eldarovich99.remote_assistant.routing.RestorePasswordScreen
 import kotlinx.android.synthetic.main.fragment_login.*
 import toothpick.ktp.KTP
 
@@ -52,11 +51,11 @@ class LoginFragment : BaseFragment() {
         loginButton.setOnClickListener {
             router.newRootScreen(ChatScreen())
         }
-        forgetPasswordButton.setOnClickListener {
+        /*forgetPasswordButton.setOnClickListener {
             router.navigateTo(RestorePasswordScreen(
 
             ))
-        }
+        }*/
         /*qrImageView.setOnClickListener {
             QrReaderFragment.start(this, router)
         }*/
