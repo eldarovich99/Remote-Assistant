@@ -7,8 +7,13 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import com.eldarovich99.remote_assistant.R
 import kotlinx.android.synthetic.main.call_upper_bar.view.*
+import kotlinx.coroutines.*
+import java.text.SimpleDateFormat
 
 class CallUpperBar(context: Context, attrs: AttributeSet) : ConstraintLayout(context, attrs){
+    val job = SupervisorJob()
+    val uiScope = job + Dispatchers.Main
+
     init {
         View.inflate(context, R.layout.call_upper_bar, this)
     }
@@ -22,7 +27,23 @@ class CallUpperBar(context: Context, attrs: AttributeSet) : ConstraintLayout(con
     fun setName(text : String){
         companionName.text = text
     }
+
     fun launchTimer(){
-        // TODO not implemented
+        var time = 0
+        val timeFormat = SimpleDateFormat("mm:ss")
+        CoroutineScope(uiScope + Dispatchers.IO).launch {
+            while(true) {
+                withContext(Dispatchers.Main) {
+                    callLength.text = timeFormat.format(time * 1000)
+                }
+                time++
+                delay(1000)
+            }
+        }
+    }
+
+    override fun onDetachedFromWindow() {
+        uiScope.cancel()
+        super.onDetachedFromWindow()
     }
 }

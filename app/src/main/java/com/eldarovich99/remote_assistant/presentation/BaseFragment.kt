@@ -4,12 +4,16 @@ import android.os.Bundle
 import android.view.KeyEvent
 import androidx.fragment.app.Fragment
 import jp.epson.moverio.H725.DisplayControl
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.SupervisorJob
 import ru.terrakok.cicerone.Cicerone
 import ru.terrakok.cicerone.Navigator
 import ru.terrakok.cicerone.Router
 import javax.inject.Inject
 
 abstract class BaseFragment : Fragment(){
+    val job = SupervisorJob()
+    val uiScope = job + Dispatchers.Main
 //    @Inject
 //    lateinit var userRepository: UserRepository
 

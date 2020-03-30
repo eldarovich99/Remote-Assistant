@@ -15,6 +15,7 @@ import com.eldarovich99.remote_assistant.presentation.ui.CloseConfirmationDialog
 import com.eldarovich99.remote_assistant.presentation.ui.DialogResult
 import com.eldarovich99.remote_assistant.utils.extensions.revertVisibility
 import kotlinx.android.synthetic.main.fragment_call.*
+import kotlinx.coroutines.*
 import toothpick.Toothpick
 import toothpick.ktp.KTP
 import java.io.IOException
@@ -76,6 +77,7 @@ class CallFragment: BaseFragment(){
 
     override fun onDestroyView() {
         Toothpick.closeScope(Scopes.CALL_SCOPE)
+        uiScope.cancel()
         super.onDestroyView()
     }
 
@@ -87,6 +89,11 @@ class CallFragment: BaseFragment(){
         chatRecycler.layoutManager = layoutManager
         chatRecycler.adapter = adapter
         showChatImageView.setOnClickListener { revertChatsVisibility() }
+        CoroutineScope(uiScope+Dispatchers.IO).launch {
+            // TODO remove mock
+            delay(2500)
+            callUpperBar.launchTimer()
+        }
         //launchCamera()
     }
 
