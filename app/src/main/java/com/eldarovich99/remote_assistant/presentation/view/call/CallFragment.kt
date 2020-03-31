@@ -105,7 +105,9 @@ class CallFragment: BaseFragment(){
             rotate.interpolator = LinearInterpolator()
             statusImageView.animation = rotate
             // TODO remove mock
-            callUpperBar.setName("Никита Хлебко")
+            withContext(Dispatchers.Main){
+                callUpperBar.setName("Никита Хлебко")
+            }
             delay(2288)
             callUpperBar.launchTimer()
             withContext(Dispatchers.Main){

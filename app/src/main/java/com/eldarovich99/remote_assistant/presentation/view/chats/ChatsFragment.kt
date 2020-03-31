@@ -12,8 +12,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.eldarovich99.remote_assistant.R
 import com.eldarovich99.remote_assistant.di.Scopes
 import com.eldarovich99.remote_assistant.presentation.BaseFragment
+import com.eldarovich99.remote_assistant.presentation.CallDialog
+import com.eldarovich99.remote_assistant.routing.CallScreen
 import com.eldarovich99.remote_assistant.utils.extensions.revertVisibility
 import kotlinx.android.synthetic.main.fragment_chats.*
+import kotlinx.coroutines.*
 import toothpick.Toothpick
 import toothpick.ktp.KTP
 import javax.inject.Inject
@@ -85,10 +88,28 @@ class ChatsFragment : BaseFragment(){
 
     override fun onDestroy() {
         Toothpick.closeScope(Scopes.CHATS_SCOPE)
+        uiScope.cancel()
         super.onDestroy()
     }
 
+    override fun onStop() {
+        uiScope.cancelChildren()
+        super.onStop()
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        CoroutineScope(uiScope+Dispatchers.IO).launch {
+            // TODO remove mock
+            delay(2228)
+            withContext(Dispatchers.Main){
+                CallDialog(this@ChatsFragment).get().show()
+               // callImageView.show()
+               // textView2.text = getString(R.string.call_from, "Никита Хлебко")
+            }
+        }
+        callImageView.setOnClickListener {
+            router.navigateTo(CallScreen())
+        }
             toolbar.title = getString(R.string.chats)
             peopleRecycler.requestFocus()
             peopleRecycler.adapter = adapter

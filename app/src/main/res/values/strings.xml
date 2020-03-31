@@ -23,5 +23,6 @@
     <string name="contacts">Контакты</string>
     <string name="find_by_name">Найти по имени</string>
     <string name="none_calls">Входящих звонков нет</string>
+    <string name="call_from">%1$s вызывает!</string>
     <string name="chat_is_empty">Чат пуст</string>
 </resources>
