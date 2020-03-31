@@ -5,7 +5,6 @@ import androidx.fragment.app.Fragment
 import com.eldarovich99.remote_assistant.presentation.QrReaderFragment
 import com.eldarovich99.remote_assistant.presentation.view.call.CallFragment
 import com.eldarovich99.remote_assistant.presentation.view.chats.ChatsFragment
-import com.eldarovich99.remote_assistant.presentation.view.contacts.ContactsFragment
 import com.eldarovich99.remote_assistant.presentation.view.login.LoginFragment
 import com.eldarovich99.remote_assistant.presentation.view.login.RestorePasswordFragment
 import ru.terrakok.cicerone.android.support.SupportAppNavigator
@@ -16,7 +15,6 @@ class SingleNavigator(val activity: AppCompatActivity, fragmentHost: Int) : Supp
         when (screen){
             is ChatScreen -> return ChatsFragment()
             is LoginScreen -> return LoginFragment()
-            is ContactsScreen -> return ContactsFragment()
             is CallScreen -> return CallFragment()
             is RestorePasswordScreen -> return RestorePasswordFragment()
             is QRScreen -> return QrReaderFragment()

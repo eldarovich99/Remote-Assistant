@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.eldarovich99.remote_assistant.R
 import com.eldarovich99.remote_assistant.di.Scopes
 import com.eldarovich99.remote_assistant.presentation.BaseFragment
-import com.eldarovich99.remote_assistant.presentation.CallDialog
+import com.eldarovich99.remote_assistant.presentation.ui.CallDialog
 import com.eldarovich99.remote_assistant.routing.CallScreen
 import com.eldarovich99.remote_assistant.utils.extensions.revertVisibility
 import kotlinx.android.synthetic.main.fragment_chats.*
@@ -102,7 +102,8 @@ class ChatsFragment : BaseFragment(){
             // TODO remove mock
             delay(2228)
             withContext(Dispatchers.Main){
-                CallDialog(this@ChatsFragment).get().show()
+                CallDialog(this@ChatsFragment)
+                    .get().show()
                // callImageView.show()
                // textView2.text = getString(R.string.call_from, "Никита Хлебко")
             }

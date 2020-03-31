@@ -1,11 +1,10 @@
-package com.eldarovich99.remote_assistant
+package com.eldarovich99.remote_assistant.utils
 
 import android.app.Application
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Environment
-import com.eldarovich99.remote_assistant.utils.Logger
 import okhttp3.ResponseBody
 import java.io.*
 import javax.inject.Inject
