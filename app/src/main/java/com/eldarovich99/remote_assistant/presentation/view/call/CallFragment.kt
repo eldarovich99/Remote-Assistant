@@ -1,8 +1,8 @@
 package com.eldarovich99.remote_assistant.presentation.view.call
 
-import android.hardware.Camera
+import android.app.AlertDialog
+import android.content.DialogInterface
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import android.view.animation.Animation
 import android.view.animation.LinearInterpolator
@@ -17,6 +17,11 @@ import com.eldarovich99.remote_assistant.domain.models.Message
 import com.eldarovich99.remote_assistant.presentation.BaseFragment
 import com.eldarovich99.remote_assistant.presentation.ui.CloseConfirmationDialog
 import com.eldarovich99.remote_assistant.presentation.ui.DialogResult
+import com.eldarovich99.remote_assistant.streaming.Session
+import com.eldarovich99.remote_assistant.streaming.SessionBuilder
+import com.eldarovich99.remote_assistant.streaming.audio.AudioQuality
+import com.eldarovich99.remote_assistant.streaming.gl.SurfaceView.ASPECT_RATIO_PREVIEW
+import com.eldarovich99.remote_assistant.streaming.rtsp.RtspClient
 import com.eldarovich99.remote_assistant.utils.extensions.hide
 import com.eldarovich99.remote_assistant.utils.extensions.revertVisibility
 import com.eldarovich99.remote_assistant.utils.extensions.show
@@ -24,22 +29,27 @@ import kotlinx.android.synthetic.main.fragment_call.*
 import kotlinx.coroutines.*
 import toothpick.Toothpick
 import toothpick.ktp.KTP
-import java.io.IOException
+import java.util.regex.Matcher
+import java.util.regex.Pattern
 import javax.inject.Inject
 
 
-class CallFragment: BaseFragment(){
+class CallFragment: BaseFragment(), RtspClient.Callback,
+    Session.Callback, SurfaceHolder.Callback{
     var isChatVisible = true
-    var camera: Camera? = null
-    var lockObject = Object()
+    //var camera: Camera? = null
+    val items = listOf<Message>()
+    /*var lockObject = Object()
     var surfaceView: SurfaceView?=null
     var previewData = ByteArray(1280 * 720 * 3/2)
-    var previewBuf = ByteArray(1280 * 720 * 3/2)
-    val items = listOf<Message>()
+    var previewBuf = ByteArray(1280 * 720 * 3/2)*/
     @Inject
     lateinit var adapter : SingleChatAdapter
     @Inject
     lateinit var presenter: CallPresenter
+
+    private var session: Session ?= null
+    private var rtspClient: RtspClient?=null
 
     override suspend fun dispatchKeyEvent(event: KeyEvent?){
         when (event?.keyCode){
@@ -48,8 +58,8 @@ class CallFragment: BaseFragment(){
             KeyEvent.KEYCODE_BACK ->{
                 CloseConfirmationDialog(this@CallFragment).get(object : DialogResult{
                     override fun onDialogClosed(result: Boolean) {
-                        if (result)
-                            camera?.stopPreview()
+                        /*if (result)
+                            camera?.stopPreview()*/
                     }
                 }).show()
             }
@@ -84,6 +94,9 @@ class CallFragment: BaseFragment(){
     override fun onDestroyView() {
         Toothpick.closeScope(Scopes.CALL_SCOPE)
         uiScope.cancel()
+        rtspClient?.release();
+        session?.release();
+        surface?.holder?.removeCallback(this);
         super.onDestroyView()
     }
 
@@ -117,6 +130,78 @@ class CallFragment: BaseFragment(){
         //launchCamera()
     }
 
+    private fun setupCamera(){
+        activity?.window?.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+        // getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        activity?.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        surface.holder.addCallback(this)
+        // Initialize RTSP client
+        initRtspClient();
+    }
+
+    override fun onResume() {
+        super.onResume()
+        toggleStreaming()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        toggleStreaming();
+    }
+
+    private fun initRtspClient() {
+        // Configures the SessionBuilder
+        session = SessionBuilder.getInstance()
+            .setContext(activity?.application)
+            .setAudioEncoder(SessionBuilder.AUDIO_NONE)
+            .setAudioQuality(AudioQuality(8000, 16000))
+            .setVideoEncoder(SessionBuilder.VIDEO_H264)
+            .setSurfaceView(surface).setPreviewOrientation(0)
+            .setCallback(this).build()
+
+        // Configures the RTSP client
+       // mClient = RtspClient()
+       // mClient.setSession(session)
+       // mClient.setCallback(this)
+        surface.setAspectRatioMode(ASPECT_RATIO_PREVIEW)
+        val ip: String
+        val port: String
+        val path: String
+
+        // We parse the URI written in the Editext
+        val uri: Pattern = Pattern.compile("rtsp://(.+):(\\d+)/(.+)")
+        val m: Matcher = uri.matcher(AppConfig.STREAM_URL)
+        m.find()
+        ip = m.group(1)
+        port = m.group(2)
+        path = m.group(3)
+        rtspClient?.setCredentials(
+            AppConfig.PUBLISHER_USERNAME,
+            AppConfig.PUBLISHER_PASSWORD
+        )
+        rtspClient?.setServerAddress(ip, port.toInt())
+        rtspClient?.setStreamPath("/$path")
+    }
+
+    private fun toggleStreaming() {
+        if (rtspClient?.isStreaming() == true) {
+            // Start camera preview
+            session?.startPreview()
+
+            // Start video stream
+            rtspClient?.startStream()
+        } else {
+            // already streaming, stop streaming
+            // stop camera preview
+            session?.stopPreview()
+
+            // stop streaming
+            rtspClient?.stopStream()
+        }
+    }
+
+
+
     private fun revertChatsVisibility(){
         isChatVisible = !isChatVisible
         chatRecycler.revertVisibility()
@@ -142,9 +227,50 @@ class CallFragment: BaseFragment(){
         }
     }
 
+    override fun onRtspUpdate(message: Int, exception: Exception?) {
+        when (message) {
+            RtspClient.ERROR_CONNECTION_FAILED, RtspClient.ERROR_WRONG_CREDENTIALS -> {
+                alertError(exception?.message)
+                exception!!.printStackTrace()
+            }
+        }
+    }
+
+    private fun alertError(msg: String?) {
+        val error = msg ?: "Unknown error: "
+        val builder: AlertDialog.Builder = AlertDialog.Builder(activity)
+        builder.setMessage(error).setPositiveButton("Ok",
+            DialogInterface.OnClickListener { dialog, id -> })
+        val dialog: AlertDialog = builder.create()
+        dialog.show()
+    }
 
 
-    private fun launchCamera(){
+    override fun onSessionStarted() {}
+
+    override fun onSessionStopped() { }
+
+    override fun onPreviewStarted() {}
+
+    override fun onSessionError(reason: Int, streamType: Int, e: Exception?) {
+        if (e != null) {
+            alertError(e.message);
+            e.printStackTrace();
+        }
+    }
+
+    override fun onSessionConfigured() {}
+
+    override fun onBitrateUpdate(bitrate: Long) {}
+
+    override fun surfaceChanged(holder: SurfaceHolder?, format: Int, width: Int, height: Int) {}
+
+    override fun surfaceDestroyed(holder: SurfaceHolder?) {}
+
+    override fun surfaceCreated(holder: SurfaceHolder?) { }
+
+
+    /*private fun launchCamera(){
         surfaceView = SurfaceView(context)
         val holder = surfaceView!!.holder
 
@@ -161,14 +287,14 @@ class CallFragment: BaseFragment(){
             override fun surfaceChanged(p0: SurfaceHolder?, p1: Int, p2: Int, p3: Int) {
                 camera!!.stopPreview()
                 val params = camera!!.parameters
-                /* Set preview resolution to 1080p */
-                /* Set preview resolution to 1080p */
+                *//* Set preview resolution to 1080p *//*
+                *//* Set preview resolution to 1080p *//*
                 params.setPreviewSize(1920, 1080)
-                /* Set frame rate to 7.5fps */
-                /* Set frame rate to 7.5fps */
+                *//* Set frame rate to 7.5fps *//*
+                *//* Set frame rate to 7.5fps *//*
                 params.setPreviewFpsRange(7500, 7500)
-                /* Reflect parameter change to camera device */
-                /* Reflect parameter change to camera device */
+                *//* Reflect parameter change to camera device *//*
+                *//* Reflect parameter change to camera device *//*
                 camera!!.parameters = params
                 camera!!.addCallbackBuffer(previewData)
                 camera!!.setPreviewCallbackWithBuffer(previewCallback)
@@ -212,21 +338,21 @@ class CallFragment: BaseFragment(){
                 saveDepthMap(p0)
             }
         }
-        /* camera.startDepthStreaming()
+        *//* camera.startDepthStreaming()
          camera.setDepthCallback(object: Camera.DepthCallback{
              override fun onDepthMap(data: ByteArray, camera: Camera) {
                  synchronized(lockObject) {
                      saveDepthMap(data);
                  }
              }
-         })*/
+         })*//*
     }
 
     fun saveDepthMap(data: ByteArray?){
         Log.d("Data", "data retrieved, size: ${data?.size}")
     }
 
-/*    private fun getResolution(): IntArray? {
+*//*    private fun getResolution(): IntArray? {
         if (com.epson.moverio.bt2000.sample.samplecamerapreview.MainActivity.RESOLUTIONS.size <= mResolutionIndex) {
             mResolutionIndex = 0
         } else if (mResolutionIndex < 0) {
