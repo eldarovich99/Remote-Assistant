@@ -13,7 +13,8 @@ import ru.terrakok.cicerone.Router
 import javax.inject.Inject
 
 class ChatsAdapter @Inject constructor(var router: Router) : RecyclerView.Adapter<ChatsAdapter.ChatsViewHolder>() {
-    val items = generateSequence { User() }.take(50).toList()
+    val items = listOf(User("Никита Хлебко"), User("Кирилл Худорошков"), User("Алексей Карманов"),
+        User("Ярик не помню фамилию"),User("Моргенштерн"))
    // var selectedView : View?=null
    // var selectedItemPosition = -1
     var bindCounter = 0
@@ -42,7 +43,7 @@ class ChatsAdapter @Inject constructor(var router: Router) : RecyclerView.Adapte
     }
 
     override fun onBindViewHolder(holder: ChatsViewHolder, position: Int) {
-        holder.itemNameTextView.text = "${holder.itemNameTextView.text.toString().substringBefore(' ')} ${holder.adapterPosition}"
+        holder.itemNameTextView.text = items[holder.adapterPosition].name //"${holder.itemNameTextView.text.toString().substringBefore(' ')} ${holder.adapterPosition}"
         holder.itemView.isSelected = items[holder.adapterPosition].isEnabled
     }
 

@@ -1,3 +1,3 @@
 package com.eldarovich99.remote_assistant.domain.models
 
-class User(var isEnabled: Boolean=false)
+class User(var name: String, var isEnabled: Boolean=false)
