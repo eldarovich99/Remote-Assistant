@@ -6,6 +6,8 @@ import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import com.eldarovich99.remote_assistant.R
+import com.eldarovich99.remote_assistant.utils.extensions.hide
+import com.eldarovich99.remote_assistant.utils.extensions.show
 import kotlinx.android.synthetic.main.call_upper_bar.view.*
 import kotlinx.coroutines.*
 import java.text.SimpleDateFormat
@@ -38,6 +40,17 @@ class CallUpperBar(context: Context, attrs: AttributeSet) : ConstraintLayout(con
                 }
                 time++
                 delay(1000)
+            }
+        }
+        CoroutineScope(uiScope + Dispatchers.IO).launch {
+            while(true) {
+                withContext(Dispatchers.Main) {
+                    if (indicatorImageView.visibility == View.VISIBLE)
+                        indicatorImageView.hide()
+                    else
+                        indicatorImageView.show()
+                }
+                delay(750)
             }
         }
     }

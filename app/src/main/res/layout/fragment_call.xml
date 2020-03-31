@@ -47,4 +47,12 @@
         app:layout_constraintEnd_toEndOf="@id/chatRecycler"
         app:layout_constraintTop_toTopOf="@id/chatRecycler"
         app:layout_constraintBottom_toBottomOf="@id/chatRecycler"/>
+
+    <View
+        android:layout_width="2dp"
+        android:background="@color/colorPrimary"
+        android:layout_height="0dp"
+        app:layout_constraintStart_toStartOf="@id/showChatImageView"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/callUpperBar"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
