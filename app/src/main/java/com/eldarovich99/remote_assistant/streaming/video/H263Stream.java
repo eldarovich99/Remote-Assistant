@@ -16,15 +16,15 @@
  * limitations under the License.
  */
 
-package net.majorkernelpanic.streaming.video;
+package com.eldarovich99.remote_assistant.streaming.video;
 
 import android.graphics.ImageFormat;
 import android.hardware.Camera.CameraInfo;
 import android.media.MediaRecorder;
 import android.service.textservice.SpellCheckerService.Session;
 
-import net.majorkernelpanic.streaming.SessionBuilder;
-import net.majorkernelpanic.streaming.rtp.H263Packetizer;
+import com.eldarovich99.remote_assistant.streaming.SessionBuilder;
+import com.eldarovich99.remote_assistant.streaming.rtp.H263Packetizer;
 
 import java.io.IOException;
 

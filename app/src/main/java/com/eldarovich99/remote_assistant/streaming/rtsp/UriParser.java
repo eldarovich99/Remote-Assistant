@@ -16,16 +16,16 @@
  * limitations under the License.
  */
 
-package net.majorkernelpanic.streaming.rtsp;
+package com.eldarovich99.remote_assistant.streaming.rtsp;
 
 import android.content.ContentValues;
 import android.hardware.Camera.CameraInfo;
 
-import net.majorkernelpanic.streaming.MediaStream;
-import net.majorkernelpanic.streaming.Session;
-import net.majorkernelpanic.streaming.SessionBuilder;
-import net.majorkernelpanic.streaming.audio.AudioQuality;
-import net.majorkernelpanic.streaming.video.VideoQuality;
+import com.eldarovich99.remote_assistant.streaming.MediaStream;
+import com.eldarovich99.remote_assistant.streaming.Session;
+import com.eldarovich99.remote_assistant.streaming.SessionBuilder;
+import com.eldarovich99.remote_assistant.streaming.audio.AudioQuality;
+import com.eldarovich99.remote_assistant.streaming.video.VideoQuality;
 
 import java.io.IOException;
 import java.net.InetAddress;
@@ -34,12 +34,12 @@ import java.net.URLEncoder;
 import java.net.UnknownHostException;
 import java.util.Set;
 
-import static net.majorkernelpanic.streaming.SessionBuilder.AUDIO_AAC;
-import static net.majorkernelpanic.streaming.SessionBuilder.AUDIO_AMRNB;
-import static net.majorkernelpanic.streaming.SessionBuilder.AUDIO_NONE;
-import static net.majorkernelpanic.streaming.SessionBuilder.VIDEO_H263;
-import static net.majorkernelpanic.streaming.SessionBuilder.VIDEO_H264;
-import static net.majorkernelpanic.streaming.SessionBuilder.VIDEO_NONE;
+import static com.eldarovich99.remote_assistant.streaming.SessionBuilder.AUDIO_AAC;
+import static com.eldarovich99.remote_assistant.streaming.SessionBuilder.AUDIO_AMRNB;
+import static com.eldarovich99.remote_assistant.streaming.SessionBuilder.AUDIO_NONE;
+import static com.eldarovich99.remote_assistant.streaming.SessionBuilder.VIDEO_H263;
+import static com.eldarovich99.remote_assistant.streaming.SessionBuilder.VIDEO_H264;
+import static com.eldarovich99.remote_assistant.streaming.SessionBuilder.VIDEO_NONE;
 
 /**
  * This class parses URIs received by the RTSP server and configures a Session accordingly.

@@ -16,7 +16,7 @@
  * limitations under the License.
  */
 
-package net.majorkernelpanic.streaming.hw;
+package com.eldarovich99.remote_assistant.streaming.hw;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -31,7 +31,7 @@ import android.preference.PreferenceManager;
 import android.util.Base64;
 import android.util.Log;
 
-import net.majorkernelpanic.streaming.hw.CodecManager.Codec;
+import com.eldarovich99.remote_assistant.streaming.hw.CodecManager.Codec;
 
 import java.io.IOException;
 import java.io.PrintWriter;

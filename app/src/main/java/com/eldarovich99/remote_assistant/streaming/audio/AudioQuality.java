@@ -16,7 +16,7 @@
  * limitations under the License.
  */
 
-package net.majorkernelpanic.streaming.audio;
+package com.eldarovich99.remote_assistant.streaming.audio;
 
 /**
  * A class that represents the quality of an audio stream.

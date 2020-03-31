@@ -16,7 +16,7 @@
  * limitations under the License.
  */
 
-package net.majorkernelpanic.streaming.video;
+package com.eldarovich99.remote_assistant.streaming.video;
 
 import android.annotation.SuppressLint;
 import android.content.SharedPreferences;
@@ -35,15 +35,15 @@ import android.view.Surface;
 import android.view.SurfaceHolder;
 import android.view.SurfaceHolder.Callback;
 
-import net.majorkernelpanic.streaming.MediaStream;
-import net.majorkernelpanic.streaming.Stream;
-import net.majorkernelpanic.streaming.exceptions.CameraInUseException;
-import net.majorkernelpanic.streaming.exceptions.ConfNotSupportedException;
-import net.majorkernelpanic.streaming.exceptions.InvalidSurfaceException;
-import net.majorkernelpanic.streaming.gl.SurfaceView;
-import net.majorkernelpanic.streaming.hw.EncoderDebugger;
-import net.majorkernelpanic.streaming.hw.NV21Convertor;
-import net.majorkernelpanic.streaming.rtp.MediaCodecInputStream;
+import com.eldarovich99.remote_assistant.streaming.MediaStream;
+import com.eldarovich99.remote_assistant.streaming.Stream;
+import com.eldarovich99.remote_assistant.streaming.exceptions.CameraInUseException;
+import com.eldarovich99.remote_assistant.streaming.exceptions.ConfNotSupportedException;
+import com.eldarovich99.remote_assistant.streaming.exceptions.InvalidSurfaceException;
+import com.eldarovich99.remote_assistant.streaming.gl.SurfaceView;
+import com.eldarovich99.remote_assistant.streaming.hw.EncoderDebugger;
+import com.eldarovich99.remote_assistant.streaming.hw.NV21Convertor;
+import com.eldarovich99.remote_assistant.streaming.rtp.MediaCodecInputStream;
 
 import java.io.FileDescriptor;
 import java.io.IOException;

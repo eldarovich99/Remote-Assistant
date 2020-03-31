@@ -16,7 +16,7 @@
  * limitations under the License.
  */
 
-package net.majorkernelpanic.streaming.hw;
+package com.eldarovich99.remote_assistant.streaming.hw;
 
 import android.annotation.SuppressLint;
 import android.media.MediaCodecInfo;

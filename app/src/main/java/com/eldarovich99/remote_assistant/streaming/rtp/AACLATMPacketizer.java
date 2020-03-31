@@ -16,7 +16,7 @@
  * limitations under the License.
  */
 
-package net.majorkernelpanic.streaming.rtp;
+package com.eldarovich99.remote_assistant.streaming.rtp;
 
 import android.annotation.SuppressLint;
 import android.media.MediaCodec.BufferInfo;

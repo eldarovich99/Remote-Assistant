@@ -16,7 +16,7 @@
  * limitations under the License.
  */
 
-package net.majorkernelpanic.streaming.video;
+package com.eldarovich99.remote_assistant.streaming.video;
 
 import android.annotation.SuppressLint;
 import android.content.SharedPreferences.Editor;
@@ -28,12 +28,12 @@ import android.service.textservice.SpellCheckerService.Session;
 import android.util.Base64;
 import android.util.Log;
 
-import net.majorkernelpanic.streaming.SessionBuilder;
-import net.majorkernelpanic.streaming.exceptions.ConfNotSupportedException;
-import net.majorkernelpanic.streaming.exceptions.StorageUnavailableException;
-import net.majorkernelpanic.streaming.hw.EncoderDebugger;
-import net.majorkernelpanic.streaming.mp4.MP4Config;
-import net.majorkernelpanic.streaming.rtp.H264Packetizer;
+import com.eldarovich99.remote_assistant.streaming.SessionBuilder;
+import com.eldarovich99.remote_assistant.streaming.exceptions.ConfNotSupportedException;
+import com.eldarovich99.remote_assistant.streaming.exceptions.StorageUnavailableException;
+import com.eldarovich99.remote_assistant.streaming.hw.EncoderDebugger;
+import com.eldarovich99.remote_assistant.streaming.mp4.MP4Config;
+import com.eldarovich99.remote_assistant.streaming.rtp.H264Packetizer;
 
 import java.io.File;
 import java.io.IOException;

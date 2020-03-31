@@ -16,7 +16,7 @@
  * limitations under the License.
  */
 
-package net.majorkernelpanic.streaming.gl;
+package com.eldarovich99.remote_assistant.streaming.gl;
 
 import android.content.Context;
 import android.graphics.SurfaceTexture;
@@ -27,8 +27,8 @@ import android.util.Log;
 import android.view.Surface;
 import android.view.SurfaceHolder;
 
-import net.majorkernelpanic.streaming.MediaStream;
-import net.majorkernelpanic.streaming.video.VideoStream;
+import com.eldarovich99.remote_assistant.streaming.MediaStream;
+import com.eldarovich99.remote_assistant.streaming.video.VideoStream;
 
 import java.util.concurrent.Semaphore;
 

@@ -16,21 +16,21 @@
  * limitations under the License.
  */
 
-package net.majorkernelpanic.streaming;
+package com.eldarovich99.remote_assistant.streaming;
 
 import android.content.Context;
 import android.hardware.Camera.CameraInfo;
 import android.preference.PreferenceManager;
 
-import net.majorkernelpanic.streaming.audio.AACStream;
-import net.majorkernelpanic.streaming.audio.AMRNBStream;
-import net.majorkernelpanic.streaming.audio.AudioQuality;
-import net.majorkernelpanic.streaming.audio.AudioStream;
-import net.majorkernelpanic.streaming.gl.SurfaceView;
-import net.majorkernelpanic.streaming.video.H263Stream;
-import net.majorkernelpanic.streaming.video.H264Stream;
-import net.majorkernelpanic.streaming.video.VideoQuality;
-import net.majorkernelpanic.streaming.video.VideoStream;
+import com.eldarovich99.remote_assistant.streaming.audio.AACStream;
+import com.eldarovich99.remote_assistant.streaming.audio.AMRNBStream;
+import com.eldarovich99.remote_assistant.streaming.audio.AudioQuality;
+import com.eldarovich99.remote_assistant.streaming.audio.AudioStream;
+import com.eldarovich99.remote_assistant.streaming.gl.SurfaceView;
+import com.eldarovich99.remote_assistant.streaming.video.H263Stream;
+import com.eldarovich99.remote_assistant.streaming.video.H264Stream;
+import com.eldarovich99.remote_assistant.streaming.video.VideoQuality;
+import com.eldarovich99.remote_assistant.streaming.video.VideoStream;
 
 import java.io.IOException;
 

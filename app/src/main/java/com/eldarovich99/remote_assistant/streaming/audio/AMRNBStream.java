@@ -16,13 +16,13 @@
  * limitations under the License.
  */
 
-package net.majorkernelpanic.streaming.audio;
+package com.eldarovich99.remote_assistant.streaming.audio;
 
 import android.media.MediaRecorder;
 import android.service.textservice.SpellCheckerService.Session;
 
-import net.majorkernelpanic.streaming.SessionBuilder;
-import net.majorkernelpanic.streaming.rtp.AMRNBPacketizer;
+import com.eldarovich99.remote_assistant.streaming.SessionBuilder;
+import com.eldarovich99.remote_assistant.streaming.rtp.AMRNBPacketizer;
 
 import java.io.IOException;
 import java.lang.reflect.Field;

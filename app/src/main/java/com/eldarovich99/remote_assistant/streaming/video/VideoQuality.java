@@ -16,7 +16,7 @@
  * limitations under the License.
  */
 
-package net.majorkernelpanic.streaming.video;
+package com.eldarovich99.remote_assistant.streaming.video;
 
 import android.hardware.Camera;
 import android.hardware.Camera.Size;

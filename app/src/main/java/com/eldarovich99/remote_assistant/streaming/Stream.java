@@ -16,7 +16,7 @@
  * limitations under the License.
  */
 
-package net.majorkernelpanic.streaming;
+package com.eldarovich99.remote_assistant.streaming;
 
 import java.io.IOException;
 import java.io.OutputStream;
@@ -95,7 +95,7 @@ public interface Stream {
 	
 
 	/**
-	 * Returns the SSRC of the underlying {@link net.majorkernelpanic.streaming.rtp.RtpSocket}.
+	 * Returns the SSRC of the underlying {@link com.eldarovich99.remote_assistant.streaming.rtp.RtpSocket}.
 	 * @return the SSRC of the stream.
 	 */
 	public int getSSRC();

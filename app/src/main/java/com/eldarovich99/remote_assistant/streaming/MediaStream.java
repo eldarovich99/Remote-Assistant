@@ -16,7 +16,7 @@
  * limitations under the License.
  */
 
-package net.majorkernelpanic.streaming;
+package com.eldarovich99.remote_assistant.streaming;
 
 import android.annotation.SuppressLint;
 import android.media.MediaCodec;
@@ -28,9 +28,9 @@ import android.os.Build;
 import android.os.ParcelFileDescriptor;
 import android.util.Log;
 
-import net.majorkernelpanic.streaming.audio.AudioStream;
-import net.majorkernelpanic.streaming.rtp.AbstractPacketizer;
-import net.majorkernelpanic.streaming.video.VideoStream;
+import com.eldarovich99.remote_assistant.streaming.audio.AudioStream;
+import com.eldarovich99.remote_assistant.streaming.rtp.AbstractPacketizer;
+import com.eldarovich99.remote_assistant.streaming.video.VideoStream;
 
 import java.io.IOException;
 import java.io.OutputStream;
@@ -248,8 +248,8 @@ public abstract class MediaStream implements Stream {
 
 	/**
 	 * Configures the stream with the settings supplied with 
-	 * {@link VideoStream#setVideoQuality(net.majorkernelpanic.streaming.video.VideoQuality)}
-	 * for a {@link VideoStream} and {@link AudioStream#setAudioQuality(net.majorkernelpanic.streaming.audio.AudioQuality)}
+	 * {@link VideoStream#setVideoQuality(com.eldarovich99.remote_assistant.streaming.video.VideoQuality)}
+	 * for a {@link VideoStream} and {@link AudioStream#setAudioQuality(com.eldarovich99.remote_assistant.streaming.audio.AudioQuality)}
 	 * for a {@link AudioStream}.
 	 */
 	public synchronized void configure() throws IllegalStateException, IOException {
@@ -317,7 +317,7 @@ public abstract class MediaStream implements Stream {
 	public abstract String getSessionDescription();
 	
 	/**
-	 * Returns the SSRC of the underlying {@link net.majorkernelpanic.streaming.rtp.RtpSocket}.
+	 * Returns the SSRC of the underlying {@link com.eldarovich99.remote_assistant.streaming.rtp.RtpSocket}.
 	 * @return the SSRC of the stream
 	 */
 	public int getSSRC() {
@@ -328,7 +328,7 @@ public abstract class MediaStream implements Stream {
 
 		if (sPipeApi == PIPE_API_LS) {
 			
-			final String LOCAL_ADDR = "net.majorkernelpanic.streaming-";
+			final String LOCAL_ADDR = "com.eldarovich99.remote_assistant.streaming-";
 	
 			for (int i=0;i<10;i++) {
 				try {

@@ -16,7 +16,7 @@
  * limitations under the License.
  */
 
-package net.majorkernelpanic.streaming.exceptions;
+package com.eldarovich99.remote_assistant.streaming.exceptions;
 
 import java.io.IOException;
 

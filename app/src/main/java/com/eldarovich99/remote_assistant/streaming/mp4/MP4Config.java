@@ -16,7 +16,7 @@
  * limitations under the License.
  */
 
-package net.majorkernelpanic.streaming.mp4;
+package com.eldarovich99.remote_assistant.streaming.mp4;
 
 import android.util.Base64;
 import android.util.Log;

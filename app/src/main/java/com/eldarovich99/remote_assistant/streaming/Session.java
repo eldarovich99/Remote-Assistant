@@ -16,23 +16,23 @@
  * limitations under the License.
  */
 
-package net.majorkernelpanic.streaming;
+package com.eldarovich99.remote_assistant.streaming;
 
 import android.hardware.Camera.CameraInfo;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.Looper;
 
-import net.majorkernelpanic.streaming.audio.AudioQuality;
-import net.majorkernelpanic.streaming.audio.AudioStream;
-import net.majorkernelpanic.streaming.exceptions.CameraInUseException;
-import net.majorkernelpanic.streaming.exceptions.ConfNotSupportedException;
-import net.majorkernelpanic.streaming.exceptions.InvalidSurfaceException;
-import net.majorkernelpanic.streaming.exceptions.StorageUnavailableException;
-import net.majorkernelpanic.streaming.gl.SurfaceView;
-import net.majorkernelpanic.streaming.rtsp.RtspClient;
-import net.majorkernelpanic.streaming.video.VideoQuality;
-import net.majorkernelpanic.streaming.video.VideoStream;
+import com.eldarovich99.remote_assistant.streaming.audio.AudioQuality;
+import com.eldarovich99.remote_assistant.streaming.audio.AudioStream;
+import com.eldarovich99.remote_assistant.streaming.exceptions.CameraInUseException;
+import com.eldarovich99.remote_assistant.streaming.exceptions.ConfNotSupportedException;
+import com.eldarovich99.remote_assistant.streaming.exceptions.InvalidSurfaceException;
+import com.eldarovich99.remote_assistant.streaming.exceptions.StorageUnavailableException;
+import com.eldarovich99.remote_assistant.streaming.gl.SurfaceView;
+import com.eldarovich99.remote_assistant.streaming.rtsp.RtspClient;
+import com.eldarovich99.remote_assistant.streaming.video.VideoQuality;
+import com.eldarovich99.remote_assistant.streaming.video.VideoStream;
 
 import java.io.IOException;
 import java.net.InetAddress;
@@ -118,7 +118,7 @@ public class Session {
 	public Session() {
 		long uptime = System.currentTimeMillis();
 
-		HandlerThread thread = new HandlerThread("net.majorkernelpanic.streaming.Session");
+		HandlerThread thread = new HandlerThread("com.eldarovich99.remote_assistant.streaming.Session");
 		thread.start();
 
 		mHandler = new Handler(thread.getLooper());

@@ -16,12 +16,12 @@
  * limitations under the License.
  */
 
-package net.majorkernelpanic.streaming.rtp;
+package com.eldarovich99.remote_assistant.streaming.rtp;
 
 import android.os.SystemClock;
 import android.util.Log;
 
-import net.majorkernelpanic.streaming.rtcp.SenderReport;
+import com.eldarovich99.remote_assistant.streaming.rtcp.SenderReport;
 
 import java.io.IOException;
 import java.io.OutputStream;

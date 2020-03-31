@@ -16,13 +16,13 @@
  * limitations under the License.
  */
 
-package net.majorkernelpanic.streaming.audio;
+package com.eldarovich99.remote_assistant.streaming.audio;
 
 import android.media.MediaRecorder;
 import android.os.ParcelFileDescriptor;
 import android.util.Log;
 
-import net.majorkernelpanic.streaming.MediaStream;
+import com.eldarovich99.remote_assistant.streaming.MediaStream;
 
 import java.io.FileDescriptor;
 import java.io.IOException;

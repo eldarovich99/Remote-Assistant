@@ -19,7 +19,7 @@
  * limitations under the License.
  */
 
-package net.majorkernelpanic.streaming.gl;
+package com.eldarovich99.remote_assistant.streaming.gl;
 
 import android.annotation.SuppressLint;
 import android.graphics.SurfaceTexture;

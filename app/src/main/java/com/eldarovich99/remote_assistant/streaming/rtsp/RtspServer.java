@@ -16,7 +16,7 @@
  * limitations under the License.
  */
 
-package net.majorkernelpanic.streaming.rtsp;
+package com.eldarovich99.remote_assistant.streaming.rtsp;
 
 import android.app.Service;
 import android.content.Intent;
@@ -29,8 +29,8 @@ import android.preference.PreferenceManager;
 import android.util.Base64;
 import android.util.Log;
 
-import net.majorkernelpanic.streaming.Session;
-import net.majorkernelpanic.streaming.SessionBuilder;
+import com.eldarovich99.remote_assistant.streaming.Session;
+import com.eldarovich99.remote_assistant.streaming.SessionBuilder;
 
 import java.io.BufferedReader;
 import java.io.IOException;

@@ -16,7 +16,7 @@
  * limitations under the License.
  */
 
-package net.majorkernelpanic.streaming.rtsp;
+package com.eldarovich99.remote_assistant.streaming.rtsp;
 
 import java.io.IOException;
 import java.io.InputStream;

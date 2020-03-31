@@ -16,7 +16,7 @@
  * limitations under the License.
  */
 
-package net.majorkernelpanic.streaming.audio;
+package com.eldarovich99.remote_assistant.streaming.audio;
 
 import android.annotation.SuppressLint;
 import android.content.SharedPreferences;
@@ -32,10 +32,10 @@ import android.os.Environment;
 import android.service.textservice.SpellCheckerService.Session;
 import android.util.Log;
 
-import net.majorkernelpanic.streaming.SessionBuilder;
-import net.majorkernelpanic.streaming.rtp.AACADTSPacketizer;
-import net.majorkernelpanic.streaming.rtp.AACLATMPacketizer;
-import net.majorkernelpanic.streaming.rtp.MediaCodecInputStream;
+import com.eldarovich99.remote_assistant.streaming.SessionBuilder;
+import com.eldarovich99.remote_assistant.streaming.rtp.AACADTSPacketizer;
+import com.eldarovich99.remote_assistant.streaming.rtp.AACLATMPacketizer;
+import com.eldarovich99.remote_assistant.streaming.rtp.MediaCodecInputStream;
 
 import java.io.File;
 import java.io.IOException;

@@ -16,16 +16,16 @@
  * limitations under the License.
  */
 
-package net.majorkernelpanic.streaming.rtsp;
+package com.eldarovich99.remote_assistant.streaming.rtsp;
 
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.Looper;
 import android.util.Log;
 
-import net.majorkernelpanic.streaming.Session;
-import net.majorkernelpanic.streaming.Stream;
-import net.majorkernelpanic.streaming.rtp.RtpSocket;
+import com.eldarovich99.remote_assistant.streaming.Session;
+import com.eldarovich99.remote_assistant.streaming.Stream;
+import com.eldarovich99.remote_assistant.streaming.rtp.RtpSocket;
 
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
@@ -142,7 +142,7 @@ public class RtspClient {
 		mState = STATE_STOPPED;
 
 		final Semaphore signal = new Semaphore(0);
-		new HandlerThread("net.majorkernelpanic.streaming.RtspClient"){
+		new HandlerThread("com.eldarovich99.remote_assistant.streaming.RtspClient"){
 			@Override
 			protected void onLooperPrepared() {
 				mHandler = new Handler();

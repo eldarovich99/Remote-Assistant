@@ -16,7 +16,7 @@
  * limitations under the License.
  */
 
-package net.majorkernelpanic.streaming.rtcp;
+package com.eldarovich99.remote_assistant.streaming.rtcp;
 
 import android.os.SystemClock;
 
@@ -26,8 +26,8 @@ import java.net.DatagramPacket;
 import java.net.InetAddress;
 import java.net.MulticastSocket;
 
-import static net.majorkernelpanic.streaming.rtp.RtpSocket.TRANSPORT_TCP;
-import static net.majorkernelpanic.streaming.rtp.RtpSocket.TRANSPORT_UDP;
+import static com.eldarovich99.remote_assistant.streaming.rtp.RtpSocket.TRANSPORT_TCP;
+import static com.eldarovich99.remote_assistant.streaming.rtp.RtpSocket.TRANSPORT_UDP;
 
 /**
  * Implementation of Sender Report RTCP packets.
