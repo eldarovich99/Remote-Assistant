@@ -10,6 +10,7 @@ import android.view.animation.RotateAnimation
 import android.widget.Toast
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.eldarovich99.remote_assistant.AppConfig
 import com.eldarovich99.remote_assistant.R
 import com.eldarovich99.remote_assistant.di.Scopes
 import com.eldarovich99.remote_assistant.di.modules.CallModule
@@ -88,6 +89,7 @@ class CallFragment: BaseFragment(), RtspClient.Callback,
        KTP.openScopes(Scopes.APP_SCOPE, Scopes.ACTIVITY_SCOPE, Scopes.CALL_SCOPE)
            .installModules(CallModule(this))
            .inject(this)
+        // getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
         return inflater.inflate(R.layout.fragment_call, container, false)
     }
 
@@ -127,13 +129,14 @@ class CallFragment: BaseFragment(), RtspClient.Callback,
                 statusImageView.setImageResource(0)
             }
         }
+        setupCamera()
         //launchCamera()
     }
 
     private fun setupCamera(){
-        activity?.window?.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-        // getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        activity?.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        //activity?.window?.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+        //// getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        //activity?.requestWindowFeature(Window.FEATURE_NO_TITLE);
         surface.holder.addCallback(this)
         // Initialize RTSP client
         initRtspClient();
@@ -160,9 +163,9 @@ class CallFragment: BaseFragment(), RtspClient.Callback,
             .setCallback(this).build()
 
         // Configures the RTSP client
-       // mClient = RtspClient()
-       // mClient.setSession(session)
-       // mClient.setCallback(this)
+        rtspClient = RtspClient()
+        rtspClient!!.setSession(session)
+        rtspClient!!.setCallback(this)
         surface.setAspectRatioMode(ASPECT_RATIO_PREVIEW)
         val ip: String
         val port: String
@@ -170,21 +173,21 @@ class CallFragment: BaseFragment(), RtspClient.Callback,
 
         // We parse the URI written in the Editext
         val uri: Pattern = Pattern.compile("rtsp://(.+):(\\d+)/(.+)")
-        val m: Matcher = uri.matcher(AppConfig.STREAM_URL)
+        val m: Matcher = uri.matcher(AppConfig.getRtspAddress())
         m.find()
         ip = m.group(1)
         port = m.group(2)
         path = m.group(3)
-        rtspClient?.setCredentials(
+        rtspClient!!.setCredentials(
             AppConfig.PUBLISHER_USERNAME,
             AppConfig.PUBLISHER_PASSWORD
         )
-        rtspClient?.setServerAddress(ip, port.toInt())
-        rtspClient?.setStreamPath("/$path")
+        rtspClient!!.setServerAddress(ip, port.toInt())
+        rtspClient!!.setStreamPath("/$path")
     }
 
     private fun toggleStreaming() {
-        if (rtspClient?.isStreaming() == true) {
+        if (rtspClient?.isStreaming() == false) {
             // Start camera preview
             session?.startPreview()
 
