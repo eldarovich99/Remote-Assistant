@@ -88,4 +88,7 @@ dependencies {
 
     // Files downloading
     implementation 'com.liulishuo.filedownloader:library:1.7.7'
+
+    // For auth
+    implementation 'com.auth0.android:jwtdecode:2.0.0'
 }
