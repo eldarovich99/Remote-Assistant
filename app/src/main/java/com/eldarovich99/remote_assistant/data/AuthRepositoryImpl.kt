@@ -6,11 +6,11 @@ import com.eldarovich99.remote_assistant.data.error_handling.ErrorHandler
 import com.eldarovich99.remote_assistant.data.error_handling.Result
 import com.eldarovich99.remote_assistant.domain.AuthRepository
 import com.eldarovich99.remote_assistant.domain.models.AuthInfo
+import javax.inject.Inject
 
-class AuthRepositoryImpl: AuthRepository {
-    val errorHandler = ErrorHandler()
+class AuthRepositoryImpl @Inject constructor(val errorHandler: ErrorHandler): AuthRepository {
     val api = NetworkClient.getApi(LoginApi::class.java)
-    override suspend fun auth(body: AuthInfo): Result<JWT> {
-        return errorHandler.executeSafeCall { api.auth(body) }
+    override suspend fun auth(email: String, password: String): Result<JWT> {
+        return errorHandler.executeSafeCall { api.auth(AuthInfo(email = email, password = password)) }
     }
 }

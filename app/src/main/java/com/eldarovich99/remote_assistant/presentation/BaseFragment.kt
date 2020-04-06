@@ -2,6 +2,7 @@ package com.eldarovich99.remote_assistant.presentation
 
 import android.os.Bundle
 import android.view.KeyEvent
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import jp.epson.moverio.H725.DisplayControl
 import kotlinx.coroutines.Dispatchers
@@ -75,6 +76,10 @@ abstract class BaseFragment : Fragment(){
         }*/
         
         super.onStart()
+    }
+
+    fun showErrorMessage(){
+        Toast.makeText(this.context, "Не удалось выполнить запрос", Toast.LENGTH_LONG).show()
     }
 
     abstract suspend fun dispatchKeyEvent(event: KeyEvent?)
