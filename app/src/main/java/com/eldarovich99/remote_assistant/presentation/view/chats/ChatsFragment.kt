@@ -11,12 +11,13 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
 import com.eldarovich99.remote_assistant.R
 import com.eldarovich99.remote_assistant.di.Scopes
+import com.eldarovich99.remote_assistant.domain.models.ContactBrief
 import com.eldarovich99.remote_assistant.presentation.BaseFragment
-import com.eldarovich99.remote_assistant.presentation.ui.CallDialog
 import com.eldarovich99.remote_assistant.routing.CallScreen
 import com.eldarovich99.remote_assistant.utils.extensions.revertVisibility
 import kotlinx.android.synthetic.main.fragment_chats.*
-import kotlinx.coroutines.*
+import kotlinx.coroutines.cancel
+import kotlinx.coroutines.cancelChildren
 import toothpick.Toothpick
 import toothpick.ktp.KTP
 import javax.inject.Inject
@@ -27,6 +28,8 @@ class ChatsFragment : BaseFragment(){
     var isChatVisible = true
     @Inject
     lateinit var adapter : ChatsAdapter
+
+    val presenter = ChatsPresenter()
 
     override suspend fun dispatchKeyEvent(event: KeyEvent?){
         when (event?.keyCode){
@@ -74,6 +77,7 @@ class ChatsFragment : BaseFragment(){
     override fun onCreate(savedInstanceState: Bundle?) {
         KTP.openScopes(Scopes.APP_SCOPE, Scopes.ACTIVITY_SCOPE, Scopes.CHATS_SCOPE)
             .inject(this)
+        presenter.onAttach(this)
         super.onCreate(savedInstanceState)
     }
 
@@ -89,6 +93,7 @@ class ChatsFragment : BaseFragment(){
     override fun onDestroy() {
         Toothpick.closeScope(Scopes.CHATS_SCOPE)
         uiScope.cancel()
+        presenter.onDetach()
         super.onDestroy()
     }
 
@@ -98,16 +103,6 @@ class ChatsFragment : BaseFragment(){
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        CoroutineScope(uiScope+Dispatchers.IO).launch {
-            // TODO remove mock
-            delay(2228)
-            withContext(Dispatchers.Main){
-                CallDialog(this@ChatsFragment)
-                    .get().show()
-               // callImageView.show()
-               // textView2.text = getString(R.string.call_from, "Никита Хлебко")
-            }
-        }
         callImageView.setOnClickListener {
             router.navigateTo(CallScreen())
         }
@@ -137,5 +132,13 @@ class ChatsFragment : BaseFragment(){
             showChatImageView.setImageDrawable(AppCompatResources.getDrawable(context!!, R.drawable.ic_keyboard_arrow_left_black))
         else
             showChatImageView.setImageDrawable(AppCompatResources.getDrawable(context!!, R.drawable.ic_keyboard_arrow_right))
+    }
+
+    fun showFailMessage(){
+        Toast.makeText(this.context, "Не удалось выполнить запрос", Toast.LENGTH_SHORT).show()
+    }
+
+    fun updateContacts(data: List<ContactBrief>){
+        adapter.updateData(data)
     }
 }
