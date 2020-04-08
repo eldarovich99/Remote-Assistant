@@ -16,7 +16,7 @@ import java.util.concurrent.TimeUnit
 
 class NetworkClient {
     companion object{
-        val BASE_URL = "https://www.innerfidelity.com/images/"
+        val BASE_URL = "http://78.155.197.233:8080/"
 
         private var retrofit: Retrofit? = null
 

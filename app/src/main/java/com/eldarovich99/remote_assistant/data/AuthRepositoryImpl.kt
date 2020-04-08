@@ -11,7 +11,7 @@ class AuthRepositoryImpl:
     AuthRepository {
     val errorHandler = ErrorHandler()
     val api = NetworkClient.getApi(LoginApi::class.java)
-    override suspend fun auth(body: AuthInfo): Result<JWT> {
-        return errorHandler.executeSafeCall { api.auth(body) }
+    override suspend fun auth(email: String, password: String): Result<JWT> {
+        return errorHandler.executeSafeCall { api.auth(AuthInfo(email = email, password = password)) }
     }
 }

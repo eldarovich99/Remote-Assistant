@@ -7,6 +7,6 @@ import retrofit2.http.Body
 import retrofit2.http.POST
 
 interface LoginApi {
-    @POST
+    @POST("auth/api/login.php")
     suspend fun auth(@Body u: AuthInfo): Response<JWT>
 }
