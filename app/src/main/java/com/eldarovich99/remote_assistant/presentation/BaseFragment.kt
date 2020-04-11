@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import jp.epson.moverio.H725.DisplayControl
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.cancelChildren
 import ru.terrakok.cicerone.Cicerone
 import ru.terrakok.cicerone.Navigator
 import ru.terrakok.cicerone.Router
@@ -24,8 +25,8 @@ abstract class BaseFragment : Fragment(){
     @Inject
     lateinit var navigator: Navigator
 
-    @Inject
-    lateinit var router: Router
+    //@Inject
+    //lateinit var router: Router
 
     lateinit var displayControl : DisplayControl // TODO inject
    // var sensorManager : SensorManager?=null
@@ -50,6 +51,7 @@ abstract class BaseFragment : Fragment(){
 
     override fun onStop() {
         cicerone.navigatorHolder.removeNavigator()
+        uiScope.cancelChildren()
         super.onStop()
     }
 

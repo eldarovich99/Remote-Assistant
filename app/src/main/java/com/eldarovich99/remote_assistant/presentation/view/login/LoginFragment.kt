@@ -9,7 +9,6 @@ import com.eldarovich99.remote_assistant.R
 import com.eldarovich99.remote_assistant.di.Scopes
 import com.eldarovich99.remote_assistant.di.modules.LoginModule
 import com.eldarovich99.remote_assistant.presentation.BaseFragment
-import com.eldarovich99.remote_assistant.routing.ChatScreen
 import kotlinx.android.synthetic.main.fragment_login.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
@@ -59,9 +58,5 @@ class LoginFragment : BaseFragment() {
             }
         }
         super.onViewCreated(view, savedInstanceState)
-    }
-
-    fun openChatScreen(){
-        router.newRootScreen(ChatScreen())
     }
 }

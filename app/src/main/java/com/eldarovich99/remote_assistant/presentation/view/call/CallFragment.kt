@@ -10,7 +10,7 @@ import android.view.animation.LinearInterpolator
 import android.view.animation.RotateAnimation
 import android.widget.Toast
 import androidx.appcompat.content.res.AppCompatResources
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.eldarovich99.remote_assistant.R
 import com.eldarovich99.remote_assistant.di.Scopes
 import com.eldarovich99.remote_assistant.di.modules.CallModule
@@ -40,6 +40,8 @@ class CallFragment: BaseFragment(){
     lateinit var adapter : SingleChatAdapter
     @Inject
     lateinit var presenter: CallPresenter
+    @Inject
+    lateinit var layoutManager: RecyclerView.LayoutManager
 
     override suspend fun dispatchKeyEvent(event: KeyEvent?){
         when (event?.keyCode){
@@ -91,8 +93,6 @@ class CallFragment: BaseFragment(){
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         callUpperBar.setOnBackButtonListener(this)
-        val layoutManager = LinearLayoutManager(context)
-        layoutManager.stackFromEnd = true
         chatRecycler.layoutManager = layoutManager
         chatRecycler.adapter = adapter
         adapter.items = items

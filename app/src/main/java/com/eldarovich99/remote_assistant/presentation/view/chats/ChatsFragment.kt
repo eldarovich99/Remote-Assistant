@@ -12,21 +12,21 @@ import androidx.recyclerview.widget.RecyclerView
 import com.eldarovich99.remote_assistant.R
 import com.eldarovich99.remote_assistant.di.Scopes
 import com.eldarovich99.remote_assistant.presentation.BaseFragment
-import com.eldarovich99.remote_assistant.presentation.ui.CallDialog
-import com.eldarovich99.remote_assistant.routing.CallScreen
 import com.eldarovich99.remote_assistant.utils.extensions.revertVisibility
 import kotlinx.android.synthetic.main.fragment_chats.*
-import kotlinx.coroutines.*
+import kotlinx.coroutines.cancel
 import toothpick.Toothpick
 import toothpick.ktp.KTP
 import javax.inject.Inject
 
-class ChatsFragment : BaseFragment(){
+class ChatsFragment : BaseFragment(), ChatsView{
     var adapterPosition = 0
     var shouldMove = true
     var isChatVisible = true
     @Inject
     lateinit var adapter : ChatsAdapter
+    @Inject
+    lateinit var presenter: ChatsPresenter
 
     override suspend fun dispatchKeyEvent(event: KeyEvent?){
         when (event?.keyCode){
@@ -82,7 +82,6 @@ class ChatsFragment : BaseFragment(){
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // It is necessary to google it and find out how to deal with it
         return inflater.inflate(R.layout.fragment_chats, container, false)
     }
 
@@ -92,29 +91,23 @@ class ChatsFragment : BaseFragment(){
         super.onDestroy()
     }
 
+    override fun onStart() {
+        presenter.onAttach(this)
+        super.onStart()
+    }
+
     override fun onStop() {
-        uiScope.cancelChildren()
+        presenter.onDetach()
         super.onStop()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        CoroutineScope(uiScope+Dispatchers.IO).launch {
-            // TODO remove mock
-            delay(2228)
-            withContext(Dispatchers.Main){
-                CallDialog(this@ChatsFragment)
-                    .get().show()
-               // callImageView.show()
-               // textView2.text = getString(R.string.call_from, "Никита Хлебко")
-            }
-        }
         callImageView.setOnClickListener {
-            router.navigateTo(CallScreen())
+            presenter.openCallScreen()
         }
             toolbar.title = getString(R.string.chats)
             peopleRecycler.requestFocus()
             peopleRecycler.adapter = adapter
-            //bottomNavBar.selectButton(CHATS)
 
             peopleRecycler.addItemDecoration(
                 DividerItemDecoration(
