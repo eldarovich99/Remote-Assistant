@@ -1,16 +1,16 @@
 package com.eldarovich99.remote_assistant.presentation.view.call
 
-import android.app.AlertDialog
-import android.content.DialogInterface
 import android.os.Bundle
-import android.view.*
+import android.view.KeyEvent
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.LinearInterpolator
 import android.view.animation.RotateAnimation
 import android.widget.Toast
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.eldarovich99.remote_assistant.AppConfig
 import com.eldarovich99.remote_assistant.R
 import com.eldarovich99.remote_assistant.di.Scopes
 import com.eldarovich99.remote_assistant.di.modules.CallModule
@@ -18,11 +18,6 @@ import com.eldarovich99.remote_assistant.domain.models.Message
 import com.eldarovich99.remote_assistant.presentation.BaseFragment
 import com.eldarovich99.remote_assistant.presentation.ui.CloseConfirmationDialog
 import com.eldarovich99.remote_assistant.presentation.ui.DialogResult
-import com.eldarovich99.remote_assistant.streaming.Session
-import com.eldarovich99.remote_assistant.streaming.SessionBuilder
-import com.eldarovich99.remote_assistant.streaming.audio.AudioQuality
-import com.eldarovich99.remote_assistant.streaming.gl.SurfaceView.ASPECT_RATIO_PREVIEW
-import com.eldarovich99.remote_assistant.streaming.rtsp.RtspClient
 import com.eldarovich99.remote_assistant.utils.extensions.hide
 import com.eldarovich99.remote_assistant.utils.extensions.revertVisibility
 import com.eldarovich99.remote_assistant.utils.extensions.show
@@ -30,13 +25,10 @@ import kotlinx.android.synthetic.main.fragment_call.*
 import kotlinx.coroutines.*
 import toothpick.Toothpick
 import toothpick.ktp.KTP
-import java.util.regex.Matcher
-import java.util.regex.Pattern
 import javax.inject.Inject
 
 
-class CallFragment: BaseFragment(), RtspClient.Callback,
-    Session.Callback, SurfaceHolder.Callback{
+class CallFragment: BaseFragment(){
     var isChatVisible = true
     //var camera: Camera? = null
     val items = listOf<Message>()
@@ -48,9 +40,6 @@ class CallFragment: BaseFragment(), RtspClient.Callback,
     lateinit var adapter : SingleChatAdapter
     @Inject
     lateinit var presenter: CallPresenter
-
-    private var session: Session ?= null
-    private var rtspClient: RtspClient?=null
 
     override suspend fun dispatchKeyEvent(event: KeyEvent?){
         when (event?.keyCode){
@@ -96,9 +85,6 @@ class CallFragment: BaseFragment(), RtspClient.Callback,
     override fun onDestroyView() {
         Toothpick.closeScope(Scopes.CALL_SCOPE)
         uiScope.cancel()
-        rtspClient?.release();
-        session?.release();
-        surface?.holder?.removeCallback(this);
         super.onDestroyView()
     }
 
@@ -129,81 +115,8 @@ class CallFragment: BaseFragment(), RtspClient.Callback,
                 statusImageView.setImageResource(0)
             }
         }
-        setupCamera()
         //launchCamera()
     }
-
-    private fun setupCamera(){
-        //activity?.window?.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-        //// getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        //activity?.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        surface.holder.addCallback(this)
-        // Initialize RTSP client
-        initRtspClient();
-    }
-
-    override fun onResume() {
-        super.onResume()
-        toggleStreaming()
-    }
-
-    override fun onPause() {
-        super.onPause()
-        toggleStreaming();
-    }
-
-    private fun initRtspClient() {
-        // Configures the SessionBuilder
-        session = SessionBuilder.getInstance()
-            .setContext(activity?.application)
-            .setAudioEncoder(SessionBuilder.AUDIO_NONE)
-            .setAudioQuality(AudioQuality(8000, 16000))
-            .setVideoEncoder(SessionBuilder.VIDEO_H264)
-            .setSurfaceView(surface).setPreviewOrientation(0)
-            .setCallback(this).build()
-
-        // Configures the RTSP client
-        rtspClient = RtspClient()
-        rtspClient!!.setSession(session)
-        rtspClient!!.setCallback(this)
-        surface.setAspectRatioMode(ASPECT_RATIO_PREVIEW)
-        val ip: String
-        val port: String
-        val path: String
-
-        // We parse the URI written in the Editext
-        val uri: Pattern = Pattern.compile("rtsp://(.+):(\\d+)/(.+)")
-        val m: Matcher = uri.matcher(AppConfig.getRtspAddress())
-        m.find()
-        ip = m.group(1)
-        port = m.group(2)
-        path = m.group(3)
-        rtspClient!!.setCredentials(
-            AppConfig.PUBLISHER_USERNAME,
-            AppConfig.PUBLISHER_PASSWORD
-        )
-        rtspClient!!.setServerAddress(ip, port.toInt())
-        rtspClient!!.setStreamPath("/$path")
-    }
-
-    private fun toggleStreaming() {
-        if (rtspClient?.isStreaming() == false) {
-            // Start camera preview
-            session?.startPreview()
-
-            // Start video stream
-            rtspClient?.startStream()
-        } else {
-            // already streaming, stop streaming
-            // stop camera preview
-            session?.stopPreview()
-
-            // stop streaming
-            rtspClient?.stopStream()
-        }
-    }
-
-
 
     private fun revertChatsVisibility(){
         isChatVisible = !isChatVisible
@@ -229,49 +142,6 @@ class CallFragment: BaseFragment(), RtspClient.Callback,
             )
         }
     }
-
-    override fun onRtspUpdate(message: Int, exception: Exception?) {
-        when (message) {
-            RtspClient.ERROR_CONNECTION_FAILED, RtspClient.ERROR_WRONG_CREDENTIALS -> {
-                alertError(exception?.message)
-                exception!!.printStackTrace()
-            }
-        }
-    }
-
-    private fun alertError(msg: String?) {
-        val error = msg ?: "Unknown error: "
-        val builder: AlertDialog.Builder = AlertDialog.Builder(activity)
-        builder.setMessage(error).setPositiveButton("Ok",
-            DialogInterface.OnClickListener { dialog, id -> })
-        val dialog: AlertDialog = builder.create()
-        dialog.show()
-    }
-
-
-    override fun onSessionStarted() {}
-
-    override fun onSessionStopped() { }
-
-    override fun onPreviewStarted() {}
-
-    override fun onSessionError(reason: Int, streamType: Int, e: Exception?) {
-        if (e != null) {
-            alertError(e.message);
-            e.printStackTrace();
-        }
-    }
-
-    override fun onSessionConfigured() {}
-
-    override fun onBitrateUpdate(bitrate: Long) {}
-
-    override fun surfaceChanged(holder: SurfaceHolder?, format: Int, width: Int, height: Int) {}
-
-    override fun surfaceDestroyed(holder: SurfaceHolder?) {}
-
-    override fun surfaceCreated(holder: SurfaceHolder?) { }
-
 
     /*private fun launchCamera(){
         surfaceView = SurfaceView(context)

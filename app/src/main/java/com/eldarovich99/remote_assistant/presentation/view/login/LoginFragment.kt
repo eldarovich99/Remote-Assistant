@@ -44,7 +44,6 @@ class LoginFragment : BaseFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // TODO
         return inflater.inflate(R.layout.fragment_login, container, false)
     }
 
