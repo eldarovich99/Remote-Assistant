@@ -9,7 +9,6 @@ import com.eldarovich99.remote_assistant.R
 import com.eldarovich99.remote_assistant.di.Scopes
 import com.eldarovich99.remote_assistant.di.modules.LoginModule
 import com.eldarovich99.remote_assistant.presentation.BaseFragment
-import com.eldarovich99.remote_assistant.presentation.QrReaderFragment
 import com.eldarovich99.remote_assistant.routing.ChatScreen
 import kotlinx.android.synthetic.main.fragment_login.*
 import kotlinx.coroutines.CoroutineScope
@@ -55,36 +54,15 @@ class LoginFragment : BaseFragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        //presenter = LoginPresenter(this)
         loginButton.setOnClickListener {
             CoroutineScope(uiScope).launch {
                 presenter.auth(loginEditText.text.toString(), passwordEditText.text.toString())
             }
-            //router.newRootScreen(ChatScreen())
         }
-        /*forgetPasswordButton.setOnClickListener {
-            router.navigateTo(RestorePasswordScreen(
-
-            ))
-        }*/
-        /*qrImageView.setOnClickListener {
-            QrReaderFragment.start(this, router)
-        }*/
         super.onViewCreated(view, savedInstanceState)
     }
 
     fun openChatScreen(){
         router.newRootScreen(ChatScreen())
-    }
-
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<out String>,
-        grantResults: IntArray
-    ) {
-        when (requestCode) {
-            1 -> { QrReaderFragment.onRequestPermissionsResult(requestCode, grantResults, router)
-            }
-        }
     }
 }
