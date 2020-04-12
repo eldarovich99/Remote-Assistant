@@ -1,20 +1,15 @@
 package com.eldarovich99.remote_assistant.presentation.view.chats
 
-import com.eldarovich99.remote_assistant.routing.CallScreen
-import ru.terrakok.cicerone.Router
-import javax.inject.Inject
 import com.eldarovich99.remote_assistant.data.error_handling.Result
 import com.eldarovich99.remote_assistant.domain.accounts.AccountInteractor
+import com.eldarovich99.remote_assistant.routing.CallScreen
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import ru.terrakok.cicerone.Router
+import javax.inject.Inject
 
 class ChatsPresenter @Inject constructor(val router: Router) {
     var view: ChatsView?=null
-
-    fun onAttach(view: ChatsView){
-
-class ChatsPresenter() {
-    var view: ChatsFragment? = null
     val interactor = AccountInteractor()
 
     fun onAttach(view: ChatsFragment) {
