@@ -1,4 +1,4 @@
-package com.eldarovich99.remote_assistant.domain
+package com.eldarovich99.remote_assistant.domain.files
 
 import com.eldarovich99.remote_assistant.data.FileRepositoryImpl
 import kotlinx.coroutines.Dispatchers

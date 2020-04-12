@@ -1,10 +1,18 @@
 package com.eldarovich99.remote_assistant.data
 
+import com.auth0.android.jwt.JWT
+import com.google.gson.GsonBuilder
+import com.google.gson.JsonDeserializationContext
+import com.google.gson.JsonDeserializer
+import com.google.gson.JsonElement
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
+import retrofit2.Converter
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.lang.reflect.Type
 import java.util.concurrent.TimeUnit
+
 
 class NetworkClient {
     companion object{
@@ -34,12 +42,24 @@ class NetworkClient {
                 if (retrofit == null) {
                     retrofit = Retrofit.Builder()
                         .baseUrl(BASE_URL)
-                        .addConverterFactory(GsonConverterFactory.create())
+                        .addConverterFactory(createGsonConverter())
                         .client(httpClient)
                         .build()
                 }
                 return retrofit!!
             }
+
+        private fun createGsonConverter(): Converter.Factory {
+            val dateJsonDeserializer: JsonDeserializer<JWT?> =
+                JsonDeserializer<JWT?> { json: JsonElement?, typeOfT: Type?, context: JsonDeserializationContext? ->
+                    var date: JWT? = null
+                    date = if (json == null) null else JWT(json.asString)
+                    date
+                }
+            val gson = GsonBuilder().registerTypeAdapter(JWT::class.java, dateJsonDeserializer).create()
+            return GsonConverterFactory.create(gson)
+        }
     }
+
 
 }

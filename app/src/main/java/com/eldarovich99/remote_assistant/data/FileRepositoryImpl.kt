@@ -4,7 +4,7 @@ import android.app.Application
 import com.eldarovich99.remote_assistant.data.api.FileApi
 import com.eldarovich99.remote_assistant.data.error_handling.ErrorHandler
 import com.eldarovich99.remote_assistant.data.error_handling.Result
-import com.eldarovich99.remote_assistant.domain.FileRepository
+import com.eldarovich99.remote_assistant.domain.files.FileRepository
 import com.eldarovich99.remote_assistant.utils.FileWriter
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext

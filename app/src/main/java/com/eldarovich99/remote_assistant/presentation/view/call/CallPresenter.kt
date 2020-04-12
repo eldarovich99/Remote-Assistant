@@ -2,7 +2,7 @@ package com.eldarovich99.remote_assistant.presentation.view.call
 
 import android.widget.Toast
 import com.eldarovich99.remote_assistant.data.error_handling.Result
-import com.eldarovich99.remote_assistant.domain.FileInteractor
+import com.eldarovich99.remote_assistant.domain.files.FileInteractor
 import com.eldarovich99.remote_assistant.utils.FileWriter
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
