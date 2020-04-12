@@ -8,10 +8,8 @@ import kotlinx.coroutines.withContext
 import ru.terrakok.cicerone.Router
 import javax.inject.Inject
 
-class ChatsPresenter @Inject constructor(val router: Router) {
+class ChatsPresenter @Inject constructor(val router: Router, private var interactor: AccountInteractor) {
     var view: ChatsView?=null
-    val interactor = AccountInteractor()
-
     fun onAttach(view: ChatsFragment) {
         this.view = view
     }

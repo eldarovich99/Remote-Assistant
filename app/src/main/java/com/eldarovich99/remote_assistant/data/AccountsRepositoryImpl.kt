@@ -6,11 +6,13 @@ import com.eldarovich99.remote_assistant.data.error_handling.Result
 import com.eldarovich99.remote_assistant.domain.accounts.AccountsRepository
 import com.eldarovich99.remote_assistant.domain.models.ContactBrief
 import com.eldarovich99.remote_assistant.domain.models.ContactFull
+import javax.inject.Inject
 
-class AccountsRepositoryImpl //@Inject constructor(val sharedPreferences: SharedPreferences) :
+class AccountsRepositoryImpl @Inject constructor(
+    private val errorHandler: ErrorHandler,
+    private val api: AccountsApi
+)
     :AccountsRepository {
-    val errorHandler = ErrorHandler()
-    val api = NetworkClient.getApi(AccountsApi::class.java)
 
     override suspend fun getContacts(): Result<List<ContactBrief>> {
         return errorHandler.executeSafeCall { api.getContacts() }

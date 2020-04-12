@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
 import com.eldarovich99.remote_assistant.R
 import com.eldarovich99.remote_assistant.di.Scopes
+import com.eldarovich99.remote_assistant.di.modules.ChatsModule
 import com.eldarovich99.remote_assistant.domain.models.ContactBrief
 import com.eldarovich99.remote_assistant.presentation.BaseFragment
 import com.eldarovich99.remote_assistant.utils.extensions.revertVisibility
@@ -73,7 +74,7 @@ class ChatsFragment : BaseFragment(), ChatsView{
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        KTP.openScopes(Scopes.APP_SCOPE, Scopes.ACTIVITY_SCOPE, Scopes.CHATS_SCOPE)
+        KTP.openScopes(Scopes.APP_SCOPE, Scopes.ACTIVITY_SCOPE, Scopes.CHATS_SCOPE).installModules(ChatsModule())
             .inject(this)
         super.onCreate(savedInstanceState)
     }
