@@ -7,10 +7,10 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 
 interface AccountsApi {
-    @GET
+    @GET("/admin/api/product/read.php")
     suspend fun getContacts() : Response<List<ContactBrief>>
-    @GET
+    @GET("/admin/api/product/read_one.php")
     suspend fun getSingleContact(@Query("id") id: String) : Response<List<ContactFull>>
-    @GET
+    @GET("/admin/api/product/search.php")
     suspend fun search(@Query("s") search: String) : Response<List<ContactFull>>
 }

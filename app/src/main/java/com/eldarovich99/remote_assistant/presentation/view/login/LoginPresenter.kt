@@ -1,7 +1,7 @@
 package com.eldarovich99.remote_assistant.presentation.view.login
 
 import com.eldarovich99.remote_assistant.data.error_handling.Result
-import com.eldarovich99.remote_assistant.domain.AuthInteractor
+import com.eldarovich99.remote_assistant.domain.auth.AuthInteractor
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import javax.inject.Inject

@@ -6,8 +6,9 @@ import com.eldarovich99.remote_assistant.data.error_handling.ErrorHandler
 import com.eldarovich99.remote_assistant.data.error_handling.Result
 import com.eldarovich99.remote_assistant.domain.auth.AuthRepository
 import com.eldarovich99.remote_assistant.domain.models.AuthInfo
+import javax.inject.Inject
 
-class AuthRepositoryImpl:
+class AuthRepositoryImpl @Inject constructor():
     AuthRepository {
     val errorHandler = ErrorHandler()
     val api = NetworkClient.getApi(LoginApi::class.java)
