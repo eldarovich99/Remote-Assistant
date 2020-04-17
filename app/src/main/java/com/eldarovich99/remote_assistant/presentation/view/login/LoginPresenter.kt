@@ -1,5 +1,6 @@
 package com.eldarovich99.remote_assistant.presentation.view.login
 
+import com.eldarovich99.remote_assistant.data.error_handling.Result
 import com.eldarovich99.remote_assistant.domain.auth.AuthInteractor
 import com.eldarovich99.remote_assistant.routing.ChatScreen
 import kotlinx.coroutines.Dispatchers
@@ -9,8 +10,8 @@ import javax.inject.Inject
 
 class LoginPresenter @Inject constructor(val view: LoginFragment, val interactor: AuthInteractor, val router: Router) {
     suspend fun auth(email: String, password: String) = withContext(Dispatchers.Main) {
-        router.navigateTo(ChatScreen())
-        /*val result = withContext(Dispatchers.IO) {
+        //router.navigateTo(ChatScreen())
+        val result = withContext(Dispatchers.IO) {
             interactor.auth(email, password)
         }
         if (result is Result.Success) {
@@ -18,6 +19,6 @@ class LoginPresenter @Inject constructor(val view: LoginFragment, val interactor
             //view.openChatScreen()
         } else {
             view.showErrorMessage()
-        }*/
+        }
     }
 }
