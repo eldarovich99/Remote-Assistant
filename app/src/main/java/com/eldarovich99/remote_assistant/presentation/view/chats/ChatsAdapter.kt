@@ -8,7 +8,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.eldarovich99.remote_assistant.R
-import com.eldarovich99.remote_assistant.domain.models.ContactBrief
+import com.eldarovich99.remote_assistant.domain.models.ContactFull
 import com.eldarovich99.remote_assistant.routing.CallScreen
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -19,9 +19,9 @@ import javax.inject.Inject
 
 class ChatsAdapter @Inject constructor(var router: Router) : RecyclerView.Adapter<ChatsAdapter.ChatsViewHolder>() {
     var bindCounter = 0
-    val items = mutableListOf<ContactBrief>()
+    val items = mutableListOf<ContactFull>()
 
-    fun updateData(data: List<ContactBrief>){
+    fun updateData(data: List<ContactFull>){
         CoroutineScope(Dispatchers.IO).launch{
             val result = DiffUtil.calculateDiff(object: DiffUtil.Callback(){
                 override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
@@ -74,7 +74,7 @@ class ChatsAdapter @Inject constructor(var router: Router) : RecyclerView.Adapte
 
     override fun onBindViewHolder(holder: ChatsViewHolder, position: Int) {
         holder.itemNameTextView.text = items[holder.adapterPosition].name //"${holder.itemNameTextView.text.toString().substringBefore(' ')} ${holder.adapterPosition}"
-        holder.itemView.isSelected = items[holder.adapterPosition].isEnabled == true
+        //holder.itemView.isSelected = items[holder.adapterPosition].isEnabled == true
     }
 
     class ChatsViewHolder(view: View) : RecyclerView.ViewHolder(view){
@@ -83,13 +83,13 @@ class ChatsAdapter @Inject constructor(var router: Router) : RecyclerView.Adapte
     }
 
     fun disable(adapterPosition: Int){
-        items[adapterPosition].isEnabled = false
+       // items[adapterPosition].isEnabled = false
         notifyItemChanged(adapterPosition)
     }
 
     fun enable(adapterPosition : Int){
         //selectedItemPosition = adapterPosition
-        items[adapterPosition].isEnabled = true
+       // items[adapterPosition].isEnabled = true
         notifyItemChanged(adapterPosition)
     }
 }

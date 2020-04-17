@@ -29,7 +29,7 @@ class ChatsPresenter @Inject constructor(val router: Router) {
             interactor.getContacts()
         }
         if (result is Result.Success) {
-            view?.updateContacts(result.data)
+            view?.updateContacts(result.data.records)
         } else {
             view?.showFailMessage()
         }
