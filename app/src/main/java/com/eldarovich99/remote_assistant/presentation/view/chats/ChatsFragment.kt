@@ -13,10 +13,14 @@ import com.eldarovich99.remote_assistant.R
 import com.eldarovich99.remote_assistant.di.Scopes
 import com.eldarovich99.remote_assistant.di.modules.ChatsModule
 import com.eldarovich99.remote_assistant.domain.models.ContactBrief
+import com.eldarovich99.remote_assistant.domain.models.ContactFull
 import com.eldarovich99.remote_assistant.presentation.BaseFragment
 import com.eldarovich99.remote_assistant.utils.extensions.revertVisibility
 import kotlinx.android.synthetic.main.fragment_chats.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.cancel
+import kotlinx.coroutines.launch
 import toothpick.Toothpick
 import toothpick.ktp.KTP
 import javax.inject.Inject
@@ -104,6 +108,9 @@ class ChatsFragment : BaseFragment(), ChatsView{
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        CoroutineScope(uiScope+Dispatchers.IO).launch {
+            presenter.getContacts()
+        }
         callImageView.setOnClickListener {
             presenter.openCallScreen()
         }
@@ -138,7 +145,7 @@ class ChatsFragment : BaseFragment(), ChatsView{
         Toast.makeText(this.context, "Не удалось выполнить запрос", Toast.LENGTH_SHORT).show()
     }
 
-    override fun updateContacts(data: List<ContactBrief>){
+    override fun updateContacts(data: List<ContactFull>){
         adapter.updateData(data)
     }
 }

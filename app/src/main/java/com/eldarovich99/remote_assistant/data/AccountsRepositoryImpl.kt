@@ -6,6 +6,7 @@ import com.eldarovich99.remote_assistant.data.error_handling.Result
 import com.eldarovich99.remote_assistant.domain.accounts.AccountsRepository
 import com.eldarovich99.remote_assistant.domain.models.ContactBrief
 import com.eldarovich99.remote_assistant.domain.models.ContactFull
+import com.eldarovich99.remote_assistant.domain.models.ContactsResponse
 import javax.inject.Inject
 
 class AccountsRepositoryImpl @Inject constructor(
@@ -14,15 +15,15 @@ class AccountsRepositoryImpl @Inject constructor(
 )
     :AccountsRepository {
 
-    override suspend fun getContacts(): Result<List<ContactBrief>> {
+    override suspend fun getContacts(): Result<ContactsResponse> {
         return errorHandler.executeSafeCall { api.getContacts() }
     }
 
-    override suspend fun getSingleContact(id: String): Result<List<ContactFull>> {
+    override suspend fun getSingleContact(id: String): Result<ContactsResponse> {
         return errorHandler.executeSafeCall { api.getSingleContact(id) }
     }
 
-    override suspend fun search(search: String): Result<List<ContactFull>> {
+    override suspend fun search(search: String): Result<ContactsResponse> {
         return errorHandler.executeSafeCall { api.search(search) }
     }
 }

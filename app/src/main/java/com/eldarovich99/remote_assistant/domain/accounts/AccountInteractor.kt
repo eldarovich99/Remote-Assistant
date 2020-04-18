@@ -10,11 +10,11 @@ class AccountInteractor @Inject constructor(private val repository: AccountsRepo
         return repository.getContacts()
     }
 
-    suspend fun getSingleContact(id: String): Result<List<ContactFull>> {
+    suspend fun getSingleContact(id: String): Result<ContactsResponse> {
         return repository.getSingleContact(id)
     }
 
-    suspend fun search(search: String): Result<List<ContactFull>> {
+    suspend fun search(search: String): Result<ContactsResponse> {
         return repository.search(search)
     }
 }
