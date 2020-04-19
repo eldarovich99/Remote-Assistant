@@ -1,6 +1,8 @@
 package com.eldarovich99.remote_assistant.presentation.view.chats
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
@@ -16,10 +18,7 @@ import com.eldarovich99.remote_assistant.domain.models.ContactFull
 import com.eldarovich99.remote_assistant.presentation.BaseFragment
 import com.eldarovich99.remote_assistant.utils.extensions.revertVisibility
 import kotlinx.android.synthetic.main.fragment_chats.*
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.cancel
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 import toothpick.Toothpick
 import toothpick.ktp.KTP
 import javax.inject.Inject
@@ -32,6 +31,7 @@ class ChatsFragment : BaseFragment(), ChatsView{
     lateinit var adapter : ChatsAdapter
     @Inject
     lateinit var presenter: ChatsPresenter
+    val searchScope = Dispatchers.IO + uiScope
 
     override suspend fun dispatchKeyEvent(event: KeyEvent?){
         when (event?.keyCode){
@@ -126,6 +126,22 @@ class ChatsFragment : BaseFragment(), ChatsView{
         showChatImageView.setOnClickListener {
             revertChatsVisibility()
         }
+        searchEditText.addTextChangedListener(object: TextWatcher{
+            override fun afterTextChanged(p0: Editable?) {
+                searchScope.cancelChildren()
+                CoroutineScope(searchScope).launch {
+                    delay(500)
+                    val result = presenter.getSearchResult(searchEditText.text)
+                }
+            }
+
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            }
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            }
+
+        })
         super.onViewCreated(view, savedInstanceState)
     }
 

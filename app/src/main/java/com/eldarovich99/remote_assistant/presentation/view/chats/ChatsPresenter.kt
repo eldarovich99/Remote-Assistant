@@ -1,5 +1,6 @@
 package com.eldarovich99.remote_assistant.presentation.view.chats
 
+import android.text.Editable
 import com.eldarovich99.remote_assistant.data.error_handling.Result
 import com.eldarovich99.remote_assistant.domain.accounts.AccountInteractor
 import com.eldarovich99.remote_assistant.routing.CallScreen
@@ -25,6 +26,17 @@ class ChatsPresenter @Inject constructor(val router: Router, private var interac
     suspend fun getContacts() = withContext(Dispatchers.Main) {
         val result = withContext(Dispatchers.IO) {
             interactor.getContacts()
+        }
+        if (result is Result.Success) {
+            view?.updateContacts(result.data.records)
+        } else {
+            view?.showFailMessage()
+        }
+    }
+
+    suspend fun getSearchResult(searchText: Editable) = withContext(Dispatchers.Main) {
+        val result = withContext(Dispatchers.IO) {
+            interactor.search(searchText.toString())
         }
         if (result is Result.Success) {
             view?.updateContacts(result.data.records)
