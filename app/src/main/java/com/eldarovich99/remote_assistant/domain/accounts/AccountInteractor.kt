@@ -1,12 +1,11 @@
 package com.eldarovich99.remote_assistant.domain.accounts
 
 import com.eldarovich99.remote_assistant.data.error_handling.Result
-import com.eldarovich99.remote_assistant.domain.models.ContactBrief
-import com.eldarovich99.remote_assistant.domain.models.ContactFull
+import com.eldarovich99.remote_assistant.domain.models.ContactsResponse
 import javax.inject.Inject
 
 class AccountInteractor @Inject constructor(private val repository: AccountsRepository) {
-    suspend fun getContacts(): Result<List<ContactBrief>> {
+    suspend fun getContacts(): Result<ContactsResponse> {
         return repository.getContacts()
     }
 

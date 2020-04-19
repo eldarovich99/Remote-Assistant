@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.eldarovich99.remote_assistant.R
 import com.eldarovich99.remote_assistant.di.Scopes
 import com.eldarovich99.remote_assistant.di.modules.ChatsModule
-import com.eldarovich99.remote_assistant.domain.models.ContactBrief
 import com.eldarovich99.remote_assistant.domain.models.ContactFull
 import com.eldarovich99.remote_assistant.presentation.BaseFragment
 import com.eldarovich99.remote_assistant.utils.extensions.revertVisibility

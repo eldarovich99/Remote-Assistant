@@ -4,8 +4,6 @@ import com.eldarovich99.remote_assistant.data.api.AccountsApi
 import com.eldarovich99.remote_assistant.data.error_handling.ErrorHandler
 import com.eldarovich99.remote_assistant.data.error_handling.Result
 import com.eldarovich99.remote_assistant.domain.accounts.AccountsRepository
-import com.eldarovich99.remote_assistant.domain.models.ContactBrief
-import com.eldarovich99.remote_assistant.domain.models.ContactFull
 import com.eldarovich99.remote_assistant.domain.models.ContactsResponse
 import javax.inject.Inject
 
