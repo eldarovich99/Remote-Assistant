@@ -57,7 +57,7 @@
         android:gravity="start"
         android:maxLines="2"
         android:clickable="false"
-        android:text="Товарищи! сложившаяся структура организации требуют определения и уточнения соответствующий условий активизации."
+        tools:text="Товарищи! сложившаяся структура организации требуют определения и уточнения соответствующий условий активизации."
         android:textAlignment="textStart"
         android:textColor="@color/textColor"
         android:textSize="14sp"

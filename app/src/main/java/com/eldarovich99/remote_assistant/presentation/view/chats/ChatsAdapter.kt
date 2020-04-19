@@ -75,10 +75,12 @@ class ChatsAdapter @Inject constructor(var router: Router) : RecyclerView.Adapte
     override fun onBindViewHolder(holder: ChatsViewHolder, position: Int) {
         holder.itemNameTextView.text = items[holder.adapterPosition].name //"${holder.itemNameTextView.text.toString().substringBefore(' ')} ${holder.adapterPosition}"
         //holder.itemView.isSelected = items[holder.adapterPosition].isEnabled == true
+        holder.descriptionTextView.text = items[holder.adapterPosition].description
     }
 
     class ChatsViewHolder(view: View) : RecyclerView.ViewHolder(view){
         val itemNameTextView : TextView = view.findViewById(R.id.nameTextView)
+        val descriptionTextView : TextView = view.findViewById(R.id.lastMessageTextView)
         val invisibleButton : Button = view.findViewById(R.id.invisibleButton)
     }
 
