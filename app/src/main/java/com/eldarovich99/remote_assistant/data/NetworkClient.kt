@@ -1,22 +1,21 @@
 package com.eldarovich99.remote_assistant.data
 
 import com.auth0.android.jwt.JWT
+import com.eldarovich99.remote_assistant.UnsafeOkHttpClient
 import com.google.gson.GsonBuilder
 import com.google.gson.JsonDeserializationContext
 import com.google.gson.JsonDeserializer
 import com.google.gson.JsonElement
-import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Converter
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.lang.reflect.Type
-import java.util.concurrent.TimeUnit
 
 
 class NetworkClient {
     companion object{
-        val BASE_URL = "http://78.155.197.233:8080/"
+        val BASE_URL = "https://78.155.197.233"
 
         private var retrofit: Retrofit? = null
 
@@ -31,13 +30,14 @@ class NetworkClient {
                 val logging = HttpLoggingInterceptor()
                 logging.apply { logging.level = HttpLoggingInterceptor.Level.BODY }
 
-                val httpClient = OkHttpClient.Builder()
+                val httpClient = UnsafeOkHttpClient.getUnsafeOkHttpClient()
+                /*val httpClient = OkHttpClient.Builder()
                     .connectTimeout(100, TimeUnit.SECONDS)
                     .readTimeout(100, TimeUnit.SECONDS)
                     .writeTimeout(100, TimeUnit.SECONDS)
                     .addInterceptor(logging)
                     //.cookieJar(cookie)
-                    .build()
+                    .build()*/
 
                 if (retrofit == null) {
                     retrofit = Retrofit.Builder()

@@ -8,10 +8,13 @@ import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.LinearInterpolator
 import android.view.animation.RotateAnimation
+import android.webkit.WebView
+import android.webkit.WebViewClient
 import android.widget.Toast
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.recyclerview.widget.RecyclerView
 import com.eldarovich99.remote_assistant.R
+import com.eldarovich99.remote_assistant.data.NetworkClient
 import com.eldarovich99.remote_assistant.di.Scopes
 import com.eldarovich99.remote_assistant.di.modules.CallModule
 import com.eldarovich99.remote_assistant.domain.models.Message
@@ -42,6 +45,8 @@ class CallFragment: BaseFragment(){
     lateinit var presenter: CallPresenter
     @Inject
     lateinit var layoutManager: RecyclerView.LayoutManager
+    @Inject
+    lateinit var webViewClient: WebViewClient
 
     override suspend fun dispatchKeyEvent(event: KeyEvent?){
         when (event?.keyCode){
@@ -81,7 +86,9 @@ class CallFragment: BaseFragment(){
            .installModules(CallModule(this))
            .inject(this)
         // getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        return inflater.inflate(R.layout.fragment_call, container, false)
+        val view =  inflater.inflate(R.layout.fragment_call, container, false)
+        launchCall(view)
+        return view
     }
 
     override fun onDestroyView() {
@@ -115,7 +122,16 @@ class CallFragment: BaseFragment(){
                 statusImageView.setImageResource(0)
             }
         }
+        //launchCall()
         //launchCamera()
+    }
+
+    private fun launchCall(view: View){
+        val room = ":4000/?room=123_emrt08lrbsf"
+        val link = NetworkClient.BASE_URL+room
+        view.findViewById<WebView>(R.id.callWebView).settings.javaScriptEnabled = true
+        view.findViewById<WebView>(R.id.callWebView).loadUrl(link)
+        view.findViewById<WebView>(R.id.callWebView).webViewClient = webViewClient
     }
 
     private fun revertChatsVisibility(){
